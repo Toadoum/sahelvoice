@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SahelVoice | Voice AI for WhatsApp surveys in Chad</title>
+<meta name="description" content="SahelVoice turns WhatsApp answers, typed or spoken, into reliable data. Speech AI transcribes and understands voice notes; your enumerators check them. Built in Chad.">
+<meta property="og:title" content="SahelVoice | Voice AI for WhatsApp surveys">
+<meta property="og:description" content="People answer on WhatsApp by typing or speaking. AI transcribes, understands and structures every answer. Your enumerators check.">
+<meta property="og:image" content="../og.png">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta name="theme-color" content="#081129">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 42 42'%3E%3Crect width='42' height='42' rx='11' fill='%232e3c8c'/%3E%3Cpath d='M11 25v-8M16 29V13M21 26V16M26 22v-4M31 24v-6' stroke='%23fff' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="alternate" hreflang="fr" href="../">
+<link rel="alternate" hreflang="en" href="./">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/site.css">
+<script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <nav aria-label="Main navigation">
+      <a class="brand" href="#"><svg width="34" height="34" viewBox="0 0 42 42" aria-hidden="true"><rect width="42" height="42" rx="11" fill="#2e3c8c"/><path d="M11 25v-8M16 29V13M21 26V16M26 22v-4M31 24v-6" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg>SahelVoice</a>
+      <div class="links">
+        <a href="#ai">AI</a>
+        <a href="#platform">Platform</a>
+        <a href="#languages">Languages</a>
+        <a href="#about">About</a>
+        <a href="../demo/">Demo</a>
+        <span class="lsw" role="group" aria-label="Language"><a href="../" hreflang="fr" lang="fr" data-setlang="fr">FR</a><span aria-current="true">EN</span></span>
+        <a class="btn" href="#contact">Pilots</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<div class="dark">
+  <div class="grid-bg"></div>
+  <div class="glow" style="width:520px;height:520px;right:-120px;top:-80px;background:#2e3c8c"></div>
+  <div class="glow" style="width:380px;height:380px;right:22%;top:46%;background:#145e48;opacity:.45"></div>
+  <div class="wrap">
+    <div class="hero">
+      <div>
+        <span class="pill"><span class="dot"><i></i></span>Voice AI built in Chad · pilots open</span>
+        <h1>Every voice note becomes <span class="hl">reliable data.</span></h1>
+        <p class="lede">SahelVoice runs your surveys on WhatsApp. People answer by tapping a button, typing, or speaking. AI transcribes, understands and structures every answer. Your enumerators check.</p>
+        <div class="ctas">
+          <a class="btn" href="../demo/">Try the demo
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="btn ghost" href="#contact">Join the pilots</a>
+        </div>
+        <div class="facts">
+          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>No app to install</span>
+          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Your KoBo or ODK XLSForm</span>
+          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Consent first</span>
+        </div>
+      </div>
+
+      <div class="console" id="console" aria-label="Example: how SahelVoice processes a voice answer">
+        <div class="c-head">
+          <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span>sahelvoice · processing an answer</span>
+          <span class="tag">example · in French</span>
+        </div>
+        <div class="c-body">
+          <p class="q">Question <span class="mono" id="c-n">2/7</span> · <b id="c-q">How many people live in your household, including you?</b></p>
+
+          <div class="stage" data-s="0">
+            <div class="st-label"><i></i>Listen</div>
+            <div><span class="vbubble">
+              <span class="play"><svg width="11" height="13" viewBox="0 0 16 18" aria-hidden="true"><path d="M2 1.5v15l13-7.5z" fill="#fff"/></svg></span>
+              <span class="wave" id="wave" aria-hidden="true"></span>
+              <span class="t" id="c-dur">0:04</span>
+            </span></div>
+          </div>
+
+          <div class="stage" data-s="1">
+            <div class="st-label"><i></i>Transcribe</div>
+            <div>
+              <p class="transcript" id="c-tr" lang="fr">« nous sommes <mark>sept</mark> à la maison »</p>
+              <p class="gloss" id="c-gl">“there are seven of us at home”</p>
+            </div>
+          </div>
+
+          <div class="stage" data-s="2">
+            <div class="st-label"><i></i>Understand</div>
+            <div class="parse">
+              <span class="chip" id="c-field">household_size</span>
+              <span class="chip" id="c-type">integer</span>
+              <span class="arrow" aria-hidden="true">→</span>
+              <span class="chip val" id="c-val">7</span>
+            </div>
+          </div>
+
+          <div class="stage" data-s="3">
+            <div class="st-label"><i></i>Check</div>
+            <div class="check" id="c-chk"><span>“You said: <b>7</b>. Is that right?”</span><span class="ok">✓ confirmed by the person</span></div>
+          </div>
+
+          <div class="stage" data-s="4">
+            <div class="st-label"><i></i>Data</div>
+            <div class="tablewrap"><table class="table">
+              <thead><tr><th>question</th><th>value</th><th>source</th><th>status</th></tr></thead>
+              <tbody id="c-rows"><tr><td>household_size</td><td>7</td><td>voice</td><td>confirmed</td></tr></tbody>
+            </table></div>
+          </div>
+        </div>
+        <div class="c-foot">
+          <span>text, buttons or voice</span>
+          <span class="prog" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="strip">
+      <span class="lbl">Works with your tools</span>
+      <div class="items">
+        <span>WhatsApp Business</span>
+        <span>XLSForm (KoBoToolbox, ODK)</span>
+        <span>Excel and CSV export</span>
+        <span>Audio as ZIP</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main>
+  <!-- ===== AI ===== -->
+  <section class="dark" id="ai" style="background:var(--navy)">
+    <div class="wrap">
+      <p class="kicker rv">Artificial intelligence</p>
+      <h2 class="rv">AI that listens, understands, checks and learns.</h2>
+      <p class="intro rv">In Chad, many people would rather speak than write. SahelVoice puts speech recognition to work for surveys, with a person to check whatever the machine is not sure it understood.</p>
+
+      <div class="ai-grid">
+        <article class="ai-card rv">
+          <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3z"/><path d="M19 11a7 7 0 0 1-14 0M12 18v3"/></svg></div>
+          <span class="num">01</span>
+          <h3>Listens</h3>
+          <p>A speech recognition model (Whisper) transcribes each voice note within seconds, on our own servers.</p>
+          <div class="demo">audio <span class="w">0:04</span><br>→ <span class="g" lang="fr">« nous sommes sept à la maison »</span></div>
+        </article>
+        <article class="ai-card rv">
+          <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3H5a2 2 0 0 0-2 2v4M15 3h4a2 2 0 0 1 2 2v4M9 21H5a2 2 0 0 1-2-2v-4M15 21h4a2 2 0 0 0 2-2v-4"/><path d="M8 12h8"/></svg></div>
+          <span class="num">02</span>
+          <h3>Understands</h3>
+          <p>It pulls out the expected answer: a number said in words, a yes or a no, a choice from the list, a rating from 1 to 5.</p>
+          <div class="demo"><span lang="fr">« je donne <span class="g">quatre</span> »</span><br>→ <span class="v">service_rating</span> = <span class="g">4</span></div>
+        </article>
+        <article class="ai-card rv">
+          <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6l-8-3z"/><path d="m9 12 2 2 4-4"/></svg></div>
+          <span class="num">03</span>
+          <h3>Checks</h3>
+          <p>A spoken number is read back to the person to confirm. An answer it cannot understand is asked again once, then sent to your enumerators.</p>
+          <div class="demo">“You said: <span class="w">7</span>. Is that right?”<br>→ <span class="g">Yes</span> ✓</div>
+        </article>
+        <article class="ai-card rv">
+          <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16M3 21v-5h5"/></svg></div>
+          <span class="num">04</span>
+          <h3>Learns</h3>
+          <p>Every enumerator correction measures the real transcription accuracy. With separate consent from respondents, it helps train our models for the languages of Chad.</p>
+          <div class="demo"><span lang="fr">« <span class="w">cette</span> »</span> corrected to <span lang="fr">« <span class="g">sept</span> »</span><br>→ error rate measured</div>
+        </article>
+      </div>
+
+      <p class="loop-note rv">We do not publish an accuracy figure until we have measured it on real answers from Chad. The dashboard computes that figure from your own enumerators' checks.</p>
+    </div>
+  </section>
+
+  <!-- ===== Platform ===== -->
+  <section id="platform">
+    <div class="wrap">
+      <p class="kicker rv">The platform</p>
+      <h2 class="rv">The whole survey cycle, in one place.</h2>
+      <p class="intro rv">From importing the questionnaire to the final export, SahelVoice replaces paper forms and one-by-one phone calls.</p>
+
+      <div class="feat">
+        <div class="rv"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg></span>
+          <h3>Your questionnaire as it is</h3><p>Upload the XLSForm file from KoBoToolbox or ODK. Simple skip logic is kept; anything WhatsApp cannot do is flagged clearly.</p></div>
+        <div class="rv"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3z"/><path d="M14 14h3v3h-3zM20 14v.01M14 20v.01M17 20h4v-3"/></svg></span>
+          <h3>Invitations and QR codes</h3><p>Invite a contact list, or put up a keyword and a QR code. The person writes in, and the survey starts.</p></div>
+        <div class="rv"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="m7 14 4-4 3 3 5-6"/></svg></span>
+          <h3>Live results</h3><p>Each answer reaches the dashboard the moment it is sent, with the audio ready to play.</p></div>
+        <div class="rv"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1v-6h3zM3 19a2 2 0 0 0 2 2h1v-6H3z"/></svg></span>
+          <h3>Review queue</h3><p>Your enumerators listen to voice notes one by one: correct, fix, or inaudible. The next one opens by itself.</p></div>
+        <div class="rv"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M5 21h14"/></svg></span>
+          <h3>Analysis-ready export</h3><p>One row per person with the checked values, in Excel or CSV. Audio in a ZIP, named like the columns.</p></div>
+        <div class="rv"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></svg></span>
+          <h3>Team and roles</h3><p>Administrators and enumerators each have their own access. Every organisation sees only its own surveys.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap split">
+      <div>
+        <p class="kicker rv">Human + AI</p>
+        <h2 class="rv">AI suggests. Your enumerators decide.</h2>
+        <p class="intro rv">The machine does the repetitive work. The people who know the field have the final say on every voice answer.</p>
+        <ul class="list">
+          <li class="rv"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Voice notes to check wait in a queue, ready to play.</span></li>
+          <li class="rv"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>A correction replaces the value in the export, and the original is kept.</span></li>
+          <li class="rv"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>The Quality panel shows the real error rate and the share of answers corrected.</span></li>
+        </ul>
+      </div>
+      <div class="dash rv" role="img" aria-label="Dashboard preview: response counters and the voice note review queue">
+        <div class="dash-top"><b>Post-distribution monitoring · example</b><span class="live"><i></i>live</span></div>
+        <div class="kpis">
+          <div><small>Responses</small><b>48</b></div>
+          <div><small>Voice</small><b>19</b></div>
+          <div><small>To check</small><b>6</b></div>
+        </div>
+        <div class="review">
+          <div class="row"><span class="pl"><svg width="10" height="12" viewBox="0 0 16 18" aria-hidden="true"><path d="M2 1.5v15l13-7.5z" fill="#3ddc97"/></svg></span>
+            <span class="tx"><small>full_kit</small><span>“yes we got everything, thank you”</span></span><span class="st ok">checked</span></div>
+          <div class="row"><span class="pl"><svg width="10" height="12" viewBox="0 0 16 18" aria-hidden="true"><path d="M2 1.5v15l13-7.5z" fill="#3ddc97"/></svg></span>
+            <span class="tx"><small>household_size</small><span lang="fr">« nous sommes cette à la maison »</span></span><span class="st fix">fixed: 7</span></div>
+          <div class="row"><span class="pl"><svg width="10" height="12" viewBox="0 0 16 18" aria-hidden="true"><path d="M2 1.5v15l13-7.5z" fill="#3ddc97"/></svg></span>
+            <span class="tx"><small>missing_item</small><span>“the soap was missing”</span></span><span class="st wait">to play</span></div>
+        </div>
+        <p class="dash-note">Illustrative example, not real data. Answers are in French; shown translated.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Audiences ===== -->
+  <section style="padding-top:0">
+    <div class="wrap">
+      <p class="kicker rv">Who it is for</p>
+      <h2 class="rv">For anyone who needs to hear from people.</h2>
+      <div class="aud">
+        <article class="rv"><h3>NGOs and agencies</h3><p>Post-distribution monitoring, beneficiary feedback, project evaluation. People who rarely write can answer out loud.</p>
+          <p class="ex">“Did you receive the full kit?”</p></article>
+        <article class="rv"><h3>Businesses and shops</h3><p>Customer satisfaction, delivery feedback, service reviews. A QR code at the counter is enough to start.</p>
+          <p class="ex">“How would you rate our service?”</p></article>
+        <article class="rv"><h3>Training and associations</h3><p>Feedback on a training, a workshop or a mentoring programme, with results visible live.</p>
+          <p class="ex">“What did you learn today?”</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Languages ===== -->
+  <section class="dark" id="languages">
+    <div class="grid-bg"></div>
+    <div class="wrap">
+      <p class="kicker rv">Languages</p>
+      <h2 class="rv">French today. The languages of Chad next.</h2>
+      <p class="intro rv">Large speech models understand the languages of Chad poorly, for lack of data. We are building that data with communities, only with people's explicit consent.</p>
+      <div class="langs">
+        <div class="lang now rv"><div class="name">French</div><div class="native">Transcription and understanding</div><span class="status">● available</span></div>
+        <div class="lang rv"><div class="name">Chadian Arabic</div><div class="native">Speech data collection</div><span class="status">○ in preparation</span></div>
+        <div class="lang rv"><div class="name">Ngambay</div><div class="native">Speech data collection</div><span class="status">○ in preparation</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Trust ===== -->
+  <section>
+    <div class="wrap">
+      <p class="kicker rv">Data protection</p>
+      <h2 class="rv">Respondents stay in control.</h2>
+      <div class="trust">
+        <div class="rv"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span><div><h3>Consent first</h3><p>Asked before the first question. Without consent, nothing is recorded and the person appears nowhere.</p></div></div>
+        <div class="rv"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/></svg></span><div><h3>STOP means stop</h3><p>Writing STOP ends all messages, from every organisation, for good.</p></div></div>
+        <div class="rv"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span><div><h3>Phone numbers hidden</h3><p>Phone numbers are replaced by a code in exports and hidden in the dashboard.</p></div></div>
+        <div class="rv"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div><h3>Audio deleted on time</h3><p>Voice notes are erased after the period the organisation sets. Reusing them for research needs a second, separate consent.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Founder ===== -->
+  <section id="about" style="padding-top:0">
+    <div class="wrap">
+      <p class="kicker rv">About</p>
+      <h2 class="rv">Built in Chad, for Chad.</h2>
+      <div class="founder rv">
+        <img src="../fondateur.png" alt="Sakayo Toadoum Sari, founder of SahelVoice" width="200" height="200">
+        <div>
+          <div class="name">Sakayo Toadoum Sari</div>
+          <div class="role">Founder · AI researcher</div>
+          <p class="t">Researcher in natural language processing for low-resource African languages. In Chad, almost everyone has WhatsApp, and many people would rather speak than write. SahelVoice turns those conversations into reliable data for the organisations that serve the population.</p>
+          <div class="socials">
+            <a href="https://www.linkedin.com/in/toadoum">LinkedIn</a>
+            <a href="https://x.com/ToadoumSari">X @ToadoumSari</a>
+            <a href="https://www.youtube.com/@sakayotech">YouTube @sakayotech</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Contact ===== -->
+  <section class="dark" id="contact">
+    <div class="grid-bg"></div>
+    <div class="glow" style="width:420px;height:420px;left:-120px;bottom:-160px;background:#2e3c8c;opacity:.5"></div>
+    <div class="wrap cta">
+      <div>
+        <p class="kicker">Pilots</p>
+        <h2>Launch your first voice survey.</h2>
+        <p class="intro">Are you an NGO, a business or an association working in Chad? The first pilots are free. We set up the survey with you.</p>
+        <div class="ctas" style="display:flex;gap:12px;flex-wrap:wrap;margin-top:30px">
+          <a class="btn" href="https://wa.me/23566049094?text=Hello%2C%20I%20would%20like%20to%20try%20SahelVoice">Message us on WhatsApp</a>
+          <a class="btn ghost" href="../demo/">See the demo (in French)</a>
+        </div>
+      </div>
+      <div class="cbox">
+        <dl>
+          <div><dt>WhatsApp</dt><dd><a href="https://wa.me/23566049094">+235 66 04 90 94</a></dd></div>
+          <div><dt>Email</dt><dd><a href="mailto:sakayo@cril.fr">sakayo@cril.fr</a></dd></div>
+          <div><dt>Head office</dt><dd style="font-weight:500;font-size:18px">N'Djamena, Chad</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 SahelVoice, a service of Quantum Qube Technologies, N'Djamena, Chad.</span>
+    <span>RCCM TD-NDJ-01-2024-A10-01446 · <a href="../" hreflang="fr" lang="fr">Version française</a></span>
+  </div>
+</footer>
+
+<script>
+window.SV = {
+  waiting: 'waiting',
+  examples: [
+    {n:'2/7', q:'How many people live in your household, including you?', dur:'0:04',
+     before:'nous sommes ', key:'sept', after:' à la maison', gloss:'“there are seven of us at home”',
+     field:'household_size', type:'integer', val:'7',
+     chk:'<span>“You said: <b>7</b>. Is that right?”</span><span class="ok">✓ confirmed by the person</span>',
+     row:['household_size','7','voice','confirmed']},
+    {n:'4/7', q:'Did you receive the full kit?', dur:'0:03',
+     before:'', key:'oui', after:' on a tout reçu merci', gloss:'“yes, we got everything, thanks”',
+     field:'full_kit', type:'yes / no', val:'yes',
+     chk:'<span>Clear answer, kept with the audio.</span><span class="ok">✓ ready to check</span>',
+     row:['full_kit','yes','voice','to check']},
+    {n:'6/7', q:'How would you rate the distribution, from 1 to 5?', dur:'0:02',
+     before:'je donne ', key:'quatre', after:'', gloss:'“I give it four”',
+     field:'distribution_rating', type:'rating 1 to 5', val:'4',
+     chk:'<span>“You said: <b>4</b>. Is that right?”</span><span class="ok">✓ confirmed by the person</span>',
+     row:['distribution_rating','4','voice','confirmed']}
+  ]
+};
+</script>
+<script src="../assets/site.js"></script>
+</body>
+</html>
