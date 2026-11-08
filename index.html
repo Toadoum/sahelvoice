@@ -27,11 +27,12 @@
 <header class="top">
   <div class="wrap">
     <nav aria-label="Navigation principale">
-      <a class="brand" href="#"><svg width="34" height="34" viewBox="0 0 42 42" aria-hidden="true"><rect width="42" height="42" rx="11" fill="#2e3c8c"/><path d="M11 25v-8M16 29V13M21 26V16M26 22v-4M31 24v-6" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg>SahelVoice</a>
+      <a class="brand" href="#"><svg width="34" height="34" viewBox="0 0 42 42" aria-hidden="true"><rect width="42" height="42" rx="11" fill="#2e3c8c"/><g class="eq" stroke="#fff" stroke-width="3" stroke-linecap="round"><path d="M11 25v-8"/><path d="M16 29V13"/><path d="M21 26V16"/><path d="M26 22v-4"/><path d="M31 24v-6"/></g></svg>SahelVoice</a>
       <div class="links">
         <a href="#ia">L'IA</a>
         <a href="#plateforme">Plateforme</a>
         <a href="#langues">Langues</a>
+        <a href="#recherche">Recherche</a>
         <a href="#apropos">À propos</a>
         <a href="demo/">Démo</a>
         <span class="lsw" role="group" aria-label="Langue"><span aria-current="true">FR</span><a href="en/" hreflang="en" lang="en" data-setlang="en">EN</a></span>
@@ -42,6 +43,7 @@
 </header>
 
 <div class="dark">
+  <canvas class="wavefield" data-y=".75" aria-hidden="true"></canvas>
   <div class="grid-bg"></div>
   <div class="glow" style="width:520px;height:520px;right:-120px;top:-80px;background:#2e3c8c"></div>
   <div class="glow" style="width:380px;height:380px;right:22%;top:46%;background:#145e48;opacity:.45"></div>
@@ -125,6 +127,17 @@
         <span>Audios en ZIP</span>
       </div>
     </div>
+    <div class="feed-label"><i></i>Exemples · réponses vocales → données</div>
+    <div class="feed"><div class="feed-track">
+      <span class="fi"><span class="mic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3z"/><path d="M19 11a7 7 0 0 1-14 0M12 18v3"/></svg></span><span lang="fr">« nous sommes sept à la maison »</span><span class="to">→</span><code>taille_menage = 7</code></span>
+      <span class="fi"><span class="mic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3z"/><path d="M19 11a7 7 0 0 1-14 0M12 18v3"/></svg></span><span lang="fr">« oui on a tout reçu merci »</span><span class="to">→</span><code>kit_complet = oui</code></span>
+      <span class="fi"><span class="mic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3z"/><path d="M19 11a7 7 0 0 1-14 0M12 18v3"/></svg></span><span lang="fr">« je donne quatre »</span><span class="to">→</span><code>note_service = 4</code></span>
+      <span class="fi"><span class="mic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3z"/><path d="M19 11a7 7 0 0 1-14 0M12 18v3"/></svg></span><span lang="fr">« deux heures de marche »</span><span class="to">→</span><code>temps_trajet = 2</code></span>
+      <span class="fi"><span class="mic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3z"/><path d="M19 11a7 7 0 0 1-14 0M12 18v3"/></svg></span><span lang="fr">« non pas encore »</span><span class="to">→</span><code>paiement_recu = non</code></span>
+      <span class="fi"><span class="mic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3z"/><path d="M19 11a7 7 0 0 1-14 0M12 18v3"/></svg></span><span lang="fr">« très satisfait »</span><span class="to">→</span><code>satisfaction = très satisfait</code></span>
+      <span class="fi"><span class="mic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3z"/><path d="M19 11a7 7 0 0 1-14 0M12 18v3"/></svg></span><span lang="fr">« cinq enfants »</span><span class="to">→</span><code>nb_enfants = 5</code></span>
+      <span class="fi"><span class="mic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3z"/><path d="M19 11a7 7 0 0 1-14 0M12 18v3"/></svg></span><span lang="fr">« il manquait le savon »</span><span class="to">→</span><code>commentaire = texte</code></span>
+    </div></div>
   </div>
 </div>
 
@@ -136,6 +149,7 @@
       <h2 class="rv">Une IA qui écoute, comprend, vérifie et apprend.</h2>
       <p class="intro rv">Au Tchad, beaucoup de gens préfèrent parler qu'écrire. SahelVoice met la reconnaissance vocale au service des enquêtes, avec un humain pour vérifier ce que la machine n'est pas sûre d'avoir compris.</p>
 
+      <div class="ai-flow" aria-hidden="true"></div>
       <div class="ai-grid">
         <article class="ai-card rv">
           <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3z"/><path d="M19 11a7 7 0 0 1-14 0M12 18v3"/></svg></div>
@@ -251,10 +265,33 @@
       <h2 class="rv">Le français aujourd'hui. Les langues du Tchad ensuite.</h2>
       <p class="intro rv">Les grands modèles vocaux comprennent mal les langues du Tchad, faute de données. Nous construisons ces données avec les communautés, uniquement avec l'accord explicite des personnes.</p>
       <div class="langs">
-        <div class="lang now rv"><div class="name">Français</div><div class="native">Transcription et compréhension</div><span class="status">● disponible</span></div>
-        <div class="lang rv"><div class="name">Arabe tchadien</div><div class="native">Collecte de données vocales</div><span class="status">○ en préparation</span></div>
-        <div class="lang rv"><div class="name">Ngambay</div><div class="native">Collecte de données vocales</div><span class="status">○ en préparation</span></div>
+        <div class="lang now rv"><div class="name">Français</div><div class="native">Transcription et compréhension</div><div class="lw" aria-hidden="true"></div><span class="status">● disponible</span></div>
+        <div class="lang rv"><div class="name">Arabe tchadien</div><div class="native">Collecte de données vocales</div><div class="lw" aria-hidden="true"></div><span class="status">○ en préparation</span></div>
+        <div class="lang rv"><div class="name">Ngambay</div><div class="native">Collecte de données vocales</div><div class="lw" aria-hidden="true"></div><span class="status">○ en préparation</span></div>
       </div>
+    </div>
+  </section>
+
+  <!-- ===== Research ===== -->
+  <section id="recherche">
+    <div class="wrap research">
+      <div>
+        <p class="kicker rv">Recherche</p>
+        <h2 class="rv">La science derrière SahelVoice.</h2>
+        <p class="intro rv">SahelVoice s'appuie sur des travaux publiés en traitement automatique des langues africaines peu dotées, à commencer par le ngambay, l'une des langues les plus parlées au sud du Tchad.</p>
+        <div class="bridge"><div class="rv"><span class="n">01</span><div><h3>Des données là où il n'y en avait pas</h3><p>Le premier corpus parallèle ngambay–français, rendu public pour la recherche.</p></div></div><div class="rv"><span class="n">02</span><div><h3>Des modèles adaptés au Tchad</h3><p>Des modèles de traduction pré-entraînés, ajustés sur ce corpus pour une langue qu'ils ne connaissaient pas.</p></div></div><div class="rv"><span class="n">03</span><div><h3>Vers la voix</h3><p>La même démarche guide la reconnaissance vocale du ngambay et de l'arabe tchadien que nous préparons.</p></div></div></div>
+      </div>
+      <article class="paper rv">
+        <div class="venue"><span class="hl">NLP4TIA 2023</span><span>Varna, Bulgarie</span><span>ACL Anthology</span></div>
+        <h3 lang="en">Ngambay-French Neural Machine Translation (sba-Fr)</h3>
+        <p class="authors"><b>Sakayo Toadoum Sari</b>, Angela Fan, Lema Logamou Seknewna</p>
+        <ul><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><span lang="fr">Premier jeu de données de traduction ngambay → français (sba-Fr).</span></span></li><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><span lang="fr">Trois modèles de traduction pré-entraînés ajustés sur ces données ; M2M100 obtient les meilleurs résultats.</span></span></li><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><span lang="fr">Corpus parallèle accessible publiquement pour la recherche.</span></span></li></ul>
+        <div class="links">
+          <a class="main" href="https://aclanthology.org/2023.nlp4tia-1.6/">Lire l'article <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a>
+          <a href="https://aclanthology.org/2023.nlp4tia-1.6.pdf">PDF <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a>
+          <a href="https://arxiv.org/abs/2308.13497">arXiv <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a>
+        </div>
+      </article>
     </div>
   </section>
 
@@ -294,8 +331,27 @@
   </section>
 
 
+  <!-- ===== FAQ ===== -->
+  <section id="faq">
+    <div class="wrap faq-wrap">
+      <div>
+        <p class="kicker rv">Questions fréquentes</p>
+        <h2 class="rv">Ce qu'on nous demande souvent.</h2>
+      </div>
+      <div class="faq rv">
+        <details><summary>Les répondants doivent-ils installer une application ?</summary><p>Non. Tout se passe dans WhatsApp, que la personne utilise déjà. Elle écrit un mot-clé, scanne un QR code ou répond à une invitation, et l'enquête commence.</p></details>
+        <details><summary>Faut-il savoir écrire pour répondre ?</summary><p>Non. Les questions arrivent par écrit, mais la personne peut répondre en touchant un bouton ou en envoyant un message vocal. L'IA transcrit la voix et vos enquêteurs vérifient.</p></details>
+        <details><summary>Pouvons-nous utiliser notre questionnaire KoBo ou ODK ?</summary><p>Oui. Importez votre fichier XLSForm tel quel. Les questions, les choix et les conditions simples sont repris. Ce que WhatsApp ne peut pas faire, comme une photo ou un point GPS, est signalé avant l'envoi.</p></details>
+        <details><summary>Quelles langues sont prises en charge ?</summary><p>Le français aujourd'hui, à l'écrit et à l'oral. L'arabe tchadien et le ngambay sont en préparation, avec des données vocales recueillies uniquement avec l'accord des personnes.</p></details>
+        <details><summary>Que deviennent les données ?</summary><p>Chaque organisation ne voit que ses propres enquêtes. Les numéros sont masqués dans les exports, les vocaux sont supprimés après la durée que vous choisissez, et leur réutilisation pour la recherche demande un second accord, séparé.</p></details>
+        <details><summary>Combien ça coûte ?</summary><p>Les premiers tests pilotes au Tchad sont gratuits. Nous préparons l'enquête avec vous. Écrivez-nous pour en parler.</p></details>
+      </div>
+    </div>
+  </section>
+
   <!-- ===== Contact ===== -->
   <section class="dark" id="contact">
+    <canvas class="wavefield" data-y=".88" aria-hidden="true"></canvas>
     <div class="grid-bg"></div>
     <div class="glow" style="width:420px;height:420px;left:-120px;bottom:-160px;background:#2e3c8c;opacity:.5"></div>
     <div class="wrap cta">
@@ -319,10 +375,21 @@
   </section>
 </main>
 
-<footer>
+<footer class="big">
   <div class="wrap">
-    <span>© 2026 SahelVoice, un service de Quantum Qube Technologies, N'Djaména, Tchad.</span>
-    <span>RCCM TD-NDJ-01-2024-A10-01446 · <a href="en/" hreflang="en" lang="en">English version</a></span>
+    <div class="cols">
+      <div>
+        <a class="brand" href="#"><svg width="32" height="32" viewBox="0 0 42 42" aria-hidden="true"><rect width="42" height="42" rx="11" fill="#2e3c8c"/><g class="eq" stroke="#fff" stroke-width="3" stroke-linecap="round"><path d="M11 25v-8"/><path d="M16 29V13"/><path d="M21 26V16"/><path d="M26 22v-4"/><path d="M31 24v-6"/></g></svg>SahelVoice</a>
+        <p class="tag">L'IA vocale pour les enquêtes WhatsApp. Conçu au Tchad.</p>
+      </div>
+      <div><h4>Produit</h4><ul><li><a href="#ia">L'IA</a></li><li><a href="#plateforme">Plateforme</a></li><li><a href="#langues">Langues</a></li><li><a href="demo/">Démo</a></li></ul></div>
+      <div><h4>Entreprise</h4><ul><li><a href="#apropos">À propos</a></li><li><a href="#recherche">Recherche</a></li><li><a href="#contact">Tests pilotes</a></li><li><a href="#faq">Questions fréquentes</a></li><li><a href="en/" hreflang="en" lang="en">English</a></li></ul></div>
+      <div><h4>Contact</h4><ul><li><a href="mailto:contact@sahelvoice.app">contact@sahelvoice.app</a></li><li><a href="https://wa.me/23566049094">+235 66 04 90 94</a></li><li>N'Djaména, Tchad</li></ul></div>
+    </div>
+    <div class="legal">
+      <span>© 2026 SahelVoice, un service de Quantum Qube Technologies, N'Djaména, Tchad.</span>
+      <span>RCCM TD-NDJ-01-2024-A10-01446</span>
+    </div>
   </div>
 </footer>
 

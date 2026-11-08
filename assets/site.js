@@ -22,6 +22,77 @@
     rv.forEach(function(e){ io.observe(e); });
   }
 
+  // cursor spotlight on cards
+  document.querySelectorAll('.ai-card,.lang,.feat > div,.aud article,.trust > div').forEach(function(el){
+    el.addEventListener('pointermove', function(e){
+      var r = el.getBoundingClientRect();
+      el.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      el.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    });
+    el.addEventListener('pointerleave', function(){ el.style.removeProperty('--mx'); el.style.removeProperty('--my'); });
+  });
+
+  // ticker: duplicate items so the loop is seamless
+  document.querySelectorAll('.feed-track').forEach(function(tr){
+    if (reduce) return;
+    Array.prototype.slice.call(tr.children).forEach(function(c){
+      var k = c.cloneNode(true); k.setAttribute('aria-hidden', 'true'); tr.appendChild(k);
+    });
+  });
+
+  // language wave bars
+  document.querySelectorAll('.lw').forEach(function(lw){
+    [40,70,100,55,85,35,65,90,50,75,30,60].forEach(function(h,i){
+      var b = document.createElement('b'); b.style.height = h + '%'; b.style.animationDelay = (i * .07) + 's'; lw.appendChild(b);
+    });
+  });
+
+  // animated voice-wave background
+  document.querySelectorAll('canvas.wavefield').forEach(function(cv){
+    var ctx = cv.getContext('2d'); if (!ctx) return;
+    var w = 0, h = 0, dpr = Math.min(2, window.devicePixelRatio || 1), on = true, t0 = performance.now();
+    var base = parseFloat(cv.getAttribute('data-y') || '.72');
+    var L = [
+      {a:42, f:.0085, s:.55,  p:0,   c:'61,220,151',  o:.55, dy:0},
+      {a:30, f:.013,  s:-.42, p:1.3, c:'143,156,255', o:.45, dy:.02},
+      {a:58, f:.006,  s:.28,  p:2.1, c:'61,220,151',  o:.20, dy:-.02},
+      {a:22, f:.019,  s:.75,  p:.7,  c:'168,240,207', o:.28, dy:.04},
+      {a:48, f:.0075, s:-.22, p:3.3, c:'143,156,255', o:.18, dy:-.04}
+    ];
+    var P = [];
+    for (var i = 0; i < 42; i++) P.push({x:Math.random(), y:Math.random(), r:Math.random()*1.5+.4, v:Math.random()*.018+.004, o:Math.random()*.35+.1});
+    function size(){
+      var r = cv.getBoundingClientRect(); w = r.width; h = r.height;
+      cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr); ctx.setTransform(dpr,0,0,dpr,0,0);
+    }
+    function draw(t){
+      ctx.clearRect(0,0,w,h);
+      for (var j = 0; j < L.length; j++){
+        var l = L[j]; ctx.beginPath();
+        for (var x = 0; x <= w + 4; x += 4){
+          var u = x / w;
+          var env = Math.pow(Math.sin(Math.PI * Math.min(1, Math.max(0, u))), 1.4) * (.55 + .45 * Math.sin(t * .7 + u * 6 + l.p));
+          var y = h * (base + l.dy) + Math.sin(x * l.f + t * l.s * 2 + l.p) * l.a * env + Math.sin(x * l.f * 2.3 - t * l.s * 1.3) * l.a * .35 * env;
+          if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+        }
+        ctx.strokeStyle = 'rgba(' + l.c + ',' + l.o + ')'; ctx.lineWidth = 1.4; ctx.stroke();
+      }
+      for (var k = 0; k < P.length; k++){
+        var p = P[k], py = ((p.y - t * p.v) % 1 + 1) % 1;
+        ctx.beginPath(); ctx.arc(p.x * w, py * h, p.r, 0, 6.283);
+        ctx.fillStyle = 'rgba(190,240,215,' + (p.o * Math.sin(Math.PI * py)) + ')'; ctx.fill();
+      }
+    }
+    size(); draw(1.5);
+    if (window.ResizeObserver) new ResizeObserver(function(){ size(); draw(reduce ? 2 : (performance.now() - t0) / 1000); }).observe(cv);
+    if (reduce) { draw(2); return; }
+    if ('IntersectionObserver' in window) new IntersectionObserver(function(es){ on = es[0].isIntersecting; }).observe(cv);
+    (function loop(now){
+      if (on && !document.hidden) draw((now - t0) / 1000);
+      requestAnimationFrame(loop);
+    })(performance.now());
+  });
+
   // waveform bars
   var wave = document.getElementById('wave');
   if (!wave) return;

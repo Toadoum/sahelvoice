@@ -28,11 +28,12 @@
 <header class="top">
   <div class="wrap">
     <nav aria-label="Main navigation">
-      <a class="brand" href="#"><svg width="34" height="34" viewBox="0 0 42 42" aria-hidden="true"><rect width="42" height="42" rx="11" fill="#2e3c8c"/><path d="M11 25v-8M16 29V13M21 26V16M26 22v-4M31 24v-6" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg>SahelVoice</a>
+      <a class="brand" href="#"><svg width="34" height="34" viewBox="0 0 42 42" aria-hidden="true"><rect width="42" height="42" rx="11" fill="#2e3c8c"/><g class="eq" stroke="#fff" stroke-width="3" stroke-linecap="round"><path d="M11 25v-8"/><path d="M16 29V13"/><path d="M21 26V16"/><path d="M26 22v-4"/><path d="M31 24v-6"/></g></svg>SahelVoice</a>
       <div class="links">
         <a href="#ai">AI</a>
         <a href="#platform">Platform</a>
         <a href="#languages">Languages</a>
+        <a href="#research">Research</a>
         <a href="#about">About</a>
         <a href="../demo/">Demo</a>
         <span class="lsw" role="group" aria-label="Language"><a href="../" hreflang="fr" lang="fr" data-setlang="fr">FR</a><span aria-current="true">EN</span></span>
@@ -43,6 +44,7 @@
 </header>
 
 <div class="dark">
+  <canvas class="wavefield" data-y=".75" aria-hidden="true"></canvas>
   <div class="grid-bg"></div>
   <div class="glow" style="width:520px;height:520px;right:-120px;top:-80px;background:#2e3c8c"></div>
   <div class="glow" style="width:380px;height:380px;right:22%;top:46%;background:#145e48;opacity:.45"></div>
@@ -129,6 +131,17 @@
         <span>Audio as ZIP</span>
       </div>
     </div>
+    <div class="feed-label"><i></i>Examples · French voice answers → data</div>
+    <div class="feed"><div class="feed-track">
+      <span class="fi"><span class="mic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3z"/><path d="M19 11a7 7 0 0 1-14 0M12 18v3"/></svg></span><span lang="fr">« nous sommes sept à la maison »</span><span class="to">→</span><code>household_size = 7</code></span>
+      <span class="fi"><span class="mic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3z"/><path d="M19 11a7 7 0 0 1-14 0M12 18v3"/></svg></span><span lang="fr">« oui on a tout reçu merci »</span><span class="to">→</span><code>full_kit = yes</code></span>
+      <span class="fi"><span class="mic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3z"/><path d="M19 11a7 7 0 0 1-14 0M12 18v3"/></svg></span><span lang="fr">« je donne quatre »</span><span class="to">→</span><code>service_rating = 4</code></span>
+      <span class="fi"><span class="mic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3z"/><path d="M19 11a7 7 0 0 1-14 0M12 18v3"/></svg></span><span lang="fr">« deux heures de marche »</span><span class="to">→</span><code>travel_time = 2</code></span>
+      <span class="fi"><span class="mic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3z"/><path d="M19 11a7 7 0 0 1-14 0M12 18v3"/></svg></span><span lang="fr">« non pas encore »</span><span class="to">→</span><code>payment_received = no</code></span>
+      <span class="fi"><span class="mic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3z"/><path d="M19 11a7 7 0 0 1-14 0M12 18v3"/></svg></span><span lang="fr">« très satisfait »</span><span class="to">→</span><code>satisfaction = very satisfied</code></span>
+      <span class="fi"><span class="mic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3z"/><path d="M19 11a7 7 0 0 1-14 0M12 18v3"/></svg></span><span lang="fr">« cinq enfants »</span><span class="to">→</span><code>children = 5</code></span>
+      <span class="fi"><span class="mic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3z"/><path d="M19 11a7 7 0 0 1-14 0M12 18v3"/></svg></span><span lang="fr">« il manquait le savon »</span><span class="to">→</span><code>comment = text</code></span>
+    </div></div>
   </div>
 </div>
 
@@ -140,6 +153,7 @@
       <h2 class="rv">AI that listens, understands, checks and learns.</h2>
       <p class="intro rv">In Chad, many people would rather speak than write. SahelVoice puts speech recognition to work for surveys, with a person to check whatever the machine is not sure it understood.</p>
 
+      <div class="ai-flow" aria-hidden="true"></div>
       <div class="ai-grid">
         <article class="ai-card rv">
           <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3z"/><path d="M19 11a7 7 0 0 1-14 0M12 18v3"/></svg></div>
@@ -255,10 +269,33 @@
       <h2 class="rv">French today. The languages of Chad next.</h2>
       <p class="intro rv">Large speech models understand the languages of Chad poorly, for lack of data. We are building that data with communities, only with people's explicit consent.</p>
       <div class="langs">
-        <div class="lang now rv"><div class="name">French</div><div class="native">Transcription and understanding</div><span class="status">● available</span></div>
-        <div class="lang rv"><div class="name">Chadian Arabic</div><div class="native">Speech data collection</div><span class="status">○ in preparation</span></div>
-        <div class="lang rv"><div class="name">Ngambay</div><div class="native">Speech data collection</div><span class="status">○ in preparation</span></div>
+        <div class="lang now rv"><div class="name">French</div><div class="native">Transcription and understanding</div><div class="lw" aria-hidden="true"></div><span class="status">● available</span></div>
+        <div class="lang rv"><div class="name">Chadian Arabic</div><div class="native">Speech data collection</div><div class="lw" aria-hidden="true"></div><span class="status">○ in preparation</span></div>
+        <div class="lang rv"><div class="name">Ngambay</div><div class="native">Speech data collection</div><div class="lw" aria-hidden="true"></div><span class="status">○ in preparation</span></div>
       </div>
+    </div>
+  </section>
+
+  <!-- ===== Research ===== -->
+  <section id="research">
+    <div class="wrap research">
+      <div>
+        <p class="kicker rv">Research</p>
+        <h2 class="rv">The science behind SahelVoice.</h2>
+        <p class="intro rv">SahelVoice builds on published research in natural language processing for low-resource African languages, starting with Ngambay, one of the most widely spoken languages in southern Chad.</p>
+        <div class="bridge"><div class="rv"><span class="n">01</span><div><h3>Data where there was none</h3><p>The first Ngambay–French parallel corpus, released publicly for research.</p></div></div><div class="rv"><span class="n">02</span><div><h3>Models adapted to Chad</h3><p>Pre-trained translation models, fine-tuned on that corpus for a language they had never seen.</p></div></div><div class="rv"><span class="n">03</span><div><h3>Towards voice</h3><p>The same approach guides the Ngambay and Chadian Arabic speech recognition we are preparing.</p></div></div></div>
+      </div>
+      <article class="paper rv" lang="en">
+        <div class="venue"><span class="hl">NLP4TIA 2023</span><span>Varna, Bulgaria</span><span>ACL Anthology</span></div>
+        <h3>Ngambay-French Neural Machine Translation (sba-Fr)</h3>
+        <p class="authors"><b>Sakayo Toadoum Sari</b>, Angela Fan, Lema Logamou Seknewna</p>
+        <ul><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>First Ngambay → French translation dataset (sba-Fr).</span></li><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Three pre-trained translation models fine-tuned on it; M2M100 performs best.</span></li><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Parallel corpus publicly available for research.</span></li></ul>
+        <div class="links">
+          <a class="main" href="https://aclanthology.org/2023.nlp4tia-1.6/">Read the paper <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a>
+          <a href="https://aclanthology.org/2023.nlp4tia-1.6.pdf">PDF <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a>
+          <a href="https://arxiv.org/abs/2308.13497">arXiv <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a>
+        </div>
+      </article>
     </div>
   </section>
 
@@ -297,8 +334,27 @@
     </div>
   </section>
 
+  <!-- ===== FAQ ===== -->
+  <section id="faq">
+    <div class="wrap faq-wrap">
+      <div>
+        <p class="kicker rv">FAQ</p>
+        <h2 class="rv">Questions we often hear.</h2>
+      </div>
+      <div class="faq rv">
+        <details><summary>Do respondents need to install an app?</summary><p>No. Everything happens in WhatsApp, which people already use. They send a keyword, scan a QR code or reply to an invitation, and the survey starts.</p></details>
+        <details><summary>Do people need to be able to write?</summary><p>No. Questions arrive as text, but people can answer by tapping a button or sending a voice note. AI transcribes the voice and your enumerators check it.</p></details>
+        <details><summary>Can we use our KoBo or ODK questionnaire?</summary><p>Yes. Upload your XLSForm file as it is. Questions, choices and simple skip logic carry over. Anything WhatsApp cannot do, such as a photo or a GPS point, is flagged before you send.</p></details>
+        <details><summary>Which languages are supported?</summary><p>French today, written and spoken. Chadian Arabic and Ngambay are in preparation, with speech data collected only with people's consent.</p></details>
+        <details><summary>What happens to the data?</summary><p>Each organisation sees only its own surveys. Phone numbers are hidden in exports, voice notes are deleted after the period you choose, and reusing them for research needs a second, separate consent.</p></details>
+        <details><summary>How much does it cost?</summary><p>The first pilots in Chad are free, and we set up the survey with you. Write to us to talk about it.</p></details>
+      </div>
+    </div>
+  </section>
+
   <!-- ===== Contact ===== -->
   <section class="dark" id="contact">
+    <canvas class="wavefield" data-y=".88" aria-hidden="true"></canvas>
     <div class="grid-bg"></div>
     <div class="glow" style="width:420px;height:420px;left:-120px;bottom:-160px;background:#2e3c8c;opacity:.5"></div>
     <div class="wrap cta">
@@ -322,10 +378,21 @@
   </section>
 </main>
 
-<footer>
+<footer class="big">
   <div class="wrap">
-    <span>© 2026 SahelVoice, a service of Quantum Qube Technologies, N'Djamena, Chad.</span>
-    <span>RCCM TD-NDJ-01-2024-A10-01446 · <a href="../" hreflang="fr" lang="fr">Version française</a></span>
+    <div class="cols">
+      <div>
+        <a class="brand" href="#"><svg width="32" height="32" viewBox="0 0 42 42" aria-hidden="true"><rect width="42" height="42" rx="11" fill="#2e3c8c"/><g class="eq" stroke="#fff" stroke-width="3" stroke-linecap="round"><path d="M11 25v-8"/><path d="M16 29V13"/><path d="M21 26V16"/><path d="M26 22v-4"/><path d="M31 24v-6"/></g></svg>SahelVoice</a>
+        <p class="tag">Voice AI for WhatsApp surveys. Built in Chad.</p>
+      </div>
+      <div><h4>Product</h4><ul><li><a href="#ai">AI</a></li><li><a href="#platform">Platform</a></li><li><a href="#languages">Languages</a></li><li><a href="../demo/">Demo (French)</a></li></ul></div>
+      <div><h4>Company</h4><ul><li><a href="#about">About</a></li><li><a href="#research">Research</a></li><li><a href="#contact">Pilots</a></li><li><a href="#faq">FAQ</a></li><li><a href="../" hreflang="fr" lang="fr">Français</a></li></ul></div>
+      <div><h4>Contact</h4><ul><li><a href="mailto:contact@sahelvoice.app">contact@sahelvoice.app</a></li><li><a href="https://wa.me/23566049094">+235 66 04 90 94</a></li><li>N'Djamena, Chad</li></ul></div>
+    </div>
+    <div class="legal">
+      <span>© 2026 SahelVoice, a service of Quantum Qube Technologies, N'Djamena, Chad.</span>
+      <span>RCCM TD-NDJ-01-2024-A10-01446</span>
+    </div>
   </div>
 </footer>
 
