@@ -358,3 +358,12 @@ footer.big .brand{color:#fff}
 .bridge h3{font:600 17px/1.3 var(--body);margin-bottom:3px}
 .bridge p{color:var(--text-muted);font-size:15.5px}
 footer.big .wrap{display:block}
+
+/* Ngambay: translation in test */
+.lang.test{border-color:rgba(143,156,255,.55);background:linear-gradient(180deg,rgba(143,156,255,.10),rgba(17,31,69,.6))}
+.lang.test .lw b{background:var(--violet);animation:wv 1.2s ease-in-out infinite alternate}
+.lang .stack{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.lang .stack .status{margin-top:0}
+.lang .status.test{border-color:rgba(143,156,255,.6);color:var(--violet)}
+.lang .more{display:block;margin-top:14px;font-size:14px;color:var(--muted);line-height:1.45}
+.lang .more a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--violet)}
