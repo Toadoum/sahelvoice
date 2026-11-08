@@ -32,6 +32,7 @@
         <a href="#ia">L'IA</a>
         <a href="#plateforme">Plateforme</a>
         <a href="#langues">Langues</a>
+        <a href="#traduction">Traduction</a>
         <a href="#recherche">Recherche</a>
         <a href="#apropos">À propos</a>
         <a href="demo/">Démo</a>
@@ -267,7 +268,37 @@
       <div class="langs">
         <div class="lang now rv"><div class="name">Français</div><div class="native">Transcription et compréhension</div><div class="lw" aria-hidden="true"></div><span class="status">● disponible</span></div>
         <div class="lang rv"><div class="name">Arabe tchadien</div><div class="native">Collecte de données vocales</div><div class="lw" aria-hidden="true"></div><span class="status">○ en préparation</span></div>
-        <div class="lang test rv"><div class="name">Ngambay</div><div class="native">Traduction écrite et collecte de données vocales</div><div class="lw" aria-hidden="true"></div><div class="stack"><span class="status test">◐ traduction écrite : en test</span><span class="status">○ voix : en préparation</span></div><p class="more">Avec notre modèle ngambay–français, que nous continuons d'améliorer. <a href="#recherche">Voir la recherche</a></p></div>
+        <div class="lang test rv"><div class="name">Ngambay</div><div class="native">Traduction écrite et collecte de données vocales</div><div class="lw" aria-hidden="true"></div><div class="stack"><span class="status test">◐ traduction écrite : en test</span><span class="status">○ voix : en préparation</span></div><p class="more">Avec notre modèle ngambay–français, que nous continuons d'améliorer. <a href="#traduction">Essayer</a> · <a href="#recherche">Voir la recherche</a></p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Live translation ===== -->
+  <section id="traduction" style="padding-bottom:40px">
+    <div class="wrap">
+      <p class="kicker rv">Traduction en direct</p>
+      <h2 class="rv">Essayez notre modèle français → ngambay.</h2>
+      <p class="intro rv">C'est le modèle issu de nos recherches qui traduit les questionnaires de SahelVoice en ngambay. Il est en test et nous l'améliorons en continu : vos retours nous aident.</p>
+      <div class="trx rv" id="trx" data-l="{&quot;working&quot;: &quot;Traduction en cours…&quot;, &quot;waking&quot;: &quot;Le modèle se réveille, cela peut prendre une minute…&quot;, &quot;done&quot;: &quot;Traduction automatique, à faire relire.&quot;, &quot;error&quot;: &quot;Le modèle ne répond pas pour l&#x27;instant. Réessayez dans une minute.&quot;, &quot;placeholder&quot;: &quot;La traduction apparaîtra ici.&quot;, &quot;copy&quot;: &quot;Copier&quot;, &quot;copied&quot;: &quot;Copié&quot;}">
+        <div class="trx-top">
+          <div class="trx-dir"><span>Français</span><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span>Ngambay</span></div>
+          <div class="trx-badges"><span class="beta">Version bêta</span><span>Modèle Toadoum/ngambay-fr-v1</span></div>
+        </div>
+        <div class="trx-panes">
+          <div class="trx-pane">
+            <label class="trx-lbl" for="trx-in"><span>Texte en français</span><span class="trx-count"></span></label>
+            <textarea id="trx-in" maxlength="1000" lang="fr" placeholder="Écrivez ou collez un texte en français…"></textarea>
+          </div>
+          <div class="trx-pane">
+            <div class="trx-lbl"><span>Traduction en ngambay</span><button type="button" class="trx-copy" hidden>Copier</button></div>
+            <div class="trx-out empty" lang="sba" aria-live="polite">La traduction apparaîtra ici.</div>
+          </div>
+        </div>
+        <div class="trx-bar">
+          <div class="trx-ex"><button type="button">Bonjour, comment allez-vous aujourd’hui ?</button><button type="button">Avez-vous reçu le kit complet ?</button><button type="button">Merci pour votre participation et votre soutien.</button></div>
+          <div class="trx-go"><span class="trx-status" role="status"></span><button type="button" class="btn trx-run">Traduire</button></div>
+        </div>
+        <p class="trx-foot">Le texte est envoyé à notre modèle hébergé sur Hugging Face : n'y mettez pas de données personnelles. Une traduction automatique se relit toujours par un locuteur. Pour traduire un document (.docx, .pdf), <a href="https://huggingface.co/spaces/Toadoum/ngambay-french-c2translate">ouvrez l'application complète</a>.</p>
       </div>
     </div>
   </section>
@@ -382,7 +413,7 @@
         <a class="brand" href="#"><svg width="32" height="32" viewBox="0 0 42 42" aria-hidden="true"><rect width="42" height="42" rx="11" fill="#2e3c8c"/><g class="eq" stroke="#fff" stroke-width="3" stroke-linecap="round"><path d="M11 25v-8"/><path d="M16 29V13"/><path d="M21 26V16"/><path d="M26 22v-4"/><path d="M31 24v-6"/></g></svg>SahelVoice</a>
         <p class="tag">L'IA vocale pour les enquêtes WhatsApp. Conçu au Tchad.</p>
       </div>
-      <div><h4>Produit</h4><ul><li><a href="#ia">L'IA</a></li><li><a href="#plateforme">Plateforme</a></li><li><a href="#langues">Langues</a></li><li><a href="demo/">Démo</a></li></ul></div>
+      <div><h4>Produit</h4><ul><li><a href="#ia">L'IA</a></li><li><a href="#plateforme">Plateforme</a></li><li><a href="#langues">Langues</a></li><li><a href="#traduction">Traduction ngambay</a></li><li><a href="demo/">Démo</a></li></ul></div>
       <div><h4>Entreprise</h4><ul><li><a href="#apropos">À propos</a></li><li><a href="#recherche">Recherche</a></li><li><a href="#contact">Tests pilotes</a></li><li><a href="#faq">Questions fréquentes</a></li><li><a href="en/" hreflang="en" lang="en">English</a></li></ul></div>
       <div><h4>Contact</h4><ul><li><a href="mailto:contact@sahelvoice.app">contact@sahelvoice.app</a></li><li><a href="https://wa.me/23566049094">+235 66 04 90 94</a></li><li>N'Djaména, Tchad</li></ul></div>
     </div>
@@ -416,5 +447,6 @@ window.SV = {
 };
 </script>
 <script src="assets/site.js"></script>
+<script src="assets/translate.js"></script>
 </body>
 </html>

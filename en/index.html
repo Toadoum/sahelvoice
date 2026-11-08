@@ -33,6 +33,7 @@
         <a href="#ai">AI</a>
         <a href="#platform">Platform</a>
         <a href="#languages">Languages</a>
+        <a href="#translation">Translation</a>
         <a href="#research">Research</a>
         <a href="#about">About</a>
         <a href="../demo/">Demo</a>
@@ -271,7 +272,37 @@
       <div class="langs">
         <div class="lang now rv"><div class="name">French</div><div class="native">Transcription and understanding</div><div class="lw" aria-hidden="true"></div><span class="status">● available</span></div>
         <div class="lang rv"><div class="name">Chadian Arabic</div><div class="native">Speech data collection</div><div class="lw" aria-hidden="true"></div><span class="status">○ in preparation</span></div>
-        <div class="lang test rv"><div class="name">Ngambay</div><div class="native">Written translation and speech data collection</div><div class="lw" aria-hidden="true"></div><div class="stack"><span class="status test">◐ written translation: in testing</span><span class="status">○ voice: in preparation</span></div><p class="more">With our own Ngambay–French model, which we keep improving. <a href="#research">See the research</a></p></div>
+        <div class="lang test rv"><div class="name">Ngambay</div><div class="native">Written translation and speech data collection</div><div class="lw" aria-hidden="true"></div><div class="stack"><span class="status test">◐ written translation: in testing</span><span class="status">○ voice: in preparation</span></div><p class="more">With our own Ngambay–French model, which we keep improving. <a href="#translation">Try it</a> · <a href="#research">See the research</a></p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Live translation ===== -->
+  <section id="translation" style="padding-bottom:40px">
+    <div class="wrap">
+      <p class="kicker rv">Live translation</p>
+      <h2 class="rv">Try our French → Ngambay model.</h2>
+      <p class="intro rv">This is the model from our research that translates SahelVoice questionnaires into Ngambay. It is in testing and we keep improving it: your feedback helps.</p>
+      <div class="trx rv" id="trx" data-l="{&quot;working&quot;: &quot;Translating…&quot;, &quot;waking&quot;: &quot;The model is waking up, this can take a minute…&quot;, &quot;done&quot;: &quot;Machine translation, to be checked.&quot;, &quot;error&quot;: &quot;The model is not responding right now. Try again in a minute.&quot;, &quot;placeholder&quot;: &quot;The translation will appear here.&quot;, &quot;copy&quot;: &quot;Copy&quot;, &quot;copied&quot;: &quot;Copied&quot;}">
+        <div class="trx-top">
+          <div class="trx-dir"><span>French</span><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span>Ngambay</span></div>
+          <div class="trx-badges"><span class="beta">Beta</span><span>Model Toadoum/ngambay-fr-v1</span></div>
+        </div>
+        <div class="trx-panes">
+          <div class="trx-pane">
+            <label class="trx-lbl" for="trx-in"><span>French text</span><span class="trx-count"></span></label>
+            <textarea id="trx-in" maxlength="1000" lang="fr" placeholder="Type or paste French text…"></textarea>
+          </div>
+          <div class="trx-pane">
+            <div class="trx-lbl"><span>Ngambay translation</span><button type="button" class="trx-copy" hidden>Copy</button></div>
+            <div class="trx-out empty" lang="sba" aria-live="polite">The translation will appear here.</div>
+          </div>
+        </div>
+        <div class="trx-bar">
+          <div class="trx-ex"><button type="button">Bonjour, comment allez-vous aujourd’hui ?</button><button type="button">Avez-vous reçu le kit complet ?</button><button type="button">Merci pour votre participation et votre soutien.</button></div>
+          <div class="trx-go"><span class="trx-status" role="status"></span><button type="button" class="btn trx-run">Translate</button></div>
+        </div>
+        <p class="trx-foot">Your text is sent to our model hosted on Hugging Face: do not include personal data. A machine translation should always be checked by a speaker. To translate a document (.docx, .pdf), <a href="https://huggingface.co/spaces/Toadoum/ngambay-french-c2translate">open the full app</a>.</p>
       </div>
     </div>
   </section>
@@ -385,7 +416,7 @@
         <a class="brand" href="#"><svg width="32" height="32" viewBox="0 0 42 42" aria-hidden="true"><rect width="42" height="42" rx="11" fill="#2e3c8c"/><g class="eq" stroke="#fff" stroke-width="3" stroke-linecap="round"><path d="M11 25v-8"/><path d="M16 29V13"/><path d="M21 26V16"/><path d="M26 22v-4"/><path d="M31 24v-6"/></g></svg>SahelVoice</a>
         <p class="tag">Voice AI for WhatsApp surveys. Built in Chad.</p>
       </div>
-      <div><h4>Product</h4><ul><li><a href="#ai">AI</a></li><li><a href="#platform">Platform</a></li><li><a href="#languages">Languages</a></li><li><a href="../demo/">Demo (French)</a></li></ul></div>
+      <div><h4>Product</h4><ul><li><a href="#ai">AI</a></li><li><a href="#platform">Platform</a></li><li><a href="#languages">Languages</a></li><li><a href="#translation">Ngambay translation</a></li><li><a href="../demo/">Demo (French)</a></li></ul></div>
       <div><h4>Company</h4><ul><li><a href="#about">About</a></li><li><a href="#research">Research</a></li><li><a href="#contact">Pilots</a></li><li><a href="#faq">FAQ</a></li><li><a href="../" hreflang="fr" lang="fr">Français</a></li></ul></div>
       <div><h4>Contact</h4><ul><li><a href="mailto:contact@sahelvoice.app">contact@sahelvoice.app</a></li><li><a href="https://wa.me/23566049094">+235 66 04 90 94</a></li><li>N'Djamena, Chad</li></ul></div>
     </div>
@@ -419,5 +450,6 @@ window.SV = {
 };
 </script>
 <script src="../assets/site.js"></script>
+<script src="../assets/translate.js"></script>
 </body>
 </html>
