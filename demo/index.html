@@ -199,26 +199,84 @@ textarea{resize:vertical;line-height:1.45}
 .contact{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:14px}
 .contact code{background:var(--soft);padding:3px 8px;border-radius:6px;user-select:all}
 footer{margin-top:22px;font-size:13px;color:var(--muted);max-width:80ch}
+
+/* ---------- branded shell (matches sahelvoice.app) */
+.dbar{background:#081129;color:#fff;position:sticky;top:0;z-index:30;border-bottom:1px solid #22325c}
+.dbar .in{max-width:1180px;margin:0 auto;padding:0 16px;height:60px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.dbar a{color:#aab5d3;text-decoration:none;font-size:14.5px}
+.dbar a:hover{color:#fff}
+.dbar .logo{display:flex;align-items:center;gap:10px;color:#fff;font:800 20px var(--display);letter-spacing:-.02em}
+.dbar .nav{display:flex;align-items:center;gap:18px}
+.dbar .cta{background:#3ddc97;color:#07122b!important;font-weight:600;border-radius:10px;padding:8px 14px}
+@media (max-width:640px){.dbar .hide-s{display:none}}
+.dhero{background:radial-gradient(ellipse 70% 120% at 85% 0%,#1e2c6b 0%,transparent 60%),#0d1a3a;color:#fff;position:relative;overflow:hidden}
+.dhero .in{max-width:1180px;margin:0 auto;padding:34px 16px 26px;position:relative}
+.dhero .kick{font:500 12px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.08em;text-transform:uppercase;color:#3ddc97;display:flex;align-items:center;gap:8px}
+.dhero .kick::before{content:"";width:18px;height:2px;background:currentColor}
+.dhero h1{font:800 clamp(30px,4.4vw,48px)/1.04 var(--display);letter-spacing:-.025em;margin-top:12px}
+.dhero .lede2{color:#aab5d3;font-size:17px;max-width:60ch;margin-top:12px}
+.dguide{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:22px;counter-reset:g}
+@media (max-width:760px){.dguide{grid-template-columns:minmax(0,1fr)}}
+.dguide div{display:flex;gap:12px;align-items:flex-start;border:1px solid #2f4170;background:rgba(17,31,69,.6);border-radius:12px;padding:12px 14px;counter-increment:g}
+.dguide div::before{content:counter(g);flex:none;width:30px;height:30px;border-radius:9px;background:rgba(61,220,151,.14);color:#3ddc97;display:grid;place-items:center;font:800 15px var(--display)}
+.dguide b{display:block;font-size:14.5px}
+.dguide span{color:#aab5d3;font-size:13.5px}
+.dhero .scenarios{margin:22px 0 0}
+.dhero .scenarios .small{color:#aab5d3}
+.dhero .chip{background:rgba(17,31,69,.7);border-color:#2f4170;color:#fff}
+.dhero .chip small{color:#aab5d3}
+.dhero .chip[aria-pressed="true"]{background:#3ddc97;border-color:#3ddc97;color:#07122b}
+.dhero .chip[aria-pressed="true"] small{color:#0d3a28}
+.dhero .fbtn{position:absolute;right:16px;top:34px}
+@media (max-width:900px){.dhero .fbtn{position:static;margin-top:16px}}
+.wrap.main{padding-top:24px}
+/* phone: status bar + notch */
+.phone{position:relative;border-radius:40px;padding:12px;background:linear-gradient(145deg,#2a3350,#0b0f1c);box-shadow:0 40px 70px -30px rgba(13,26,58,.7),inset 0 0 0 1px rgba(255,255,255,.06)}
+.screen{border-radius:30px}
+.sbar{background:var(--chat-head);color:#fff;display:flex;justify-content:space-between;align-items:center;padding:8px 20px 0;font:600 12px var(--body)}
+.sbar .notch{width:84px;height:20px;border-radius:12px;background:#05070b;margin-top:-4px}
+.sbar .ic{display:flex;gap:5px;align-items:center}
+.console{border-radius:18px;box-shadow:0 30px 60px -40px rgba(13,26,58,.35)}
+/* bottom CTA */
+.dend{margin-top:34px;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:18px}
+@media (max-width:860px){.dend{grid-template-columns:minmax(0,1fr)}}
+.dend .card{border-radius:18px;padding:24px;border:1px solid var(--line);background:var(--surface)}
+.dend .card.dark{background:#0d1a3a;border-color:#22325c;color:#fff}
+.dend h2{font:800 24px/1.15 var(--display);letter-spacing:-.02em}
+.dend p{color:var(--muted);margin-top:8px}
+.dend .card.dark p{color:#aab5d3}
+.dend .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.dend .g{background:#3ddc97;border-color:#3ddc97;color:#07122b}
+.dend .gh{background:transparent;border-color:#3a4a78;color:#fff}
 </style>
 
-<div class="wrap">
-  <header class="top">
-    <div style="display:flex;flex-direction:column;gap:10px">
-      <div class="brand">
-        <svg class="mark" viewBox="0 0 42 42" aria-hidden="true"><rect width="42" height="42" rx="11" fill="#2e3c8c"/><path d="M11 25v-8M16 29V13M21 26V16M26 22v-4M31 24v-6" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg>
-        <div><h1>SahelVoice</h1><div class="tag">Enquêtes WhatsApp, par écrit ou par la voix</div></div>
-      </div>
-      <p class="lede">Répondez sur le téléphone comme un participant. À côté, voyez ce que l'organisation reçoit : les réponses, les messages vocaux transcrits, et la file de vérification des enquêteurs.</p>
-    </div>
-    <button class="btn" type="button" id="goFeedback">Donner mon avis</button>
-  </header>
-
+<header class="dbar"><div class="in">
+  <a class="logo" href="../"><svg width="30" height="30" viewBox="0 0 42 42" aria-hidden="true"><rect width="42" height="42" rx="11" fill="#2e3c8c"/><path d="M11 25v-8M16 29V13M21 26V16M26 22v-4M31 24v-6" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg>SahelVoice</a>
+  <nav class="nav" aria-label="Navigation">
+    <a href="../" class="hide-s">← Retour au site</a>
+    <a href="../#soutenir" class="hide-s">Soutenir</a>
+    <a href="../#contact" class="cta">Tests pilotes</a>
+  </nav>
+</div></header>
+<section class="dhero"><div class="in">
+  <p class="kick">Démo interactive</p>
+  <h1>Vivez une enquête SahelVoice des deux côtés.</h1>
+  <p class="lede2">Répondez sur le téléphone comme un participant. À côté, voyez ce que l'organisation reçoit : les réponses, les messages vocaux transcrits et la file de vérification.</p>
+  <button class="btn fbtn" type="button" id="goFeedback" style="background:#3ddc97;border-color:#3ddc97;color:#07122b">Donner mon avis</button>
+  <div class="dguide">
+    <div><p><b>Répondez</b><span>Touchez un bouton, écrivez, ou envoyez un vocal avec le micro.</span></p></div>
+    <div><p><b>Regardez</b><span>Le tableau de bord se remplit en direct, onglet « Réponses ».</span></p></div>
+    <div><p><b>Vérifiez</b><span>Onglet « À vérifier » : écoutez, corrigez, comme un enquêteur.</span></p></div>
+  </div>
   <div class="scenarios" role="group" aria-label="Choisir un exemple">
     <span class="small muted">Exemple :</span>
     <button class="chip" type="button" data-survey="vivres" aria-pressed="true">Suivi de distribution <small>· ONG</small></button>
     <button class="chip" type="button" data-survey="avis" aria-pressed="false">Satisfaction client <small>· boutique</small></button>
     <button class="chip" type="button" data-survey="custom" aria-pressed="false" id="chipCustom" hidden>Votre questionnaire</button>
   </div>
+</div></section>
+
+<div class="wrap main">
 
   <div class="switch" role="tablist" aria-label="Vue">
     <button type="button" role="tab" data-view="phone" aria-selected="true">Téléphone</button>
@@ -228,6 +286,7 @@ footer{margin-top:22px;font-size:13px;color:var(--muted);max-width:80ch}
   <div class="stage" id="stage" data-view="phone">
     <section class="phone-col" aria-label="Téléphone du participant">
       <div class="phone"><div class="screen">
+        <div class="sbar" aria-hidden="true"><span>9:41</span><span class="notch"></span><span class="ic"><svg width="16" height="11" viewBox="0 0 16 11" fill="currentColor"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.3" y="5" width="3" height="6" rx="1"/><rect x="8.6" y="2.5" width="3" height="8.5" rx="1"/><rect x="12.9" y="0" width="3" height="11" rx="1"/></svg><svg width="22" height="11" viewBox="0 0 22 11" fill="none"><rect x=".5" y=".5" width="18" height="10" rx="2.5" stroke="currentColor"/><rect x="2" y="2" width="13" height="7" rx="1.2" fill="currentColor"/><rect x="19.5" y="3.5" width="2" height="4" rx="1" fill="currentColor"/></svg></span></div>
         <div class="chathead"><div class="av"><svg width="18" height="18" viewBox="0 0 42 42" aria-hidden="true"><path d="M11 25v-8M16 29V13M21 26V16M26 22v-4M31 24v-6" stroke="#fff" stroke-width="4" stroke-linecap="round"/></svg></div>
           <div><b id="orgName">ONG de démonstration</b><span>compte WhatsApp Business</span></div></div>
         <div class="msgs" id="msgs" aria-live="polite"></div>
@@ -264,6 +323,15 @@ footer{margin-top:22px;font-size:13px;color:var(--muted);max-width:80ch}
       <div class="pane" id="pane-form" hidden></div>
       <div class="pane" id="pane-feedback" hidden></div>
     </section>
+  </div>
+
+  <div class="dend">
+    <div class="card dark"><h2>Vous voulez ça pour votre organisation ?</h2>
+      <p>ONG, entreprises, institutions au Tchad : le premier test pilote est gratuit. Nous préparons le questionnaire avec vous.</p>
+      <div class="row"><a class="btn g" href="https://wa.me/23566049094?text=Bonjour%2C%20j%27ai%20essay%C3%A9%20la%20d%C3%A9mo%20SahelVoice%20et%20notre%20organisation%20souhaite%20faire%20un%20test%20pilote.">Demander un pilote sur WhatsApp</a><a class="btn gh" href="mailto:contact@sahelvoice.app?subject=Test%20pilote%20SahelVoice">contact@sahelvoice.app</a></div></div>
+    <div class="card"><h2>Soutenez les langues du Tchad</h2>
+      <p>Nous finançons la collecte de données vocales en arabe tchadien et en ngambay, avec l'accord de chaque personne. Entreprises et fondations : devenez partenaires.</p>
+      <div class="row"><a class="btn" href="../#soutenir">Devenir partenaire</a></div></div>
   </div>
 
   <footer><a href="../">← Retour au site SahelVoice</a><br>Démonstration : tout se passe dans votre navigateur, rien n'est envoyé ni enregistré tant que vous n'envoyez pas votre avis. Dans le vrai service, les réponses arrivent par WhatsApp, les messages vocaux sont transcrits automatiquement, les numéros sont remplacés par un code dans les exports, et toute personne qui écrit STOP n'est plus jamais contactée.</footer>

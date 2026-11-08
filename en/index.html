@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="../assets/site.css?v=202611081310">
+<link rel="stylesheet" href="../assets/site.css?v=202611081321">
 <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
@@ -32,11 +32,11 @@
       <div class="links">
         <a href="#ai">AI</a>
         <a href="#platform">Platform</a>
-        <a href="#languages">Languages</a>
+        <a href="#demo">Demo</a>
         <a href="#translation">Translation</a>
         <a href="#research">Research</a>
         <a href="#about">Founder</a>
-        <a href="../demo/">Demo</a>
+        <a href="#support">Support us</a>
         <span class="lsw" role="group" aria-label="Language"><a href="../" hreflang="fr" lang="fr" data-setlang="fr">FR</a><span aria-current="true">EN</span></span>
         <a class="btn" href="#contact">Pilots</a>
       </div>
@@ -246,6 +246,37 @@
     </div>
   </section>
 
+  <!-- ===== Demo ===== -->
+  <section class="dark" id="demo" style="background:var(--navy)">
+    <canvas class="wavefield" data-y=".97" aria-hidden="true"></canvas>
+    <div class="grid-bg"></div>
+    <div class="wrap demo-band">
+      <div>
+        <p class="kicker rv">Interactive demo</p>
+        <h2 class="rv">Try SahelVoice in two minutes.</h2>
+        <p class="intro rv">In your browser, no sign-up. You answer as a respondent and, at the same time, see what the organisation receives. The demo is in French.</p>
+        <ol class="dsteps rv"><li><div><b>Answer on the phone</b><span>Tap a button, type, or send a voice note.</span></div></li><li><div><b>Watch the answer arrive</b><span>The organisation's dashboard fills in live.</span></div></li><li><div><b>Check like an enumerator</b><span>Listen, correct, then export to Excel.</span></div></li></ol>
+        <div class="demo-cta rv">
+          <a class="btn" href="../demo/">Launch the demo <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="btn ghost" href="../demo/#organisation">See the dashboard</a>
+        </div>
+      </div>
+      <div class="mini rv" aria-hidden="true">
+        <div class="mini-phone"><div class="mini-screen">
+          <div class="mini-head"><i></i><div><b>Partner NGO</b><span>WhatsApp Business</span></div></div>
+          <div class="mini-msgs">
+            <div class="mm o">(2/7) Combien de personnes vivent dans votre ménage ?</div>
+            <div class="mm i"><div class="v"><i></i><em></em><small>0:04</small></div></div>
+            <div class="mm o">Vous avez dit : <b>7</b>. C'est bien ça ?</div>
+            <div class="mm i">Oui</div>
+            <div class="mm o">(3/7) Avez-vous reçu le kit complet ?</div>
+          </div>
+        </div></div>
+        <div class="mini-card"><small>Dashboard</small><b>taille_menage = 7</b><span>✓ confirmed by the person</span></div>
+      </div>
+    </div>
+  </section>
+
   <!-- ===== Audiences ===== -->
   <section style="padding-top:0">
     <div class="wrap">
@@ -412,6 +443,24 @@
     </div>
   </section>
 
+  <!-- ===== Support ===== -->
+  <section class="dark support" id="support">
+    <div class="grid-bg"></div>
+    <div class="glow" style="width:460px;height:460px;right:-140px;top:10%;background:#145e48;opacity:.35"></div>
+    <div class="wrap">
+      <p class="kicker rv">Support data collection</p>
+      <h2 class="rv" style="max-width:22ch">Help us give Chad's languages a digital voice.</h2>
+      <p class="intro rv">Voice assistants do not understand Chadian Arabic or Ngambay, because the speech data does not exist. We want to create it with communities, with every person's consent. To do this, we are looking for partner companies, organisations and foundations.</p>
+      <div class="why"><div class="rv"><span class="n">01</span><h3>Pay the speakers</h3><p>Everyone who records their voice gives consent and is paid fairly.</p></div><div class="rv"><span class="n">02</span><h3>Transcribe and check</h3><p>Native speakers transcribe and check every recording.</p></div><div class="rv"><span class="n">03</span><h3>Train the models</h3><p>Speech recognition, speech synthesis and translation for Chadian Arabic and Ngambay.</p></div><div class="rv"><span class="n">04</span><h3>Share knowledge</h3><p>Publish results and, where consent allows, datasets for research.</p></div></div>
+      <p class="kicker rv" style="margin-top:64px">Three ways to partner</p>
+      <div class="tiers"><article class="tier rv"><span class="who">Foundations · agencies · companies</span><h3>Sponsor a language</h3><p>Fund a data collection campaign in Chadian Arabic or Ngambay.</p><ul><li>Regular progress reports</li><li>Recognition as a founding partner</li><li>Early access to the models</li></ul><a class="btn ghost" href="mailto:contact@sahelvoice.app?subject=Sponsor%20a%20language%20-%20SahelVoice">Sponsor a language</a></article><article class="tier star rv"><span class="ribbon">Most direct</span><span class="who">NGOs · companies · institutions</span><h3>Run a survey</h3><p>Run your surveys with SahelVoice. The first test is free; after that, every survey also helps fund data collection.</p><ul><li>Questionnaire prepared with you</li><li>Answers by text and voice</li><li>Analysis-ready Excel export</li></ul><a class="btn" href="https://wa.me/23566049094?text=Hello%2C%20our%20organisation%20would%20like%20to%20run%20a%20survey%20with%20SahelVoice.">Request a pilot</a></article><article class="tier rv"><span class="who">Universities · labs</span><h3>Research partner</h3><p>Let's build the data and the evaluations for Chad's languages together.</p><ul><li>Co-built corpora and benchmarks</li><li>Joint publications</li><li>Supervised student projects</li></ul><a class="btn ghost" href="mailto:contact@sahelvoice.app?subject=Research%20collaboration%20-%20SahelVoice">Propose a collaboration</a></article></div>
+      <div class="support-cta rv">
+        <div><b>Let's talk about your project.</b><span>Tell us what you would like to support and we will come back to you with a proposal.</span></div>
+        <div class="row"><a class="btn" href="mailto:contact@sahelvoice.app?subject=Partnership%20-%20SahelVoice%20data%20collection">contact@sahelvoice.app</a><a class="btn ghost" href="https://wa.me/23566049094?text=Hello%2C%20I%20would%20like%20to%20support%20SahelVoice%20data%20collection.">WhatsApp</a></div>
+      </div>
+    </div>
+  </section>
+
   <!-- ===== FAQ ===== -->
   <section id="faq">
     <div class="wrap faq-wrap">
@@ -425,6 +474,7 @@
         <details><summary>Can we use our KoBo or ODK questionnaire?</summary><p>Yes. Upload your XLSForm file as it is. Questions, choices and simple skip logic carry over. Anything WhatsApp cannot do, such as a photo or a GPS point, is flagged before you send.</p></details>
         <details><summary>Which languages are supported?</summary><p>French today, written and spoken. For Ngambay, written translation of questionnaires is in testing with our own Ngambay–French model, which we keep improving; a speaker reviews every translation. Speech recognition for Ngambay and Chadian Arabic is in preparation, with data collected only with people's consent.</p></details>
         <details><summary>What happens to the data?</summary><p>Each organisation sees only its own surveys. Phone numbers are hidden in exports, voice notes are deleted after the period you choose, and reusing them for research needs a second, separate consent.</p></details>
+        <details><summary>How can we support SahelVoice?</summary><p>By sponsoring speech data collection in Chadian Arabic or Ngambay, by running a survey with us, or by becoming a research partner. Write to contact@sahelvoice.app and we will propose the format that suits you.</p></details>
         <details><summary>How much does it cost?</summary><p>The first pilots in Chad are free, and we set up the survey with you. Write to us to talk about it.</p></details>
       </div>
     </div>
@@ -442,7 +492,7 @@
         <p class="intro">Are you an NGO, a business or an association working in Chad? The first pilots are free. We set up the survey with you.</p>
         <div class="ctas" style="display:flex;gap:12px;flex-wrap:wrap;margin-top:30px">
           <a class="btn" href="https://wa.me/23566049094?text=Hello%2C%20I%20would%20like%20to%20try%20SahelVoice">Message us on WhatsApp</a>
-          <a class="btn ghost" href="../demo/">See the demo (in French)</a>
+          <a class="btn ghost" href="#support">Support data collection</a>
         </div>
       </div>
       <div class="cbox">
@@ -464,7 +514,7 @@
         <p class="tag">Voice AI for WhatsApp surveys. Built in Chad.</p>
       </div>
       <div><h4>Product</h4><ul><li><a href="#ai">AI</a></li><li><a href="#platform">Platform</a></li><li><a href="#languages">Languages</a></li><li><a href="#translation">Ngambay translation</a></li><li><a href="../demo/">Demo (French)</a></li></ul></div>
-      <div><h4>Company</h4><ul><li><a href="#about">The founder</a></li><li><a href="#journey">His journey</a></li><li><a href="#research">Research</a></li><li><a href="#contact">Pilots</a></li><li><a href="#faq">FAQ</a></li><li><a href="../" hreflang="fr" lang="fr">Français</a></li></ul></div>
+      <div><h4>Company</h4><ul><li><a href="#about">The founder</a></li><li><a href="#journey">His journey</a></li><li><a href="#research">Research</a></li><li><a href="#contact">Pilots</a></li><li><a href="#support">Support data collection</a></li><li><a href="#faq">FAQ</a></li><li><a href="../" hreflang="fr" lang="fr">Français</a></li></ul></div>
       <div><h4>Contact</h4><ul><li><a href="mailto:contact@sahelvoice.app">contact@sahelvoice.app</a></li><li><a href="https://wa.me/23566049094">+235 66 04 90 94</a></li><li>N'Djamena, Chad</li></ul></div>
     </div>
     <div class="legal">
@@ -496,7 +546,7 @@ window.SV = {
   ]
 };
 </script>
-<script src="../assets/site.js?v=202611081310"></script>
-<script src="../assets/translate.js?v=202611081310"></script>
+<script src="../assets/site.js?v=202611081321"></script>
+<script src="../assets/translate.js?v=202611081321"></script>
 </body>
 </html>
