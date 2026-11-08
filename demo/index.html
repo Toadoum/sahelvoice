@@ -1,0 +1,1169 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Démo SahelVoice</title>
+<meta name="description" content="Essayez SahelVoice : répondez à une enquête comme sur WhatsApp, puis voyez ce que l'organisation reçoit.">
+<meta property="og:image" content="../og.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 42 42'%3E%3Crect width='42' height='42' rx='11' fill='%232e3c8c'/%3E%3Cpath d='M11 25v-8M16 29V13M21 26V16M26 22v-4M31 24v-6' stroke='%23fff' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,750&family=Instrument+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: a working phone (what the respondent sees) beside the organisation's console (what the NGO receives). */
+:root{
+  --paper:#f2f4f7; --surface:#ffffff; --ink:#1b2232; --muted:#5a6377; --line:#d9dee7; --soft:#eef1f6;
+  --indigo:#2e3c8c; --indigo-ink:#ffffff; --indigo-soft:#e6e9f7;
+  --chat-bg:#e9e4dc; --bubble-out:#ffffff; --bubble-in:#d8f5d0; --chat-ink:#1b2232; --chat-link:#0b7bb0; --chat-head:#233f5c;
+  --ochre:#a2560b; --ochre-soft:#fbeedd; --green:#1b6f46; --green-soft:#dff1e7; --red:#a32f29; --red-soft:#f8e3e1;
+  --phone:#1b2232;
+  --display:"Bricolage Grotesque",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --body:"Instrument Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#12161f; --surface:#1a202c; --ink:#e7eaf1; --muted:#9aa3b5; --line:#2c3445; --soft:#222a38;
+  --indigo:#8d9bf0; --indigo-ink:#121726; --indigo-soft:#262f4f;
+  --chat-bg:#0e1419; --bubble-out:#1f2a33; --bubble-in:#1d4a36; --chat-ink:#e7eaf1; --chat-link:#5cc3f0; --chat-head:#1c2a38;
+  --ochre:#f0a65a; --ochre-soft:#3a2a17; --green:#6fd3a0; --green-soft:#173425; --red:#f08a83; --red-soft:#3d1f1d;
+  --phone:#05070b; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#12161f; --surface:#1a202c; --ink:#e7eaf1; --muted:#9aa3b5; --line:#2c3445; --soft:#222a38;
+  --indigo:#8d9bf0; --indigo-ink:#121726; --indigo-soft:#262f4f;
+  --chat-bg:#0e1419; --bubble-out:#1f2a33; --bubble-in:#1d4a36; --chat-ink:#e7eaf1; --chat-link:#5cc3f0; --chat-head:#1c2a38;
+  --ochre:#f0a65a; --ochre-soft:#3a2a17; --green:#6fd3a0; --green-soft:#173425; --red:#f08a83; --red-soft:#3d1f1d;
+  --phone:#05070b; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:15px/1.5 var(--body);margin:0}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 56px}
+a{color:var(--indigo)}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--indigo);outline-offset:2px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0}
+h2{font-size:19px;font-weight:600;letter-spacing:-.005em}
+h3{font-size:15px;font-weight:600}
+p{margin:0}
+.muted{color:var(--muted)}
+.small{font-size:13px}
+.num{font-variant-numeric:tabular-nums}
+
+/* header */
+.top{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand h1{font-size:30px;font-weight:750;letter-spacing:-.02em;line-height:1}
+.brand .tag{font-size:14px;color:var(--muted);margin-top:4px}
+.mark{width:42px;height:42px;flex:none}
+.lede{max-width:62ch;color:var(--muted)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--indigo);background:var(--indigo);color:var(--indigo-ink);border-radius:9px;padding:9px 15px;font-weight:600;cursor:pointer;text-decoration:none;line-height:1.2}
+.btn:hover{filter:brightness(1.08)}
+.btn.quiet{background:var(--surface);color:var(--ink);border-color:var(--line)}
+.btn.ok{background:var(--green);border-color:var(--green);color:var(--surface)}
+.btn.warn{background:var(--surface);color:var(--red);border-color:var(--red)}
+.btn.small{padding:6px 11px;font-size:13px}
+.btn[disabled]{opacity:.5;cursor:default}
+
+/* scenario picker */
+.scenarios{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:7px 14px;cursor:pointer;font-weight:500}
+.chip[aria-pressed="true"]{border-color:var(--indigo);background:var(--indigo-soft);color:var(--indigo)}
+.chip small{color:var(--muted);font-weight:400}
+
+/* mobile view switch */
+.switch{display:none;gap:4px;background:var(--soft);border-radius:11px;padding:4px;margin-bottom:14px}
+.switch button{flex:1;border:0;background:none;border-radius:8px;padding:9px 6px;font-weight:600;cursor:pointer;color:var(--muted)}
+.switch button[aria-selected="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.badge{display:inline-block;min-width:19px;padding:0 6px;border-radius:10px;background:var(--ochre);color:var(--surface);font-size:12px;line-height:19px;text-align:center;margin-left:4px;font-variant-numeric:tabular-nums}
+
+.stage{display:grid;grid-template-columns:372px minmax(0,1fr);gap:24px;align-items:start}
+@media (max-width:900px){
+  .stage{grid-template-columns:minmax(0,1fr)}
+  .switch{display:flex}
+  .stage[data-view="phone"] .console{display:none}
+  .stage[data-view="console"] .phone-col{display:none}
+}
+
+/* phone */
+.phone-col{display:flex;flex-direction:column;gap:10px;min-width:0}
+.phone{background:var(--phone);border-radius:34px;padding:11px;max-width:372px;width:100%;margin:0 auto;box-shadow:0 20px 40px -22px rgba(20,25,40,.6)}
+.screen{background:var(--chat-bg);border-radius:24px;overflow:hidden;display:flex;flex-direction:column;height:640px;max-height:78vh;color:var(--chat-ink)}
+.chathead{background:var(--chat-head);color:#fff;padding:11px 14px;display:flex;align-items:center;gap:10px}
+.chathead .av{width:34px;height:34px;border-radius:50%;background:#2e3c8c;display:grid;place-items:center;flex:none}
+.chathead b{display:block;font-size:15px;font-weight:600}
+.chathead span{font-size:12px;color:#c6d3e1}
+.msgs{flex:1;overflow-y:auto;padding:14px 10px;display:flex;flex-direction:column;gap:7px;scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){.msgs{scroll-behavior:auto}}
+.m{max-width:86%;padding:7px 10px 6px;border-radius:9px;font-size:14px;line-height:1.42;box-shadow:0 1px 0 rgba(0,0,0,.08);overflow-wrap:anywhere}
+.m .t{white-space:pre-line}
+.m.out{background:var(--bubble-out);align-self:flex-start;border-top-left-radius:2px}
+.m.in{background:var(--bubble-in);align-self:flex-end;border-top-right-radius:2px}
+.m.sys{align-self:center;background:var(--surface);color:var(--muted);font-size:12px;border-radius:7px;text-align:center;max-width:92%}
+.m .voice{display:flex;align-items:center;gap:8px;font-weight:500}
+.m .voice svg{flex:none}
+.m audio{width:220px;max-width:100%;height:34px;margin-top:4px;display:block}
+.opts{display:flex;flex-direction:column;margin-top:6px;border-top:1px solid rgba(127,127,127,.25)}
+.opts button{background:none;border:0;border-top:1px solid rgba(127,127,127,.15);color:var(--chat-link);padding:8px 4px;cursor:pointer;font-weight:500;text-align:center}
+.opts button:first-child{border-top:0}
+.opts button:hover{background:rgba(127,127,127,.08)}
+.opts .row-item{text-align:left}
+.opts .row-item small{display:block;color:var(--muted);font-size:12px;font-weight:400}
+.listbtn{display:block;width:100%;background:none;border:0;border-top:1px solid rgba(127,127,127,.25);color:var(--chat-link);padding:8px 0 2px;margin-top:6px;cursor:pointer;font-weight:600}
+.typing{align-self:flex-start;font-size:12px;color:var(--muted);padding:0 6px}
+.composer{display:flex;gap:6px;padding:8px;background:var(--soft);align-items:center}
+.composer input{flex:1;min-width:0;border-radius:20px;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:10px 14px;font:inherit;font-size:14px}
+.round{width:42px;height:42px;border-radius:50%;border:0;background:#0f8f6f;color:#fff;display:grid;place-items:center;cursor:pointer;flex:none}
+.round[aria-expanded="true"]{background:var(--red)}
+.voicebox{background:var(--surface);border-top:1px solid var(--line);padding:10px;display:flex;flex-direction:column;gap:8px;color:var(--ink)}
+.voicebox label{font-size:13px;font-weight:600}
+.voicebox textarea{width:100%;min-height:58px;resize:vertical;border:1px solid var(--line);border-radius:8px;padding:8px;font:inherit;font-size:14px;background:var(--surface);color:var(--ink)}
+.voicebox .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.voicebox input[type=file]{font-size:12px;max-width:100%}
+.phone-tools{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;align-items:center}
+.toggle{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);cursor:pointer}
+.toggle input{accent-color:var(--indigo);width:16px;height:16px}
+
+/* console */
+.console{background:var(--surface);border:1px solid var(--line);border-radius:14px;min-width:0}
+.tabs{display:flex;gap:2px;border-bottom:1px solid var(--line);padding:6px 10px 0;overflow-x:auto}
+.tabs button{border:0;background:none;padding:10px 12px;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap}
+.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--indigo)}
+.pane{padding:18px 20px 22px}
+.pane-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.stats{display:flex;gap:26px;flex-wrap:wrap;margin-bottom:16px}
+.stat b{display:block;font-family:var(--display);font-size:26px;font-weight:600;line-height:1.1;font-variant-numeric:tabular-nums}
+.stat span{font-size:13px;color:var(--muted)}
+.tablewrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{text-align:left;font-size:12.5px;font-weight:600;color:var(--muted);padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:9px 10px;border-bottom:1px solid var(--soft);vertical-align:top}
+tr.resp{cursor:pointer}
+tr.resp:hover td{background:var(--soft)}
+tr.fresh td{animation:fresh 2.2s ease-out}
+@keyframes fresh{from{background:var(--indigo-soft)}to{background:transparent}}
+@media (prefers-reduced-motion:reduce){tr.fresh td{animation:none}}
+.pill{display:inline-block;font-size:12px;font-weight:600;border-radius:6px;padding:1px 8px;white-space:nowrap}
+.pill.done,.pill.verified{background:var(--green-soft);color:var(--green)}
+.pill.pending{background:var(--ochre-soft);color:var(--ochre)}
+.pill.corrected{background:var(--indigo-soft);color:var(--indigo)}
+.pill.stop,.pill.inaudible,.pill.declined{background:var(--red-soft);color:var(--red)}
+.pill.neutral{background:var(--soft);color:var(--muted)}
+.detail{background:var(--soft);border-radius:10px;padding:4px 14px;margin:6px 0 10px}
+.qa{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:6px 18px;padding:10px 0;border-bottom:1px solid var(--line)}
+.qa:last-child{border-bottom:0}
+@media (max-width:640px){.qa{grid-template-columns:minmax(0,1fr)}}
+.qa .q{color:var(--muted);font-size:14px}
+.qa .v{font-weight:600}
+.qa .tr{font-size:13.5px}
+.qa audio{height:32px;max-width:100%;margin-top:4px}
+.meta{font-size:12px;color:var(--muted);display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:3px}
+.empty{padding:26px 10px;text-align:center;color:var(--muted)}
+.note{background:var(--soft);border-radius:10px;padding:10px 14px;font-size:13.5px;color:var(--muted)}
+
+/* review card */
+.rv{display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:20px;align-items:start}
+@media (max-width:760px){.rv{grid-template-columns:minmax(0,1fr)}}
+.thread{display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
+.lbl{font-size:12px;color:var(--muted);margin-bottom:3px}
+.b-out{background:var(--soft);border-radius:12px;border-top-left-radius:3px;padding:9px 12px;max-width:520px;white-space:pre-line}
+.b-in{background:var(--bubble-in);color:var(--chat-ink);border-radius:12px;border-top-right-radius:3px;padding:9px 12px;max-width:520px;margin-left:auto}
+.b-in audio{width:100%;height:36px;display:block;margin-bottom:6px}
+.field{margin-bottom:12px}
+.field label{display:block;font-weight:600;font-size:14px;margin-bottom:5px}
+.help{font-size:12.5px;color:var(--muted);margin-top:4px}
+input[type=text],input[type=number],input[type=email],select,textarea{width:100%;font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 10px}
+textarea{resize:vertical;line-height:1.45}
+.actions{display:flex;gap:10px;flex-wrap:wrap}
+#rv-fix{display:none}
+.edited #rv-fix,.must-fix #rv-fix{display:inline-flex}
+.edited #rv-ok{display:none}
+
+/* questionnaire */
+.qlist{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:8px}
+.qlist .ty{font-size:12.5px;color:var(--muted)}
+.warns{display:flex;flex-direction:column;gap:6px;margin:10px 0}
+.warns div{background:var(--ochre-soft);color:var(--ink);border-radius:8px;padding:7px 11px;font-size:13.5px}
+.ok-box{background:var(--green-soft);border-radius:8px;padding:8px 12px;font-size:14px}
+.err-box{background:var(--red-soft);border-radius:8px;padding:8px 12px;font-size:14px}
+.split2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px}
+@media (max-width:760px){.split2{grid-template-columns:minmax(0,1fr)}}
+
+/* feedback */
+.scale{display:flex;gap:6px;flex-wrap:wrap}
+.scale button{width:44px;height:40px;border-radius:8px;border:1px solid var(--line);background:var(--surface);cursor:pointer;font-weight:600}
+.scale button[aria-pressed="true"]{background:var(--indigo);color:var(--indigo-ink);border-color:var(--indigo)}
+.checks{display:flex;flex-wrap:wrap;gap:8px 16px}
+.checks label{display:flex;gap:6px;align-items:center;font-weight:400;font-size:14px;margin:0}
+.preview{white-space:pre-wrap;background:var(--soft);border-radius:8px;padding:10px 12px;font-size:13px;max-height:220px;overflow:auto}
+.contact{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:14px}
+.contact code{background:var(--soft);padding:3px 8px;border-radius:6px;user-select:all}
+footer{margin-top:22px;font-size:13px;color:var(--muted);max-width:80ch}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div class="brand">
+        <svg class="mark" viewBox="0 0 42 42" aria-hidden="true"><rect width="42" height="42" rx="11" fill="#2e3c8c"/><path d="M11 25v-8M16 29V13M21 26V16M26 22v-4M31 24v-6" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg>
+        <div><h1>SahelVoice</h1><div class="tag">Enquêtes WhatsApp, par écrit ou par la voix</div></div>
+      </div>
+      <p class="lede">Répondez sur le téléphone comme un participant. À côté, voyez ce que l'organisation reçoit : les réponses, les messages vocaux transcrits, et la file de vérification des enquêteurs.</p>
+    </div>
+    <button class="btn" type="button" id="goFeedback">Donner mon avis</button>
+  </header>
+
+  <div class="scenarios" role="group" aria-label="Choisir un exemple">
+    <span class="small muted">Exemple :</span>
+    <button class="chip" type="button" data-survey="vivres" aria-pressed="true">Suivi de distribution <small>· ONG</small></button>
+    <button class="chip" type="button" data-survey="avis" aria-pressed="false">Satisfaction client <small>· boutique</small></button>
+    <button class="chip" type="button" data-survey="custom" aria-pressed="false" id="chipCustom" hidden>Votre questionnaire</button>
+  </div>
+
+  <div class="switch" role="tablist" aria-label="Vue">
+    <button type="button" role="tab" data-view="phone" aria-selected="true">Téléphone</button>
+    <button type="button" role="tab" data-view="console" aria-selected="false">Organisation <span class="badge" id="swBadge" hidden>0</span></button>
+  </div>
+
+  <div class="stage" id="stage" data-view="phone">
+    <section class="phone-col" aria-label="Téléphone du participant">
+      <div class="phone"><div class="screen">
+        <div class="chathead"><div class="av"><svg width="18" height="18" viewBox="0 0 42 42" aria-hidden="true"><path d="M11 25v-8M16 29V13M21 26V16M26 22v-4M31 24v-6" stroke="#fff" stroke-width="4" stroke-linecap="round"/></svg></div>
+          <div><b id="orgName">ONG de démonstration</b><span>compte WhatsApp Business</span></div></div>
+        <div class="msgs" id="msgs" aria-live="polite"></div>
+        <div class="voicebox" id="voicebox" hidden>
+          <label for="vtext">Message vocal : écrivez ce que vous diriez</label>
+          <textarea id="vtext" placeholder="ex. nous sommes sept à la maison"></textarea>
+          <div class="row"><label for="vfile" class="small muted" style="font-weight:400">Joindre un enregistrement (facultatif)</label>
+            <input type="file" id="vfile" accept="audio/*"></div>
+          <div class="row"><button class="btn small" type="button" id="vsend">Envoyer le vocal</button>
+            <span class="small muted">Le vrai service transcrit la voix automatiquement.</span></div>
+        </div>
+        <form class="composer" id="composer" autocomplete="off">
+          <input id="txt" placeholder="Message" aria-label="Message">
+          <button type="button" class="round" id="mic" aria-expanded="false" aria-controls="voicebox" title="Message vocal" aria-label="Message vocal">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.9V21h2v-2.1A7 7 0 0 0 19 12h-2z"/></svg></button>
+          <button class="round" id="send" title="Envoyer" aria-label="Envoyer"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 20l18-8L3 4v6l12 2-12 2z"/></svg></button>
+        </form>
+      </div></div>
+      <div class="phone-tools">
+        <label class="toggle"><input type="checkbox" id="noise" checked> Simuler des erreurs de transcription</label>
+        <button class="btn quiet small" type="button" id="restart">Recommencer</button>
+      </div>
+    </section>
+
+    <section class="console" aria-label="Console de l'organisation">
+      <div class="tabs" role="tablist">
+        <button type="button" role="tab" data-tab="responses" aria-selected="true">Réponses</button>
+        <button type="button" role="tab" data-tab="review" aria-selected="false">À vérifier <span class="badge" id="tabBadge" hidden>0</span></button>
+        <button type="button" role="tab" data-tab="form" aria-selected="false">Questionnaire</button>
+        <button type="button" role="tab" data-tab="feedback" aria-selected="false">Votre avis</button>
+      </div>
+      <div class="pane" id="pane-responses"></div>
+      <div class="pane" id="pane-review" hidden></div>
+      <div class="pane" id="pane-form" hidden></div>
+      <div class="pane" id="pane-feedback" hidden></div>
+    </section>
+  </div>
+
+  <footer><a href="../">← Retour au site SahelVoice</a><br>Démonstration : tout se passe dans votre navigateur, rien n'est envoyé ni enregistré tant que vous n'envoyez pas votre avis. Dans le vrai service, les réponses arrivent par WhatsApp, les messages vocaux sont transcrits automatiquement, les numéros sont remplacés par un code dans les exports, et toute personne qui écrit STOP n'est plus jamais contactée.</footer>
+</div>
+
+<script>
+/* ===================================================================== config */
+// Where testers send feedback. Fill both to show the buttons; leave empty to hide.
+const CONTACT_WHATSAPP = "23566049094";   // international format, digits only
+const CONTACT_EMAIL = "toadoum16@gmail.com";
+
+/* ===================================================================== French answer parsing
+   Ported from the server (app/nlu_fr.py). Rule-based: every decision can be explained. */
+const NLU = (() => {
+  const normalize = (t) => (t || "").toLowerCase().replace(/[’]/g, "'").replace(/œ/g, "oe").replace(/æ/g, "ae")
+    .normalize("NFKD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9' ]+/g, " ").replace(/'/g, " ")
+    .replace(/\s+/g, " ").trim();
+  const has = (p, n) => new RegExp("(?<![a-z0-9])" + p.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "(?![a-z0-9])").test(n);
+  const YES = new Set(["oui","ouais","ouai","ouii","ok","okay","oki","daccord","accord","yes","yep","aywa","aiwa","ayewa","naam","accepte","volontiers","exactement","absolument","evidemment","certainement","correct","voila"]);
+  const YES_P = ["bien sur","tout a fait","c est ca","c est bien ca","bien entendu","je veux bien","c est juste","c est exact"];
+  const NO = new Set(["non","nan","no","nope","jamais","refuse","aucunement"]);
+  const NO_P = ["pas du tout","pas d accord","pas vraiment","je ne veux pas","non merci","je refuse","pas encore","absolument pas","pas question"];
+  function yesNo(text) {
+    const n = normalize(text);
+    if (!n || has("sais pas", n) || has("sait pas", n)) return null;
+    if (NO_P.some(p => has(p, n))) return "non";
+    const toks = new Set(n.split(" "));
+    const yes = [...toks].some(t => YES.has(t)) || YES_P.some(p => has(p, n));
+    let no = [...toks].some(t => NO.has(t)) || toks.has("pas");
+    if (/(^| )(ne|n)( .*)? pas( |$)/.test(n)) no = true;
+    if (yes && no) return null;
+    return yes ? "oui" : no ? "non" : null;
+  }
+  const UNITS = {zero:0,un:1,une:1,deux:2,trois:3,quatre:4,cinq:5,six:6,sept:7,huit:8,neuf:9,dix:10,onze:11,douze:12,treize:13,quatorze:14,quinze:15,seize:16};
+  const TENS = {vingt:20,vingts:20,trente:30,quarante:40,cinquante:50,soixante:60,septante:70,huitante:80,octante:80,nonante:90};
+  const NUMW = new Set([...Object.keys(UNITS), ...Object.keys(TENS), "cent", "cents", "mille"]);
+  function wordsToInt(ws) {
+    let total = 0, cur = 0, prev = "", seen = false;
+    for (const w of ws) {
+      if (w === "et") continue;
+      if (w in UNITS) cur += UNITS[w];
+      else if ((w === "vingt" || w === "vingts") && prev === "quatre") cur += 76;
+      else if (w in TENS) cur += TENS[w];
+      else if (w === "cent" || w === "cents") cur = (cur || 1) * 100;
+      else if (w === "mille") { total += (cur || 1) * 1000; cur = 0; }
+      else return null;
+      seen = true; prev = w;
+    }
+    return seen ? total + cur : null;
+  }
+  function number(text) {
+    const raw = (text || "").replace(/[  ]/g, " ");
+    const m = raw.match(/(?<![\d,.])-?\d{1,3}(?:[ .]\d{3})+(?![\d,])|(?<![\d,.])-?\d+(?!\d)/);
+    if (m) return parseInt(m[0].replace(/[ .]/g, ""), 10);
+    const toks = normalize(text).split(" ").concat([""]);
+    let run = [];
+    for (const t of toks) {
+      if (NUMW.has(t) || (t === "et" && run.length)) { run.push(t); continue; }
+      if (run.length) {
+        while (run.length && run[run.length - 1] === "et") run.pop();
+        const v = wordsToInt(run);
+        if (v !== null) return v;
+        run = [];
+      }
+    }
+    return null;
+  }
+  const RATING_P = [["pas du tout satisfait",1],["pas du tout content",1],["tres mecontent",1],["tres mauvais",1],["tres decu",1],["nul",1],["catastrophique",1],
+    ["pas tres satisfait",2],["pas tres content",2],["pas tres bien",2],["pas tres bon",2],["pas satisfait",2],["peu satisfait",2],["pas content",2],["mecontent",2],["mauvais",2],["decevant",2],["decu",2],["pas bien",2],
+    ["un peu satisfait",3],["un peu content",3],["moyen",3],["moyennement",3],["bof",3],["passable",3],["comme ci comme ca",3],["ca va",3],
+    ["tres satisfait",5],["tres content",5],["tres bien",5],["excellent",5],["parfait",5],["super",5],["genial",5],
+    ["satisfait",4],["content",4],["bien",4],["bon",4],["bonne",4]].sort((a, b) => b[0].length - a[0].length);
+  function rating(text, q) {
+    const n = normalize(text);
+    if (!n) return null;
+    const words = n.split(" ");
+    let num = null;
+    if (/\d/.test(text)) num = number(text);
+    else if (words.length <= 3 && (words.length === 1 || !(words.includes("un") || words.includes("une")))) num = number(text);
+    if (num !== null && num >= 1 && num <= q.scale) return String(num);
+    const labels = Object.entries(q.scale_labels || {}).map(([k, l]) => [normalize(l), k]).sort((a, b) => b[0].length - a[0].length);
+    for (const [l, k] of labels) if (l && has(l, n)) return String(k);
+    for (const [p, v0] of RATING_P) if (has(p, n)) {
+      const v = q.scale === 5 ? v0 : Math.round(1 + (v0 - 1) * (q.scale - 1) / 4);
+      return String(v);
+    }
+    return null;
+  }
+  const ORD = {premier:1,premiere:1,deuxieme:2,second:2,seconde:2,troisieme:3,quatrieme:4,cinquieme:5,sixieme:6,septieme:7,huitieme:8,neuvieme:9,dixieme:10};
+  function lev(a, b) {
+    const d = Array.from({length: b.length + 1}, (_, j) => j);
+    for (let i = 1; i <= a.length; i++) {
+      let prev = d[0]; d[0] = i;
+      for (let j = 1; j <= b.length; j++) { const tmp = d[j]; d[j] = Math.min(d[j] + 1, d[j - 1] + 1, prev + (a[i - 1] !== b[j - 1])); prev = tmp; }
+    }
+    return d[b.length];
+  }
+  function choice(text, options) {
+    const n = normalize(text);
+    if (!n) return null;
+    let pos = null;
+    const m = (text || "").trim().match(/^\W*(\d{1,2})\W*$/);
+    if (m) pos = parseInt(m[1], 10);
+    else for (const t of n.split(" ")) if (t in ORD) { pos = ORD[t]; break; }
+    if (pos !== null && pos >= 1 && pos <= options.length) return options[pos - 1].value;
+    const cands = [];
+    for (const o of options) for (const p of [o.label, String(o.value).replace(/_/g, " "), ...(o.synonyms || [])]) {
+      const np = normalize(p); if (np) cands.push([np, o.value]);
+    }
+    cands.sort((a, b) => b[0].length - a[0].length);
+    const taken = [], hits = new Set();
+    for (const [p, v] of cands) {
+      const re = new RegExp("(?<![a-z0-9])" + p.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "(?![a-z0-9])", "g");
+      let mm;
+      while ((mm = re.exec(n))) {
+        const s = mm.index, e = s + mm[0].length;
+        if (taken.some(([a, b]) => a <= s && e <= b)) continue;
+        taken.push([s, e]); hits.add(v);
+      }
+    }
+    if (hits.size === 1) return [...hits][0];
+    if (hits.size > 1) return null;
+    const words = n.split(" ");
+    let best = 0, bestV = null, tie = false;
+    for (const [p, v] of cands) {
+      const k = p.split(" ").length;
+      for (let i = 0; i < Math.max(1, words.length - k + 1); i++) {
+        const w = words.slice(i, i + k).join(" ");
+        const r = 1 - lev(w, p) / Math.max(w.length, p.length, 1);
+        if (r > best + 1e-9) { best = r; bestV = v; tie = false; }
+        else if (Math.abs(r - best) < 1e-9 && v !== bestV) tie = true;
+      }
+    }
+    return best >= 0.8 && !tie ? bestV : null;
+  }
+  function extract(q, text) {
+    text = (text || "").trim();
+    if (!text) return [null, ""];
+    if (q.type === "yes_no") { const v = yesNo(text); return v ? [v, v === "oui" ? "Oui" : "Non"] : [null, ""]; }
+    if (q.type === "number") {
+      const v = number(text);
+      if (v === null || (q.min != null && v < q.min) || (q.max != null && v > q.max)) return [null, ""];
+      return [String(v), String(v)];
+    }
+    if (q.type === "rating") {
+      const v = rating(text, q); if (v === null) return [null, ""];
+      const l = (q.scale_labels || {})[v];
+      return [v, `${v}/${q.scale}` + (l ? ` (${l})` : "")];
+    }
+    if (q.type === "choice") { const v = choice(text, q.options); return v === null ? [null, ""] : [v, q.options.find(o => o.value === v).label]; }
+    if (q.type === "text") return [text, text];
+    return [null, ""];
+  }
+  const SKIP = ["je ne sais pas","sais pas","sait pas","aucune idee","pas d idee","passer","je passe","skip","nsp","pas de reponse","prefere ne pas repondre"];
+  const STOP = new Set(["stop","arreter","arret","arrete","stopper","desabonner","desinscrire","unsubscribe"]);
+  const isSkip = (t) => { const n = normalize(t); return !!n && SKIP.some(p => has(p, n)); };
+  const isStop = (t) => { const k = normalize(t).split(" ").filter(Boolean); return k.length > 0 && k.length <= 3 && STOP.has(k[0]); };
+  return { normalize, yesNo, number, rating, choice, extract, isSkip, isStop, lev };
+})();
+
+/* ===================================================================== surveys */
+const SURVEYS = {
+  vivres: {
+    id: "vivres", org: "ONG de démonstration", title: "Suivi post-distribution de vivres", keywords: ["vivres"],
+    intro: "Bonjour ! L'ONG de démonstration vous invite à répondre à l'enquête « Suivi post-distribution de vivres » : 7 questions.",
+    consent: "Vos réponses sont confidentielles et transmises sans votre numéro de téléphone.\n\nSi vous répondez par message vocal, l'équipe peut l'écouter pour vérifier la transcription. Il est supprimé après 30 jours.\n\nÉcrivez STOP à tout moment pour arrêter. Acceptez-vous de répondre ?",
+    closing: "Merci beaucoup pour vos réponses !", training: false,
+    questions: [
+      {id: "intro_note", type: "note", text: "Cette enquête porte sur la distribution de vivres d'octobre."},
+      {id: "assistance_recue", type: "yes_no", text: "Avez-vous reçu le kit alimentaire complet ?"},
+      {id: "article_manquant", type: "choice", text: "Quel article manquait ?", relevant: {mode: "and", terms: [["assistance_recue", "=", "non"]]},
+       options: [{value: "riz", label: "Riz"}, {value: "huile", label: "Huile"}, {value: "sorgho", label: "Sorgho"}, {value: "sel", label: "Sel"}, {value: "savon", label: "Savon"}]},
+      {id: "taille_menage", type: "number", text: "Combien de personnes vivent dans votre ménage, vous compris ?", min: 1, max: 40, confirm_voice: true},
+      {id: "temps_trajet", type: "choice", text: "Combien de temps avez-vous mis pour venir au site de distribution ?",
+       options: [{value: "moins_30", label: "Moins de 30 minutes", synonyms: ["pas longtemps", "rapide"]}, {value: "30_60", label: "30 minutes à 1 heure", synonyms: ["une heure"]},
+                 {value: "1_2h", label: "1 à 2 heures", synonyms: ["deux heures"]}, {value: "plus_2h", label: "Plus de 2 heures", synonyms: ["toute la journee", "tres longtemps"]}]},
+      {id: "satisfaction", type: "rating", text: "Sur une échelle de 1 à 5, êtes-vous satisfait(e) de la distribution ?", scale: 5,
+       scale_labels: {5: "Très satisfait(e)", 4: "Satisfait(e)", 3: "Moyen", 2: "Peu satisfait(e)", 1: "Pas du tout satisfait(e)"}},
+      {id: "usage_kit", type: "text", text: "À quoi allez-vous utiliser le kit ?"},
+      {id: "plainte", type: "text", text: "Avez-vous une plainte ou une suggestion ? Vous pouvez répondre par message vocal."},
+    ],
+  },
+  avis: {
+    id: "avis", org: "Boutique de démonstration", title: "Satisfaction client", keywords: ["avis"],
+    intro: "Bonjour ! Merci pour votre achat. Pouvez-vous nous donner votre avis ? 4 questions, moins d'une minute.",
+    consent: "Vos réponses aident la boutique à améliorer son service. Elles sont analysées sans votre numéro de téléphone.\n\nÉcrivez STOP à tout moment pour arrêter. Acceptez-vous ?",
+    closing: "Merci ! Votre avis compte beaucoup pour nous.", training: true,
+    questions: [
+      {id: "note", type: "rating", text: "Comment évaluez-vous votre dernier achat ?", scale: 5, scale_labels: {5: "Excellent", 4: "Bien", 3: "Moyen", 2: "Décevant", 1: "Très mauvais"}},
+      {id: "livraison_ok", type: "yes_no", text: "Votre commande est-elle arrivée à l'heure prévue ?"},
+      {id: "paiement", type: "choice", text: "Comment avez-vous payé ?", options: [
+        {value: "especes", label: "Espèces", synonyms: ["cash", "liquide", "a la livraison"]},
+        {value: "airtel", label: "Airtel Money", synonyms: ["airtel"]}, {value: "moov", label: "Moov Money", synonyms: ["moov", "flooz"]}]},
+      {id: "commentaire", type: "text", text: "Un commentaire ou une suggestion ? (écrit ou vocal)"},
+    ],
+  },
+};
+const TRAINING_Q = "Une dernière chose avant de commencer, et c'est facultatif : acceptez-vous que vos messages vocaux soient aussi utilisés, sans votre nom ni votre numéro, pour améliorer la reconnaissance vocale en français et dans les langues du Tchad ?";
+const HINTS = {yes_no: "Répondez simplement Oui ou Non.", number: "Répondez avec un nombre, par exemple : 3.", rating: "Choisissez une note dans la liste.", choice: "Choisissez une des options proposées.", text: ""};
+// Typical mistakes of a speech model on short French numbers, to show why enumerators check.
+const ASR_NOISE = [[/\bsept\b/gi, "cette"], [/\bhuit\b/gi, "wi"], [/\bcent\b/gi, "sans"], [/\bvingt\b/gi, "vin"], [/\bdix\b/gi, "dis"]];
+
+/* ===================================================================== state */
+const S = {
+  surveyId: "vivres",
+  sessions: [],          // every conversation (examples + yours)
+  msgs: {},              // per survey: the phone's messages
+  current: {},           // per survey: id of the open session on the phone
+  tab: "responses", openRow: null, reviewing: null, nextId: 1, fresh: null,
+  importWarnings: [], importError: "",
+};
+const survey = () => SURVEYS[S.surveyId];
+const isRelevant = (q, values) => {
+  if (!q.relevant) return true;
+  const r = q.relevant.terms.map(([qid, op, want]) => {
+    const got = values[qid];
+    if (op === "=" || op === "!=") { const ok = got != null && String(got) === String(want); return op === "=" ? ok : !ok; }
+    const a = parseFloat(got), b = parseFloat(want);
+    if (isNaN(a) || isNaN(b)) return false;
+    return {">": a > b, "<": a < b, ">=": a >= b, "<=": a <= b}[op];
+  });
+  return q.relevant.mode === "or" ? r.some(Boolean) : r.every(Boolean);
+};
+const valuesOf = (s) => Object.fromEntries(Object.entries(s.answers).map(([k, a]) => [k, a.value]));
+const needsReview = (a) => a.source === "voice" || a.status === "unparsed";
+
+function newSession(sv, label) {
+  const s = {id: S.nextId++, surveyId: sv.id, label, state: "consent", q: 0, attempts: 0, pending: null,
+             consentAt: null, training: null, started: Date.now(), finished: null, answers: {}};
+  S.sessions.push(s);
+  return s;
+}
+function saveAnswer(s, q, value, status, source, raw, audio) {
+  s.answers[q.id] = {qid: q.id, value, status, source, raw, audio: audio || null,
+                     review: needsReview({source, status}) ? "pending" : "none", rText: null, rValue: null, at: Date.now()};
+}
+
+/* ===================================================================== the conversation engine (port of app/engine.py) */
+const out = (o) => S.msgs[S.surveyId].push({dir: "out", ...o});
+const sendText = (body) => out({kind: "text", body});
+function sendButtons(body, buttons) {
+  if (body.length > 1024) { sendText(body); body = "👇"; }
+  out({kind: "buttons", body, options: buttons});
+}
+function sendOptions(body, rows, allowButtons = true) {
+  const titles = rows.map(r => r[1]);
+  if (allowButtons && rows.length <= 3 && titles.every(t => t.length <= 20)) out({kind: "buttons", body, options: rows.map(r => [r[0], r[1]])});
+  else if (rows.length <= 10 && titles.every(t => t.length <= 24)) out({kind: "list", body, rows});
+  else sendText(body + "\n\n" + titles.map((t, i) => `${i + 1}. ${t}`).join("\n") + "\n\nRépondez avec le numéro de votre choix.");
+}
+function position(sv, s) {
+  const vals = valuesOf(s);
+  const ans = sv.questions.map((q, i) => [q, i]).filter(([q, i]) => q.type !== "note" && !(i < s.q && !isRelevant(q, vals)));
+  return [ans.filter(([, i]) => i <= s.q).length, ans.length];
+}
+function ask(sv, s, prefix = "") {
+  for (;;) {
+    const q = sv.questions[s.q];
+    if (!q) { if (prefix) sendText(prefix); finish(sv, s); return; }
+    if (!isRelevant(q, valuesOf(s))) { s.q++; s.attempts = 0; continue; }
+    if (q.type !== "note") break;
+    sendText(prefix ? prefix + "\n\n" + q.text : q.text); prefix = ""; s.q++; s.attempts = 0;
+  }
+  const q = sv.questions[s.q];
+  const [k, n] = position(sv, s);
+  let body = `(${k}/${n}) ${q.text}`;
+  if (prefix) body = prefix + "\n\n" + body;
+  if (q.type === "yes_no") sendButtons(body, [[q.id + "|oui", "Oui"], [q.id + "|non", "Non"]]);
+  else if (q.type === "choice") sendOptions(body, q.options.map(o => [q.id + "|" + o.value, o.label, ""]));
+  else if (q.type === "rating") {
+    const rows = []; for (let v = q.scale; v >= 1; v--) rows.push([q.id + "|" + v, (q.scale_labels || {})[v] || String(v), `${v}/${q.scale}`]);
+    sendOptions(body, rows, false);
+  } else sendText(body);
+}
+function advance(sv, s) { s.q++; s.attempts = 0; s.state = "asking"; ask(sv, s); }
+function finish(sv, s) {
+  s.state = "done"; s.finished = Date.now(); sendText(sv.closing);
+  S.fresh = s.id;
+}
+function validValue(q, v) {
+  if (q.type === "yes_no") return v === "oui" || v === "non";
+  if (q.type === "choice") return q.options.some(o => o.value === v);
+  if (q.type === "rating") return /^\d+$/.test(v) && +v >= 1 && +v <= q.scale;
+  if (q.type === "number") return /^-?\d+$/.test(v) && (q.min == null || +v >= q.min) && (q.max == null || +v <= q.max);
+  return true;
+}
+function retryOrRecord(sv, s, q, raw, source, audio, reason) {
+  if (s.attempts < 1) { s.attempts++; sendText((reason + " " + (q.hint || HINTS[q.type] || "")).trim()); ask(sv, s); return; }
+  saveAnswer(s, q, null, "unparsed", source, raw, audio); advance(sv, s);
+}
+function handle(msg) {
+  const sv = survey();
+  let s = S.sessions.find(x => x.id === S.current[sv.id]);
+  if (msg.kind === "text" && NLU.isStop(msg.text)) {
+    if (s && !["done", "declined", "stopped"].includes(s.state)) { s.state = "stopped"; s.finished = Date.now(); }
+    S.current[sv.id] = null;
+    sendText("Vous ne recevrez plus de messages de notre part. Écrivez REPRENDRE si vous changez d'avis.");
+    return;
+  }
+  if (!s || ["done", "declined", "stopped"].includes(s.state)) {
+    const words = NLU.normalize(msg.text).split(" ");
+    if (msg.kind === "text" && (sv.keywords.some(k => words.includes(k)) || /^(reprendre|start|commencer)$/.test(NLU.normalize(msg.text)))) {
+      s = newSession(sv, "Vous (test " + (S.sessions.filter(x => x.surveyId === sv.id && !x.example).length + 1) + ")");
+      S.current[sv.id] = s.id;
+      const merged = sv.intro + "\n\n" + sv.consent;
+      if (merged.length <= 1024) sendButtons(merged, [["consent|yes", "J'accepte"], ["consent|no", "Je refuse"]]);
+      else { sendText(sv.intro); sendButtons(sv.consent, [["consent|yes", "J'accepte"], ["consent|no", "Je refuse"]]); }
+    } else {
+      sendText(`Bonjour 👋 Pour participer à une enquête, envoyez le mot-clé communiqué par l'organisation (ici : « ${sv.keywords[0]} »).`);
+    }
+    return;
+  }
+  if (s.state === "consent") {
+    const d = msg.replyId === "consent|yes" ? "oui" : msg.replyId === "consent|no" ? "non" : NLU.yesNo(msg.text);
+    if (d === "oui") {
+      s.consentAt = Date.now(); s.q = 0; s.attempts = 0;
+      if (sv.training) { s.state = "training"; sendButtons(TRAINING_Q, [["training|yes", "Oui, j'accepte"], ["training|no", "Non merci"]]); }
+      else { s.state = "asking"; ask(sv, s, "Vous pouvez répondre par écrit ou par message vocal 🎤."); }
+    } else if (d === "non") {
+      s.state = "declined"; s.finished = Date.now(); S.current[sv.id] = null;
+      sendText("C'est noté. Aucune réponse n'a été enregistrée. Merci de votre temps.");
+    } else sendButtons(sv.consent, [["consent|yes", "J'accepte"], ["consent|no", "Je refuse"]]);
+    return;
+  }
+  if (s.state === "training") {
+    const d = msg.replyId === "training|yes" ? "oui" : msg.replyId === "training|no" ? "non" : NLU.yesNo(msg.text);
+    if (d === null && s.attempts < 1) { s.attempts++; sendButtons(TRAINING_Q, [["training|yes", "Oui, j'accepte"], ["training|no", "Non merci"]]); return; }
+    s.training = d === "oui"; s.state = "asking"; s.attempts = 0;
+    ask(sv, s, "Vous pouvez répondre par écrit ou par message vocal 🎤.");
+    return;
+  }
+  const q = sv.questions[s.q];
+  if (!q) { finish(sv, s); return; }
+  if (s.state === "confirming") {
+    let ok = null;
+    if (msg.replyId === "confirm|yes" || msg.replyId === "confirm|no") ok = msg.replyId === "confirm|yes";
+    else if (msg.kind === "text") { const yn = NLU.yesNo(msg.text); if (yn !== null) ok = yn === "oui"; }
+    if (ok === null) { s.state = "asking"; s.pending = null; return answer(sv, s, q, msg); }
+    const p = s.pending; s.pending = null; s.state = "asking";
+    if (ok) { saveAnswer(s, q, p.value, "ok", "voice", p.raw, p.audio); advance(sv, s); }
+    else {
+      s.attempts++;
+      if (s.attempts > 1) { saveAnswer(s, q, null, "unparsed", "voice", p.raw, p.audio); advance(sv, s); return; }
+      sendText("D'accord, pouvez-vous répéter votre réponse ?"); ask(sv, s);
+    }
+    return;
+  }
+  answer(sv, s, q, msg);
+}
+function answer(sv, s, q, msg) {
+  if (msg.kind === "reply") {
+    if (!msg.replyId.startsWith(q.id + "|")) { ask(sv, s); return; }
+    const v = msg.replyId.slice(q.id.length + 1);
+    if (!validValue(q, v)) { ask(sv, s); return; }
+    saveAnswer(s, q, v, "ok", "button", msg.text, null); advance(sv, s); return;
+  }
+  const raw = msg.text, source = msg.kind === "audio" ? "voice" : "text", audio = msg.audio || null;
+  if (NLU.isSkip(raw) && q.type !== "text") { saveAnswer(s, q, null, "skipped", source, raw, audio); advance(sv, s); return; }
+  const [value, display] = NLU.extract(q, raw);
+  if (value === null) { retryOrRecord(sv, s, q, raw, source, audio, "Je n'ai pas bien compris."); return; }
+  if (source === "voice" && q.confirm_voice) {
+    s.state = "confirming"; s.pending = {value, raw, audio};
+    sendButtons(`Vous avez dit : *${display}*. C'est bien ça ?`, [["confirm|yes", "Oui"], ["confirm|no", "Non, corriger"]]);
+    return;
+  }
+  saveAnswer(s, q, value, "ok", source, raw, audio); advance(sv, s);
+}
+
+/* ===================================================================== phone UI */
+const $ = (id) => document.getElementById(id);
+const esc = (t) => String(t ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+const waFmt = (t) => esc(t).replace(/(^|[^\w*])\*([^*\n]+)\*(?![\w*])/g, "$1<b>$2</b>").replace(/(^|[^\w_])_([^_\n]+)_(?![\w_])/g, "$1<em>$2</em>");
+const MIC_SVG = '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.9V21h2v-2.1A7 7 0 0 0 19 12h-2z"/></svg>';
+
+function renderPhone() {
+  const box = $("msgs"), list = S.msgs[S.surveyId];
+  box.innerHTML = "";
+  const sys = document.createElement("div");
+  sys.className = "m sys";
+  sys.textContent = `Démo : envoyez « ${survey().keywords[0]} » pour commencer. Touchez les boutons, écrivez, ou envoyez un vocal avec le micro.`;
+  box.appendChild(sys);
+  list.forEach((m) => {
+    const b = document.createElement("div");
+    b.className = "m " + m.dir;
+    if (m.kind === "audio") {
+      b.innerHTML = `<div class="voice">${MIC_SVG}<span>Message vocal</span></div>` + (m.audio ? `<audio controls preload="none" src="${esc(m.audio)}"></audio>` : "") +
+        `<div class="t small" style="opacity:.75">« ${esc(m.said)} »</div>`;
+    } else {
+      b.innerHTML = `<div class="t">${waFmt(m.body)}</div>`;
+    }
+    if (m.dir === "out" && m.kind === "buttons") {
+      const o = document.createElement("div"); o.className = "opts";
+      m.options.forEach(([id, title]) => { const btn = document.createElement("button"); btn.type = "button"; btn.textContent = title; btn.onclick = () => userTap(id, title); o.appendChild(btn); });
+      b.appendChild(o);
+    }
+    if (m.dir === "out" && m.kind === "list") {
+      const lb = document.createElement("button"); lb.type = "button"; lb.className = "listbtn";
+      lb.textContent = "☰ Choisir"; lb.setAttribute("aria-expanded", "false");
+      const o = document.createElement("div"); o.className = "opts"; o.hidden = true;
+      m.rows.forEach(([id, title, desc]) => {
+        const btn = document.createElement("button"); btn.type = "button"; btn.className = "row-item"; btn.textContent = title;
+        if (desc) { const sm = document.createElement("small"); sm.textContent = desc; btn.appendChild(sm); }
+        btn.onclick = () => userTap(id, title); o.appendChild(btn);
+      });
+      lb.onclick = () => { o.hidden = !o.hidden; lb.setAttribute("aria-expanded", String(!o.hidden)); };
+      b.appendChild(lb); b.appendChild(o);
+    }
+    box.appendChild(b);
+  });
+  box.scrollTop = box.scrollHeight;
+}
+function after() { renderPhone(); renderConsole(); }
+function userText(text) {
+  if (!text.trim()) return;
+  S.msgs[S.surveyId].push({dir: "in", kind: "text", body: text});
+  handle({kind: "text", text}); after();
+}
+function userTap(id, title) {
+  S.msgs[S.surveyId].push({dir: "in", kind: "text", body: title});
+  handle({kind: "reply", replyId: id, text: title}); after();
+}
+function userVoice(said, audio) {
+  let heard = said;
+  if ($("noise").checked) for (const [re, w] of ASR_NOISE) heard = heard.replace(re, w);
+  S.msgs[S.surveyId].push({dir: "in", kind: "audio", said, audio});
+  handle({kind: "audio", text: heard, audio}); after();
+}
+
+$("composer").addEventListener("submit", (e) => { e.preventDefault(); const t = $("txt").value; $("txt").value = ""; userText(t); });
+$("mic").addEventListener("click", () => {
+  const open = $("voicebox").hidden;
+  $("voicebox").hidden = !open; $("mic").setAttribute("aria-expanded", String(open));
+  if (open) $("vtext").focus();
+});
+$("vsend").addEventListener("click", () => {
+  const said = $("vtext").value.trim();
+  if (!said) { $("vtext").focus(); return; }
+  const f = $("vfile").files[0];
+  const audio = f ? URL.createObjectURL(f) : null;
+  $("vtext").value = ""; $("vfile").value = "";
+  $("voicebox").hidden = true; $("mic").setAttribute("aria-expanded", "false");
+  userVoice(said, audio);
+});
+$("restart").addEventListener("click", () => {
+  const sv = survey(), s = S.sessions.find(x => x.id === S.current[sv.id]);
+  if (s && !["done", "declined", "stopped"].includes(s.state)) S.sessions = S.sessions.filter(x => x !== s);
+  S.current[sv.id] = null; S.msgs[sv.id] = []; after();
+});
+
+/* ===================================================================== console */
+const STATE_L = {consent: "Consentement", training: "Consentement", asking: "En cours", confirming: "En cours", done: "Terminée", declined: "Refus", stopped: "Arrêtée (STOP)"};
+const REVIEW_L = {pending: "À vérifier", verified: "Vérifiée", corrected: "Corrigée", inaudible: "Inaudible"};
+const SRC_L = {voice: "Vocal", text: "Écrit", button: "Bouton"};
+function display(q, v) {
+  if (v == null || v === "") return "—";
+  if (q.type === "yes_no") return v === "oui" ? "Oui" : v === "non" ? "Non" : v;
+  if (q.type === "choice") { const o = q.options.find(o => o.value === v); return o ? o.label : v; }
+  if (q.type === "rating") { const l = (q.scale_labels || {})[v]; return `${v}/${q.scale}` + (l ? ` (${l})` : ""); }
+  return v;
+}
+const finalValue = (a) => a.review === "verified" || a.review === "corrected" ? a.rValue : a.review === "inaudible" ? null : a.value;
+const finalText = (a) => (a.review === "verified" || a.review === "corrected") && a.rText != null ? a.rText : a.raw;
+const consented = () => S.sessions.filter(s => s.surveyId === S.surveyId && s.consentAt);
+const pendingList = () => consented().flatMap(s => Object.values(s.answers).filter(a => a.review === "pending").map(a => ({s, a}))).sort((x, y) => x.a.at - y.a.at);
+const hhmm = (t) => t ? new Date(t).toLocaleTimeString("fr-FR", {hour: "2-digit", minute: "2-digit"}) : "";
+const fmtPct = (x) => x == null ? "—" : String(Math.round(x * 10) / 10).replace(".", ",") + " %";
+
+function wer(hyp, ref) {
+  const tk = (t) => (t || "").toLowerCase().replace(/[’]/g, "'").replace(/[^\p{L}\p{N}']+/gu, " ").trim().split(/\s+/).filter(Boolean);
+  const h = tk(hyp), r = tk(ref);
+  const d = Array.from({length: r.length + 1}, (_, j) => j);
+  for (let i = 1; i <= h.length; i++) { let prev = d[0]; d[0] = i; for (let j = 1; j <= r.length; j++) { const t = d[j]; d[j] = Math.min(d[j] + 1, d[j - 1] + 1, prev + (h[i - 1] !== r[j - 1])); prev = t; } }
+  return [d[r.length], r.length];
+}
+function metrics() {
+  const all = consented().flatMap(s => Object.values(s.answers));
+  const rev = all.filter(a => ["verified", "corrected", "inaudible"].includes(a.review));
+  let err = 0, words = 0;
+  for (const a of all.filter(a => a.source === "voice" && (a.review === "verified" || a.review === "corrected"))) { const [e, n] = wer(a.raw, a.rText); err += e; words += n; }
+  const corrected = rev.filter(a => a.review === "corrected").length;
+  return {pending: all.filter(a => a.review === "pending").length, reviewed: rev.length, corrected,
+          correctedPct: rev.length ? 100 * corrected / rev.length : null, wer: words ? 100 * err / words : null, words,
+          inaudible: rev.filter(a => a.review === "inaudible").length};
+}
+
+function setTab(t) {
+  S.tab = t;
+  document.querySelectorAll(".tabs [role=tab]").forEach(b => b.setAttribute("aria-selected", String(b.dataset.tab === t)));
+  ["responses", "review", "form", "feedback"].forEach(p => $("pane-" + p).hidden = p !== t);
+  renderConsole();
+}
+document.querySelectorAll(".tabs [role=tab]").forEach(b => b.addEventListener("click", () => setTab(b.dataset.tab)));
+
+function renderConsole() {
+  const n = pendingList().length;
+  for (const id of ["tabBadge", "swBadge"]) { $(id).hidden = n === 0; $(id).textContent = n; }
+  if (S.tab === "responses") renderResponses();
+  if (S.tab === "review") renderReview();
+  if (S.tab === "form") renderForm();
+  if (S.tab === "feedback") renderFeedback();
+}
+
+function renderResponses() {
+  const sv = survey(), all = S.sessions.filter(s => s.surveyId === sv.id);
+  const done = all.filter(s => s.state === "done").length, running = all.filter(s => ["consent", "training", "asking", "confirming"].includes(s.state)).length;
+  const rows = consented().slice().reverse();
+  const answerable = sv.questions.filter(q => q.type !== "note");
+  let html = `<div class="pane-head"><div><h2>${esc(sv.title)}</h2><p class="small muted">${esc(sv.org)} · mot-clé WhatsApp <b>${esc(sv.keywords[0])}</b> · ${answerable.length} questions</p></div>
+    <button class="btn quiet small" type="button" id="csvBtn">Exporter CSV</button></div>
+    <div class="stats"><div class="stat"><b>${done}</b><span>terminées</span></div><div class="stat"><b>${running}</b><span>en cours</span></div>
+    <div class="stat"><b>${all.filter(s => s.state === "declined").length}</b><span>refus</span></div><div class="stat"><b>${pendingList().length}</b><span>à vérifier</span></div></div>`;
+  if (!rows.length) html += `<div class="empty">Pas encore de réponse. Envoyez « ${esc(sv.keywords[0])} » depuis le téléphone.</div>`;
+  else {
+    html += `<div class="tablewrap"><table><thead><tr><th>Répondant</th><th>Heure</th><th>État</th><th class="num">Réponses</th><th>Vocaux</th></tr></thead><tbody>`;
+    for (const s of rows) {
+      const ans = Object.values(s.answers), voice = ans.filter(a => a.source === "voice").length, pend = ans.filter(a => a.review === "pending").length;
+      html += `<tr class="resp${S.fresh === s.id ? " fresh" : ""}" data-sid="${s.id}" tabindex="0" aria-expanded="${S.openRow === s.id}">
+        <td><b>${esc(s.label)}</b></td><td class="small num">${hhmm(s.started)}</td>
+        <td><span class="pill ${s.state === "done" ? "done" : s.state === "stopped" ? "stop" : "neutral"}">${STATE_L[s.state]}</span></td>
+        <td class="num">${ans.length}/${answerable.length}</td>
+        <td>${voice ? voice + " " : ""}${pend ? `<span class="pill pending">${pend} à vérifier</span>` : voice ? `<span class="pill verified">vérifiés</span>` : `<span class="muted">—</span>`}</td></tr>`;
+      if (S.openRow === s.id) html += `<tr><td colspan="5" style="padding:0 4px">${detail(sv, s)}</td></tr>`;
+    }
+    html += `</tbody></table></div><p class="small muted" style="margin-top:10px">Touchez une ligne pour voir les réponses et écouter les vocaux.</p>`;
+  }
+  $("pane-responses").innerHTML = html;
+  S.fresh = null;
+  $("pane-responses").querySelectorAll("tr.resp").forEach(tr => {
+    const toggle = () => { const id = +tr.dataset.sid; S.openRow = S.openRow === id ? null : id; renderResponses(); };
+    tr.addEventListener("click", toggle);
+    tr.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); } });
+  });
+  $("pane-responses").querySelectorAll("[data-review]").forEach(b => b.addEventListener("click", (e) => { e.preventDefault(); e.stopPropagation(); S.reviewing = b.dataset.review; setTab("review"); }));
+  $("csvBtn").addEventListener("click", exportCsv);
+}
+function detail(sv, s) {
+  let h = `<div class="detail">`;
+  for (const q of sv.questions.filter(q => q.type !== "note")) {
+    const a = s.answers[q.id];
+    h += `<div class="qa"><div class="q">${esc(q.text)}</div><div>`;
+    if (!a) h += `<span class="muted">${q.relevant && s.state === "done" ? "Non posée (condition)" : "Pas de réponse"}</span>`;
+    else {
+      const fv = finalValue(a), ft = finalText(a);
+      if (q.type !== "text") h += `<div class="v">${a.status === "skipped" ? '<span class="muted">Passée</span>' : a.review === "inaudible" ? '<span class="muted">Inaudible</span>' : fv ? esc(display(q, fv)) : '<span class="muted">Non comprise</span>'}</div>`;
+      if (ft && (q.type === "text" || a.source !== "button")) h += `<div class="tr">${q.type === "text" ? "" : "« "}${esc(ft)}${q.type === "text" ? "" : " »"}</div>`;
+      if (a.audio) h += `<audio controls preload="none" src="${esc(a.audio)}"></audio>`;
+      h += `<div class="meta"><span>${SRC_L[a.source]}</span>${a.review !== "none" ? `<span class="pill ${a.review}">${REVIEW_L[a.review]}</span> <a href="#" data-review="${s.id}:${q.id}">${a.review === "pending" ? "Vérifier" : "Modifier"}</a>` : ""}
+        ${a.review === "corrected" && a.raw ? `<span>transcription automatique : « ${esc(a.raw)} »</span>` : ""}</div>`;
+    }
+    h += `</div></div>`;
+  }
+  return h + `</div>`;
+}
+
+function valueInput(q, cur) {
+  cur = cur ?? "";
+  if (q.type === "yes_no") return `<select id="rv-value"><option value="">— pas de réponse —</option><option value="oui" ${cur === "oui" ? "selected" : ""}>Oui</option><option value="non" ${cur === "non" ? "selected" : ""}>Non</option></select>`;
+  if (q.type === "choice") return `<select id="rv-value"><option value="">— pas de réponse —</option>${q.options.map(o => `<option value="${esc(o.value)}" ${cur === o.value ? "selected" : ""}>${esc(o.label)}</option>`).join("")}</select>`;
+  if (q.type === "rating") { let o = `<select id="rv-value"><option value="">— pas de réponse —</option>`; for (let v = q.scale; v >= 1; v--) o += `<option value="${v}" ${String(cur) === String(v) ? "selected" : ""}>${v}/${q.scale}${(q.scale_labels || {})[v] ? " — " + esc(q.scale_labels[v]) : ""}</option>`; return o + `</select>`; }
+  if (q.type === "number") return `<input type="number" id="rv-value" value="${esc(cur)}" ${q.min != null ? `min="${q.min}"` : ""} ${q.max != null ? `max="${q.max}"` : ""} style="max-width:160px" inputmode="numeric">`;
+  return "";
+}
+function renderReview() {
+  const sv = survey(), pl = pendingList(), m = metrics();
+  let item = null;
+  if (S.reviewing) { const [sid, qid] = S.reviewing.split(":"); const s = S.sessions.find(x => x.id === +sid); if (s && s.answers[qid]) item = {s, a: s.answers[qid]}; }
+  if (!item) item = pl[0] || null;
+  const quality = `<div class="note"><b style="color:var(--ink)">Qualité de la transcription</b><br>
+    ${m.reviewed ? `${m.reviewed} réponses vérifiées · ${fmtPct(m.correctedPct)} corrigées · ${fmtPct(m.wer)} de mots erronés (sur ${m.words} mots)` : "Les chiffres apparaissent dès la première vérification."}<br>
+    Mesuré sur les réponses relues par vos enquêteurs : c'est le vrai taux d'erreur, pas une promesse.</div>`;
+  if (!item) {
+    $("pane-review").innerHTML = `<div class="pane-head"><h2>À vérifier</h2></div><div class="empty"><b style="color:var(--ink)">Tout est vérifié.</b><br>Répondez par un message vocal sur le téléphone : il arrive ici pour être vérifié.</div>${quality}`;
+    return;
+  }
+  const {s, a} = item, q = sv.questions.find(x => x.id === a.qid), unparsed = a.status === "unparsed";
+  const curVal = a.review === "verified" || a.review === "corrected" ? a.rValue : a.value;
+  $("pane-review").innerHTML = `<div class="pane-head"><div><h2>À vérifier</h2><p class="small muted">${esc(s.label)} · ${a.review === "pending" ? pl.length + " en attente" : "déjà " + REVIEW_L[a.review].toLowerCase() + ", vous pouvez la modifier"}</p></div></div>
+  <div class="rv"><form id="rvform" class="${unparsed ? "must-fix" : ""}">
+    <div class="thread"><div><div class="lbl">Question envoyée</div><div class="b-out">${waFmt(q.text)}</div></div>
+      <div style="align-self:flex-end;width:min(100%,520px)"><div class="lbl" style="text-align:right">${a.source === "voice" ? "Message vocal" : "Réponse écrite"} · ${hhmm(a.at)}</div>
+        <div class="b-in">${a.audio ? `<audio controls preload="auto" src="${esc(a.audio)}" id="rv-player"></audio>` : a.source === "voice" ? `<div class="small" style="opacity:.75;margin-bottom:4px">(démo : pas d'enregistrement joint)</div>` : ""}
+          ${a.source === "voice" ? `<div class="small" style="opacity:.75">Transcription automatique</div>` : ""}<div>${esc(a.raw || "(rien de compris)")}</div></div></div></div>
+    ${a.source === "voice" ? `<div class="field"><label for="rv-text">Ce que la personne dit</label><textarea id="rv-text" rows="2">${esc(a.rText ?? a.raw ?? "")}</textarea><div class="help">Écoutez, puis corrigez les mots si besoin.</div></div>` : ""}
+    ${q.type !== "text" ? `<div class="field"><label for="rv-value">Réponse retenue</label>${valueInput(q, curVal)}
+      <div class="help" ${unparsed ? 'style="color:var(--ochre)"' : ""}>${unparsed ? "Le système n'a pas compris cette réponse : choisissez la bonne valeur." : "Compris automatiquement : <b>" + esc(display(q, a.value)) + "</b>"}</div></div>` : ""}
+    <div id="rv-err" class="err-box" hidden></div>
+    <div class="actions">${unparsed ? "" : `<button class="btn ok" type="button" id="rv-ok">C'est correct</button>`}
+      <button class="btn" type="button" id="rv-fix">Enregistrer la correction</button>
+      ${a.source === "voice" ? `<button class="btn warn" type="button" id="rv-inaud">Inaudible</button>` : ""}</div>
+  </form>
+  <div class="small muted" style="display:flex;flex-direction:column;gap:10px"><p>Les réponses vocales et celles que le système n'a pas comprises arrivent ici. Après chaque décision, la suivante s'ouvre.</p>
+    <p>La valeur retenue va dans l'export ; la transcription corrigée sert à mesurer la qualité.</p></div></div>
+  <div style="margin-top:16px">${quality}</div>`;
+  const form = $("rvform"), txt = $("rv-text"), val = $("rv-value");
+  const t0 = txt ? txt.value : null, v0 = val ? val.value : null;
+  const mark = () => form.classList.toggle("edited", (txt && txt.value !== t0) || (val && val.value !== v0));
+  if (txt) txt.addEventListener("input", mark);
+  if (val) { val.addEventListener("input", mark); val.addEventListener("change", mark); }
+  const done = () => { S.reviewing = null; renderConsole(); renderPhone(); };
+  if ($("rv-ok")) $("rv-ok").onclick = () => { a.review = "verified"; a.rText = a.raw; a.rValue = a.value; done(); };
+  if ($("rv-inaud")) $("rv-inaud").onclick = () => { a.review = "inaudible"; a.rText = null; a.rValue = null; done(); };
+  $("rv-fix").onclick = () => {
+    const text = txt ? txt.value.trim() : (a.raw || "");
+    let value = val ? val.value.trim() : "";
+    if (q.type === "text") value = text;
+    else if (!value || (value === (a.value || "") && text !== (a.raw || ""))) value = NLU.extract(q, text)[0] || value;
+    if (value && !validValue(q, value)) { $("rv-err").hidden = false; $("rv-err").textContent = `La valeur « ${value} » n'est pas valide pour cette question.`; return; }
+    a.rText = text; a.rValue = value || null;
+    a.review = text === (a.raw || "") && (value || "") === (a.value || "") ? "verified" : "corrected";
+    done();
+  };
+}
+
+/* ---------- questionnaire: show the questions, import an XLSForm */
+const TYPE_L = {yes_no: "Oui / Non", choice: "Choix", number: "Nombre", rating: "Note", text: "Réponse libre, écrite ou vocale", note: "Information"};
+function renderForm() {
+  const sv = survey();
+  const qs = sv.questions.map(q => `<li>${waFmt(q.text)}<div class="ty">${TYPE_L[q.type]}${q.type === "choice" ? " : " + q.options.map(o => esc(o.label)).join(" · ") : ""}${q.type === "number" && q.min != null ? ` de ${q.min} à ${q.max ?? "…"}` : ""}${q.type === "rating" ? ` de 1 à ${q.scale}` : ""}${q.relevant ? " · posée seulement si " + q.relevant.terms.map(t => `${esc(t[0])} ${t[1]} ${esc(t[2])}`).join(q.relevant.mode === "or" ? " ou " : " et ") : ""}</div></li>`).join("");
+  $("pane-form").innerHTML = `<div class="split2"><div><h2 style="margin-bottom:10px">${esc(sv.title)}</h2><ol class="qlist">${qs}</ol>
+    <p class="small muted" style="margin-top:12px">Consentement : « ${waFmt(sv.consent)} »</p></div>
+    <div><h2 style="margin-bottom:8px">Essayer votre questionnaire</h2>
+      <p class="small muted" style="margin-bottom:10px">Importez votre fichier XLSForm (le format Excel de KoBoToolbox et ODK). Il est lu dans votre navigateur, rien n'est envoyé. Ce qui ne peut pas passer sur WhatsApp est signalé.</p>
+      <div class="field"><label for="xlsfile">Fichier XLSForm (.xlsx)</label><input type="file" id="xlsfile" accept=".xlsx,.xls"></div>
+      <div class="field"><label for="xlskw">Mot-clé WhatsApp (facultatif)</label><input type="text" id="xlskw" placeholder="ex. nutrition"></div>
+      ${S.importError ? `<div class="err-box">${esc(S.importError)}</div>` : ""}
+      ${SURVEYS.custom && S.surveyId === "custom" ? `<div class="ok-box">« ${esc(SURVEYS.custom.title)} » importé : ${SURVEYS.custom.questions.filter(q => q.type !== "note").length} questions. Essayez-le sur le téléphone avec le mot-clé <b>${esc(SURVEYS.custom.keywords[0])}</b>.</div>` : ""}
+      ${S.importWarnings.length ? `<div class="warns">${S.importWarnings.map(w => `<div>${esc(w)}</div>`).join("")}</div>` : ""}
+      <p class="small muted" style="margin-top:10px">Pas de fichier sous la main ? <button class="btn quiet small" type="button" id="xlsExample">Obtenir l'exemple XLSForm</button></p>
+      <p class="small muted" id="xlsExNote"></p></div></div>`;
+  $("xlsfile").addEventListener("change", (e) => { const f = e.target.files[0]; if (f) importXlsForm(f, $("xlskw").value.trim()); });
+  $("xlsExample").addEventListener("click", downloadExample);
+}
+let xlsxLoading = null;
+function loadXlsx() {
+  if (window.XLSX) return Promise.resolve();
+  if (!xlsxLoading) xlsxLoading = new Promise((res, rej) => {
+    const sc = document.createElement("script");
+    sc.src = "https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js";
+    sc.onload = res; sc.onerror = () => { xlsxLoading = null; rej(new Error("load")); };
+    document.head.appendChild(sc);
+  });
+  return xlsxLoading;
+}
+const slug = (t, sep = "_") => NLU.normalize(t).replace(/[^a-z0-9]+/g, sep).replace(new RegExp(`^${sep}|${sep}$`, "g"), "").slice(0, 40) || "enquete";
+function parseRelevant(expr) {
+  const e = expr.trim(), hasAnd = /\sand\s/.test(e), hasOr = /\sor\s/.test(e);
+  if (hasAnd && hasOr) return null;
+  const mode = hasOr ? "or" : "and", terms = [];
+  for (let part of e.split(new RegExp(`\\s${mode}\\s`))) {
+    part = part.trim();
+    while (part.startsWith("(") && part.endsWith(")")) part = part.slice(1, -1).trim();
+    let m = part.match(/^selected\(\s*\$\{(\w+)\}\s*,\s*['"]([^'"]*)['"]\s*\)$/);
+    if (m) { terms.push([m[1], "=", m[2]]); continue; }
+    m = part.match(/^\$\{(\w+)\}\s*(=|!=|>=|<=|>|<)\s*(?:['"]([^'"]*)['"]|(-?\d+(?:\.\d+)?))$/);
+    if (!m) return null;
+    terms.push([m[1], m[2], m[3] !== undefined ? m[3] : m[4]]);
+  }
+  return {mode, terms};
+}
+async function importXlsForm(file, kw) {
+  S.importError = ""; S.importWarnings = [];
+  try { await loadXlsx(); } catch { S.importError = "Le lecteur Excel n'a pas pu être chargé. Vérifiez votre connexion et réessayez."; renderForm(); return; }
+  try {
+    const wb = XLSX.read(await file.arrayBuffer(), {type: "array"});
+    const sheet = (name) => { const k = wb.SheetNames.find(n => n.trim().toLowerCase() === name); return k ? XLSX.utils.sheet_to_json(wb.Sheets[k], {defval: "", raw: false}).map(r => Object.fromEntries(Object.entries(r).map(([a, b]) => [a.trim().toLowerCase(), String(b).trim()]))) : null; };
+    const rows = sheet("survey");
+    if (!rows) throw new Error("La feuille « survey » est introuvable : ce fichier n'est pas un XLSForm.");
+    const choicesRows = sheet("choices") || [], settings = (sheet("settings") || [{}])[0] || {};
+    const pick = (cols, base) => { const ls = cols.filter(c => c === base || c.startsWith(base + "::")); return ls.find(c => /\bfr\b|fran/.test(c.split("::")[1] || "")) || (ls.includes(base) ? base : ls[0]); };
+    const sCols = [...new Set(rows.flatMap(r => Object.keys(r)))], labelCol = pick(sCols, "label"), hintCol = pick(sCols, "hint");
+    if (!labelCol) throw new Error("Aucune colonne « label » dans la feuille survey.");
+    const cLabel = pick([...new Set(choicesRows.flatMap(r => Object.keys(r)))], "label") || "label";
+    const lists = {};
+    for (const r of choicesRows) { const ln = r.list_name || r["list name"], nm = r.name || r.value; if (ln && nm) (lists[ln] = lists[ln] || []).push([nm, r[cLabel] || nm]); }
+    const warn = (w) => S.importWarnings.push(w), qs = [], seen = new Set(), ynMap = {};
+    rows.forEach((r, idx) => {
+      const line = idx + 2, typ = (r.type || "").toLowerCase().replace(/\s+/g, " ").trim(), name = r.name || "", label = r[labelCol] || "";
+      if (!typ) return;
+      const base = typ.split(" ")[0];
+      if (base === "begin" || base === "end" || base.startsWith("begin_") || base.startsWith("end_")) { if (typ.includes("repeat")) warn(`Ligne ${line} : les répétitions (repeat) ne sont pas gérées ; les questions sont posées une seule fois.`); return; }
+      if (["start", "end", "today", "deviceid", "phonenumber", "username", "simserial", "subscriberid", "audit", "hidden", "calculate", "email"].includes(base)) { if (base === "calculate") warn(`Ligne ${line} « ${name} » : les calculs sont ignorés.`); return; }
+      if (!label) { warn(`Ligne ${line} « ${name} » : pas de libellé, question ignorée.`); return; }
+      let qid = /^[A-Za-z0-9_-]+$/.test(name) ? name : slug(name || "q" + line);
+      if (seen.has(qid)) { warn(`Ligne ${line} : le nom « ${qid} » est en double ; renommé.`); qid += "_" + line; }
+      let relevant = null;
+      if (r.relevant) {
+        relevant = parseRelevant(r.relevant);
+        if (relevant && relevant.terms.every(t => seen.has(t[0]))) relevant.terms = relevant.terms.map(([a, op, v]) => [a, op, (ynMap[a] || {})[v] ?? v]);
+        else { relevant = null; warn(`Ligne ${line} « ${name} » : condition trop complexe pour WhatsApp (${r.relevant}) ; la question sera posée à tout le monde.`); }
+      }
+      const hint = hintCol ? r[hintCol] : "", text = hint ? `${label}\n_${hint}_` : label;
+      let q = null;
+      if (base === "select_one") {
+        const opts = lists[typ.split(" ")[1]] || [];
+        if (!opts.length) { warn(`Ligne ${line} « ${name} » : liste de choix introuvable, question ignorée.`); return; }
+        const YES = ["oui", "yes", "1", "true", "o", "y"], NO = ["non", "no", "0", "false", "n"];
+        const names = opts.map(o => o[0].toLowerCase()), labels = opts.map(o => NLU.normalize(o[1]));
+        if (opts.length === 2 && ((names.some(n => YES.includes(n)) && names.some(n => NO.includes(n))) || (labels.includes("oui") && labels.includes("non")))) {
+          const yesN = opts.find(o => YES.includes(o[0].toLowerCase()) || NLU.normalize(o[1]) === "oui")[0];
+          ynMap[qid] = Object.fromEntries(opts.map(o => [o[0], o[0] === yesN ? "oui" : "non"]));
+          q = {id: qid, type: "yes_no", text};
+        } else {
+          q = {id: qid, type: "choice", text, options: opts.map(([v, l]) => ({value: v, label: l}))};
+          if (opts.length > 10) warn(`Ligne ${line} « ${name} » : ${opts.length} choix, envoyés en liste numérotée (WhatsApp limite les menus à 10).`);
+        }
+      } else if (base === "select_multiple") {
+        const opts = lists[typ.split(" ")[1]] || [];
+        q = {id: qid, type: "text", text: opts.length ? `${text}\n(Plusieurs réponses possibles : ${opts.map(o => o[1]).join(" ; ")})` : text};
+        warn(`Ligne ${line} « ${name} » : choix multiple posé en question ouverte ; les réponses seront à coder.`);
+      } else if (base === "integer" || base === "decimal") {
+        let min = null, max = null;
+        for (const m of (r.constraint || "").matchAll(/\.\s*(>=|<=|>|<)\s*(-?\d+)/g)) { const n = +m[2]; if (m[1] === ">=") min = n; else if (m[1] === ">") min = n + 1; else if (m[1] === "<=") max = n; else max = n - 1; }
+        q = {id: qid, type: "number", text, min, max, confirm_voice: true};
+        if (base === "decimal") warn(`Ligne ${line} « ${name} » : nombre décimal ; seuls les nombres entiers sont compris.`);
+      } else if (base === "range") {
+        const p = Object.fromEntries([...(r.parameters || "").matchAll(/(\w+)\s*=\s*(\S+)/g)].map(m => [m[1], +m[2]]));
+        const st = p.start ?? 1, en = p.end ?? 10, sp = p.step ?? 1;
+        q = st === 1 && sp === 1 && en >= 2 && en <= 10 ? {id: qid, type: "rating", text, scale: en, scale_labels: {}} : {id: qid, type: "number", text, min: st, max: en, confirm_voice: true};
+      } else if (base === "text" || base === "audio") q = {id: qid, type: "text", text};
+      else if (base === "note") q = {id: qid, type: "note", text};
+      else if (["date", "time", "datetime"].includes(base)) { q = {id: qid, type: "text", text}; warn(`Ligne ${line} « ${name} » : type ${base} posé en question ouverte.`); }
+      else { warn(`Ligne ${line} « ${name} » : type ${base} impossible sur WhatsApp, question ignorée.`); return; }
+      if (relevant) q.relevant = relevant;
+      seen.add(qid); qs.push(q);
+    });
+    const n = qs.filter(q => q.type !== "note").length;
+    if (!n) throw new Error("Aucune question utilisable dans ce fichier.");
+    const title = settings.form_title || file.name.replace(/\.\w+$/, "");
+    const keyword = slug(kw || (settings.keywords || "").split(/[,;\s]+/)[0] || "test", "") || "test";
+    SURVEYS.custom = {id: "custom", org: "Votre organisation", title, keywords: [keyword],
+      intro: `Bonjour ! Vous êtes invité(e) à répondre à l'enquête « ${title} » : ${n} question${n > 1 ? "s" : ""}.`,
+      consent: "Vos réponses sont confidentielles et transmises sans votre numéro de téléphone.\n\nSi vous répondez par message vocal, l'équipe peut l'écouter pour vérifier la transcription.\n\nÉcrivez STOP à tout moment pour arrêter. Acceptez-vous de répondre ?",
+      closing: "Merci beaucoup pour vos réponses !", training: false, questions: qs};
+    S.sessions = S.sessions.filter(s => s.surveyId !== "custom"); S.msgs.custom = []; S.current.custom = null;
+    $("chipCustom").hidden = false; $("chipCustom").textContent = title.length > 30 ? title.slice(0, 29) + "…" : title;
+    selectSurvey("custom", false);
+  } catch (e) {
+    S.importError = e && e.message && !/^[A-Z][a-z]+Error/.test(e.message) ? e.message : "Fichier illisible. Envoyez un .xlsx au format XLSForm.";
+  }
+  renderForm();
+}
+async function downloadExample() {
+  try { await loadXlsx(); } catch { $("xlsExNote").textContent = "Le lecteur Excel n'a pas pu être chargé."; return; }
+  const wb = XLSX.utils.book_new();
+  const survey = [["type", "name", "label::Français (fr)", "hint::Français (fr)", "required", "constraint", "relevant", "parameters"],
+    ["note", "intro_note", "Cette enquête porte sur la distribution de vivres d'octobre.", "", "", "", "", ""],
+    ["select_one oui_non", "assistance_recue", "Avez-vous reçu le kit alimentaire complet ?", "", "yes", "", "", ""],
+    ["select_one articles", "article_manquant", "Quel article manquait ?", "", "", "", "${assistance_recue} = 'non'", ""],
+    ["integer", "taille_menage", "Combien de personnes vivent dans votre ménage, vous compris ?", "", "yes", ". >= 1 and . <= 40", "", ""],
+    ["range", "satisfaction", "Sur une échelle de 1 à 5, êtes-vous satisfait(e) de la distribution ?", "1 = pas du tout, 5 = très satisfait(e)", "yes", "", "", "start=1 end=5 step=1"],
+    ["select_multiple usages", "usage_kit", "À quoi allez-vous utiliser le kit ?", "", "", "", "", ""],
+    ["text", "plainte", "Avez-vous une plainte ou une suggestion ?", "", "", "", "", ""],
+    ["geopoint", "gps", "Position GPS", "", "", "", "", ""]];
+  const choices = [["list_name", "name", "label::Français (fr)"], ["oui_non", "oui", "Oui"], ["oui_non", "non", "Non"],
+    ["articles", "riz", "Riz"], ["articles", "huile", "Huile"], ["articles", "sorgho", "Sorgho"], ["articles", "sel", "Sel"], ["articles", "savon", "Savon"],
+    ["usages", "consommation", "Consommation du ménage"], ["usages", "vente", "Vente"], ["usages", "partage", "Partage avec la famille"]];
+  XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(survey), "survey");
+  XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(choices), "choices");
+  XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet([["form_title", "form_id", "keywords"], ["Exemple : suivi de distribution", "exemple_vivres", "exemple"]]), "settings");
+  const buf = XLSX.write(wb, {type: "array", bookType: "xlsx"});
+  const ok = await saveFile("exemple_xlsform_sahelvoice.xlsx", new Uint8Array(buf));
+  if (!ok) {
+    // No download in this view: import the example directly so the visitor still sees the result.
+    const f = new File([buf], "exemple_xlsform_sahelvoice.xlsx");
+    $("xlsExNote").textContent = "";
+    importXlsForm(f, "");
+  }
+}
+async function saveFile(filename, data) {
+  try {
+    const type = filename.endsWith(".csv") ? "text/csv;charset=utf-8" : "application/octet-stream";
+    const url = URL.createObjectURL(new Blob([data], {type}));
+    const a = document.createElement("a");
+    a.href = url; a.download = filename; document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 2000);
+    return true;
+  } catch (e) { return false; }
+}
+async function exportCsv() {
+  const sv = survey(), qs = sv.questions.filter(q => q.type !== "note");
+  const head = ["repondant", "etat", "debut", "fin"]; qs.forEach(q => head.push(q.id, q.id + "__source", q.id + "__texte", q.id + "__verification"));
+  const cell = (v) => { v = v == null ? "" : String(v); return /[",;\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; };
+  const lines = [head.join(",")];
+  for (const s of consented()) {
+    const row = [s.label, s.state, new Date(s.started).toISOString(), s.finished ? new Date(s.finished).toISOString() : ""];
+    qs.forEach(q => { const a = s.answers[q.id]; row.push(a ? finalValue(a) : "", a ? a.source : "", a ? finalText(a) : "", a && a.review !== "none" ? a.review : ""); });
+    lines.push(row.map(cell).join(","));
+  }
+  const ok = await saveFile(sv.id + "_reponses.csv", "﻿" + lines.join("\n"));
+  if (!ok) { try { await navigator.clipboard.writeText(lines.join("\n")); $("csvBtn").textContent = "CSV copié"; } catch { $("csvBtn").textContent = "Export indisponible ici"; } }
+}
+
+/* ---------- feedback */
+const FB = {role: "", org: "", use: "", missing: "", rating: 0, langs: new Set(), price: "", contact: ""};
+const ROLES = ["ONG / agence humanitaire", "Entreprise / commerce", "Enquêteur·rice", "Administration", "Chercheur·se / étudiant·e", "Autre"];
+const LANGS = ["Arabe tchadien", "Ngambay", "Sara (autres)", "Kanembu", "Maba", "Zaghawa", "Autre"];
+const PRICES = ["Je ne paierais pas", "Moins de 10 000 FCFA / mois", "10 000 à 50 000 FCFA / mois", "50 000 à 150 000 FCFA / mois", "Plus de 150 000 FCFA / mois", "Par enquête, selon le volume"];
+function fbMessage() {
+  const L = ["Avis sur la démo SahelVoice"];
+  if (FB.role) L.push("Profil : " + FB.role);
+  if (FB.org) L.push("Organisation : " + FB.org);
+  if (FB.rating) L.push(`Utilité : ${FB.rating}/5`);
+  if (FB.use) L.push("Usage prévu : " + FB.use);
+  if (FB.missing) L.push("Ce qui manque : " + FB.missing);
+  if (FB.langs.size) L.push("Langues nécessaires : " + [...FB.langs].join(", "));
+  if (FB.price) L.push("Prix acceptable : " + FB.price);
+  if (FB.contact) L.push("Me recontacter : " + FB.contact);
+  return L.join("\n");
+}
+function renderFeedback() {
+  const msg = fbMessage(), ready = FB.rating || FB.use || FB.missing;
+  const wa = CONTACT_WHATSAPP ? `https://wa.me/${CONTACT_WHATSAPP}?text=${encodeURIComponent(msg)}` : "";
+  $("pane-feedback").innerHTML = `<div class="pane-head"><div><h2>Votre avis</h2><p class="small muted">Deux minutes. Vos réponses décident de ce que SahelVoice construit ensuite.</p></div></div>
+  <div class="split2"><div>
+    <div class="field"><label for="fb-role">Vous êtes</label><select id="fb-role"><option value="">— choisir —</option>${ROLES.map(r => `<option ${FB.role === r ? "selected" : ""}>${esc(r)}</option>`).join("")}</select></div>
+    <div class="field"><label for="fb-org">Organisation (facultatif)</label><input type="text" id="fb-org" value="${esc(FB.org)}"></div>
+    <div class="field"><label id="fb-r-l">Ce service serait-il utile pour votre travail ?</label><div class="scale" role="group" aria-labelledby="fb-r-l">${[1, 2, 3, 4, 5].map(n => `<button type="button" data-r="${n}" aria-pressed="${FB.rating === n}">${n}</button>`).join("")}</div><div class="help">1 = pas du tout, 5 = tout de suite</div></div>
+    <div class="field"><label for="fb-use">Pour quelle enquête l'utiliseriez-vous ?</label><textarea id="fb-use" rows="2" placeholder="ex. suivi après distribution, satisfaction des clients, évaluation d'une formation">${esc(FB.use)}</textarea></div>
+    <div class="field"><label for="fb-missing">Qu'est-ce qui manque ou vous gêne ?</label><textarea id="fb-missing" rows="2">${esc(FB.missing)}</textarea></div>
+  </div><div>
+    <div class="field"><label>Langues nécessaires en plus du français</label><div class="checks">${LANGS.map((l, i) => `<label><input type="checkbox" id="fb-l${i}" data-l="${esc(l)}" ${FB.langs.has(l) ? "checked" : ""}> ${esc(l)}</label>`).join("")}</div></div>
+    <div class="field"><label for="fb-price">Combien seriez-vous prêt à payer ?</label><select id="fb-price"><option value="">— choisir —</option>${PRICES.map(p => `<option ${FB.price === p ? "selected" : ""}>${esc(p)}</option>`).join("")}</select></div>
+    <div class="field"><label for="fb-contact">Numéro WhatsApp ou email, si vous voulez être recontacté (facultatif)</label><input type="text" id="fb-contact" value="${esc(FB.contact)}"></div>
+    <div class="field"><label>Votre message</label><div class="preview" id="fb-preview">${esc(msg)}</div></div>
+    <div class="actions" style="align-items:center">
+      ${wa ? `<a class="btn" id="fb-wa" href="${esc(wa)}" target="_blank" rel="noopener" ${ready ? "" : 'aria-disabled="true" style="opacity:.5;pointer-events:none"'}>Envoyer sur WhatsApp</a>` : ""}
+      <button class="btn ${wa ? "quiet" : ""}" type="button" id="fb-copy" ${ready ? "" : "disabled"}>Copier le message</button>
+    </div>
+    ${CONTACT_EMAIL ? `<div class="contact" style="margin-top:10px">Ou par email, collez-le à : <code>${esc(CONTACT_EMAIL)}</code></div>` : ""}
+    ${!wa && !CONTACT_EMAIL ? `<p class="help">Copiez le message et envoyez-le à la personne qui vous a partagé cette démo.</p>` : ""}
+    <p class="help" id="fb-copied"></p>
+  </div></div>`;
+  const sync = () => { const p = $("fb-preview"); if (p) p.textContent = fbMessage(); const on = FB.rating || FB.use || FB.missing; const c = $("fb-copy"); if (c) c.disabled = !on;
+    const w = $("fb-wa"); if (w) { w.href = `https://wa.me/${CONTACT_WHATSAPP}?text=${encodeURIComponent(fbMessage())}`; w.style.opacity = on ? "" : ".5"; w.style.pointerEvents = on ? "" : "none"; w.setAttribute("aria-disabled", String(!on)); } };
+  $("fb-role").onchange = (e) => { FB.role = e.target.value; sync(); };
+  $("fb-price").onchange = (e) => { FB.price = e.target.value; sync(); };
+  for (const [id, k] of [["fb-org", "org"], ["fb-use", "use"], ["fb-missing", "missing"], ["fb-contact", "contact"]]) $(id).oninput = (e) => { FB[k] = e.target.value.trim(); sync(); };
+  $("pane-feedback").querySelectorAll("[data-r]").forEach(b => b.onclick = () => { FB.rating = +b.dataset.r; $("pane-feedback").querySelectorAll("[data-r]").forEach(x => x.setAttribute("aria-pressed", String(+x.dataset.r === FB.rating))); sync(); });
+  $("pane-feedback").querySelectorAll("[data-l]").forEach(c => c.onchange = () => { c.checked ? FB.langs.add(c.dataset.l) : FB.langs.delete(c.dataset.l); sync(); });
+  $("fb-copy").onclick = async () => {
+    try { await navigator.clipboard.writeText(fbMessage()); $("fb-copied").textContent = "Message copié. Collez-le dans WhatsApp ou dans un email."; }
+    catch { const r = document.createRange(); r.selectNodeContents($("fb-preview")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); $("fb-copied").textContent = "Le texte est sélectionné : copiez-le avec Ctrl+C (ou appui long sur mobile)."; }
+  };
+}
+
+/* ===================================================================== navigation */
+function setView(v) {
+  $("stage").dataset.view = v;
+  document.querySelectorAll(".switch [role=tab]").forEach(b => b.setAttribute("aria-selected", String(b.dataset.view === v)));
+}
+document.querySelectorAll(".switch [role=tab]").forEach(b => b.addEventListener("click", () => setView(b.dataset.view)));
+$("goFeedback").addEventListener("click", () => { setView("console"); setTab("feedback"); $("pane-feedback").scrollIntoView({behavior: "smooth", block: "start"}); });
+function selectSurvey(id, render = true) {
+  S.surveyId = id; S.openRow = null; S.reviewing = null;
+  S.msgs[id] = S.msgs[id] || [];
+  document.querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", String(c.dataset.survey === id)));
+  $("orgName").textContent = survey().org;
+  if (render) after(); else renderPhone();
+}
+document.querySelectorAll(".chip").forEach(c => c.addEventListener("click", () => selectSurvey(c.dataset.survey)));
+function fromHash() {
+  const h = location.hash.slice(1);
+  if (h === "avis") { setView("console"); setTab("feedback"); }
+  else if (h === "organisation") setView("console");
+}
+window.addEventListener("hashchange", fromHash);
+
+/* ===================================================================== example data: two finished responses per survey */
+function seedExamples() {
+  const run = (sid, label, steps, minutesAgo) => {
+    const keepId = S.surveyId; S.surveyId = sid; S.msgs[sid] = S.msgs[sid] || [];
+    const saved = S.msgs[sid].length;
+    S.current[sid] = null;
+    handle({kind: "text", text: SURVEYS[sid].keywords[0]});
+    const s = S.sessions[S.sessions.length - 1]; s.label = label; s.example = true;
+    for (const st of steps) handle(st);
+    S.msgs[sid].length = saved; S.current[sid] = null; S.surveyId = keepId;
+    const t = Date.now() - minutesAgo * 60000; s.started = t; if (s.finished) s.finished = t + 3 * 60000;
+    Object.values(s.answers).forEach((a, i) => a.at = t + i * 20000);
+    return s;
+  };
+  const R = (id, text = "") => ({kind: "reply", replyId: id, text}), T = (text) => ({kind: "text", text}), V = (text) => ({kind: "audio", text, audio: null});
+  const a = run("vivres", "Exemple · Mahamat", [R("consent|yes", "J'accepte"), R("assistance_recue|non", "Non"), T("l'huile"), V("nous sommes cette"), V("cette"),
+    R("temps_trajet|1_2h", "1 à 2 heures"), R("satisfaction|2", "Peu satisfait(e)"), T("consommation"), V("il manquait le bidon d'huile pour beaucoup de familles")], 42);
+  const b = run("vivres", "Exemple · Achta", [R("consent|yes", "J'accepte"), R("assistance_recue|oui", "Oui"), T("5"), R("temps_trajet|plus_2h", "Plus de 2 heures"),
+    R("satisfaction|3", "Moyen"), V("on partage avec la famille à Moundou"), V("les agents ont été respectueux mais le site est loin du village de Kabalaye")], 95);
+  // Achta's answers were already checked by an enumerator: the quality panel starts with real numbers.
+  const p = b.answers.plainte; p.review = "corrected"; p.rText = "les agents ont été respectueux mais le site est loin du quartier Kabalaye"; p.rValue = p.rText;
+  const u = b.answers.usage_kit; u.review = "verified"; u.rText = u.raw; u.rValue = u.value;
+  run("avis", "Exemple · Client 1", [R("consent|yes", "J'accepte"), R("training|no", "Non merci"), R("note|4", "Bien"), R("livraison_ok|non", "Non"), T("par airtel"), V("le livreur a appelé deux fois avant de trouver la maison")], 30);
+}
+
+/* ===================================================================== start */
+S.msgs.vivres = []; S.msgs.avis = [];
+seedExamples();
+S.fresh = null;
+selectSurvey("vivres", false);
+userText("vivres");      // the phone opens on the first message, consent buttons ready to tap
+fromHash();
+</script>
+
+</body>
+</html>
