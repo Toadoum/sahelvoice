@@ -22,8 +22,21 @@
     rv.forEach(function(e){ io.observe(e); });
   }
 
+  // journey timeline: line grows with scroll, steps light up
+  var tl = document.querySelector('.tl');
+  if (tl) {
+    var steps = tl.querySelectorAll('.step');
+    var tick = function(){
+      var r = tl.getBoundingClientRect(), vh = window.innerHeight;
+      var p = Math.min(1, Math.max(0, (vh * .7 - r.top) / r.height));
+      tl.style.setProperty('--p', reduce ? 1 : p);
+      steps.forEach(function(st){ if (reduce || st.getBoundingClientRect().top < vh * .72) st.classList.add('in'); });
+    };
+    window.addEventListener('scroll', tick, {passive:true}); window.addEventListener('resize', tick); tick();
+  }
+
   // cursor spotlight on cards
-  document.querySelectorAll('.ai-card,.lang,.feat > div,.aud article,.trust > div').forEach(function(el){
+  document.querySelectorAll('.ai-card,.lang,.feat > div,.aud article,.trust > div,.nowgrid article').forEach(function(el){
     el.addEventListener('pointermove', function(e){
       var r = el.getBoundingClientRect();
       el.style.setProperty('--mx', (e.clientX - r.left) + 'px');
