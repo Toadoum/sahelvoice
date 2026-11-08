@@ -36,7 +36,7 @@
   }
 
   // cursor spotlight on cards
-  document.querySelectorAll('.ai-card,.lang,.feat > div,.aud article,.trust > div,.nowgrid article,.tier').forEach(function(el){
+  document.querySelectorAll('.ai-card,.lang,.feat > div,.aud article,.trust > div,.nowgrid article,.tier,.how article,.plan').forEach(function(el){
     el.addEventListener('pointermove', function(e){
       var r = el.getBoundingClientRect();
       el.style.setProperty('--mx', (e.clientX - r.left) + 'px');

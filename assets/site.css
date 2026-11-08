@@ -526,3 +526,58 @@ footer.big .wrap{display:block}
 .mini-card b{font-size:19px;white-space:nowrap}
 @media (max-width:960px){.mini-card{right:-10px}}
 @media (max-width:620px){.mini-card{right:6px;width:220px}.mini-card b{font-size:16px}}
+
+/* ================= how it works (3 steps) ================= */
+.center{text-align:center}
+.center h2,.center .intro{margin-inline:auto}
+.how{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:48px;position:relative}
+@media (max-width:900px){.how{grid-template-columns:minmax(0,1fr)}}
+.how article{background:var(--card);border:1px solid var(--rule);border-radius:20px;padding:28px;position:relative;transition:transform .25s ease,border-color .25s ease;background-image:radial-gradient(420px circle at var(--mx,-999px) var(--my,-999px),rgba(46,60,140,.07),transparent 45%)}
+.how article:hover{transform:translateY(-4px);border-color:#c9d0e4}
+.how .st{font:500 12px var(--mono);letter-spacing:.08em;color:var(--indigo);text-transform:uppercase}
+.how .big{font:800 54px/1 var(--display);letter-spacing:-.03em;background:linear-gradient(120deg,var(--navy),var(--indigo));-webkit-background-clip:text;background-clip:text;color:transparent;margin:10px 0 14px}
+.how h3{font:700 22px/1.2 var(--display);letter-spacing:-.01em}
+.how p{color:var(--text-muted);margin-top:8px;font-size:16px}
+.how ul{list-style:none;padding:0;margin:16px 0 0;display:grid;gap:8px;border-top:1px solid var(--rule);padding-top:14px}
+.how li{display:flex;gap:10px;font-size:15px}
+.how li::before{content:"";flex:none;width:16px;height:16px;margin-top:3px;border-radius:50%;background:#e3f8ee url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23127a4f' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center/10px no-repeat}
+.how-cta{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:34px}
+.how-cta .btn.ghost{color:var(--text);border-color:var(--rule);background:#fff}
+.how-cta .note{width:100%;text-align:center;font-size:14px;color:var(--text-muted)}
+
+/* ================= plans ================= */
+.plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:48px;align-items:stretch}
+@media (max-width:960px){.plans{grid-template-columns:minmax(0,1fr)}}
+.plan{position:relative;background:var(--card);border:1px solid var(--rule);border-radius:22px;padding:30px;display:flex;flex-direction:column;gap:12px;transition:transform .25s ease;background-image:radial-gradient(420px circle at var(--mx,-999px) var(--my,-999px),rgba(46,60,140,.07),transparent 45%)}
+.plan:hover{transform:translateY(-4px)}
+.plan.top{background:var(--navy);border-color:var(--navy);color:#fff;box-shadow:0 40px 80px -40px rgba(13,26,58,.6);background-image:radial-gradient(420px circle at var(--mx,-999px) var(--my,-999px),rgba(61,220,151,.12),transparent 45%)}
+.plan .badge{position:absolute;top:-12px;left:30px;background:var(--green);color:#07122b;font:600 12px var(--mono);border-radius:999px;padding:5px 11px}
+.plan .pn{font:500 12.5px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--indigo)}
+.plan.top .pn{color:var(--green)}
+.plan .price{font:800 40px/1 var(--display);letter-spacing:-.03em}
+.plan .price small{font:500 15px var(--body);letter-spacing:0;color:var(--text-muted);margin-left:6px}
+.plan.top .price small{color:var(--muted)}
+.plan p{color:var(--text-muted);font-size:15.5px}
+.plan.top p{color:var(--muted)}
+.plan ul{list-style:none;padding:0;margin:6px 0 10px;display:grid;gap:9px;border-top:1px solid var(--rule);padding-top:16px}
+.plan.top ul{border-color:var(--line-2)}
+.plan li{display:flex;gap:10px;font-size:15px}
+.plan li::before{content:"";flex:none;width:16px;height:16px;margin-top:3px;border-radius:50%;background:#e3f8ee url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23127a4f' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center/10px no-repeat}
+.plan.top li::before{background-color:var(--green-soft);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233ddc97' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E")}
+.plan .btn{margin-top:auto;align-self:stretch}
+.plan:not(.top) .btn{background:var(--navy);border-color:var(--navy);color:#fff}
+.plans-note{text-align:center;color:var(--text-muted);font-size:14.5px;margin-top:22px}
+
+/* ================= about (compact) ================= */
+.about2{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:48px;align-items:center;margin-top:8px}
+@media (max-width:900px){.about2{grid-template-columns:minmax(0,1fr);gap:28px}}
+.about2 .facts2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:26px}
+.about2 .facts2 div{background:var(--card);border:1px solid var(--rule);border-radius:14px;padding:14px 16px}
+.about2 .facts2 b{display:block;font:700 16px/1.3 var(--body)}
+.about2 .facts2 span{font-size:14px;color:var(--text-muted)}
+.fnote{display:flex;gap:16px;align-items:center;background:var(--card);border:1px solid var(--rule);border-radius:18px;padding:18px 20px}
+.fnote img{width:64px;height:64px;border-radius:50%;object-fit:cover;object-position:50% 30%;border:3px solid var(--green);flex:none}
+.fnote b{display:block;font-weight:600}
+.fnote span{display:block;color:var(--text-muted);font-size:14.5px;margin-top:2px}
+.fnote a{font-size:14px;color:var(--indigo);font-weight:600;text-decoration:none}
+.tiers.two{grid-template-columns:repeat(2,minmax(0,1fr))}@media (max-width:860px){.tiers.two{grid-template-columns:minmax(0,1fr)}}
