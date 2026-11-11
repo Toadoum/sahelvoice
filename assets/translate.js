@@ -1,11 +1,10 @@
 // Live French -> Ngambay translation on sahelvoice.app.
-// Calls the Gradio API of the Hugging Face Space Toadoum/ngambay-french-c2translate
-// (model Toadoum/ngambay-fr-v1), function translate_text_simple(text).
+// Calls the SahelVoice server (app.sahelvoice.app/api/traduire), where the model
+// Toadoum/ngambay-fr-v1 runs. The text is translated and not stored.
 (function(){
   var root = document.getElementById('trx');
   if (!root) return;
-  var BASE = 'https://toadoum-ngambay-french-c2translate.hf.space';
-  var FN = 'translate_text_simple';
+  var API = 'https://app.sahelvoice.app/api/traduire';
   var L = JSON.parse(root.getAttribute('data-l'));
   var ta = root.querySelector('textarea'), out = root.querySelector('.trx-out'),
       btn = root.querySelector('.trx-run'), st = root.querySelector('.trx-status'),
@@ -15,32 +14,11 @@
   function upd(){ count.textContent = ta.value.length + ' / ' + ta.maxLength; }
   ta.addEventListener('input', upd); upd();
 
-  function parseSSE(body){
-    var blocks = body.split(/\n\n/), result = null, error = null;
-    blocks.forEach(function(b){
-      var ev = (b.match(/^event:\s*(.+)$/m) || [])[1], data = (b.match(/^data:\s*([\s\S]*)$/m) || [])[1];
-      if (ev === 'complete' && data) { try { result = JSON.parse(data); } catch(e){} }
-      if (ev === 'error') error = data || 'error';
-    });
-    if (error) throw new Error(error);
-    if (!result) throw new Error('no result');
-    var v = Array.isArray(result) ? result[0] : result;
-    return typeof v === 'string' ? v : JSON.stringify(v);
-  }
-
   async function call(text, signal){
-    var last;
-    for (var p of ['/gradio_api/call/', '/call/']){
-      try {
-        var r = await fetch(BASE + p + FN, {method:'POST', headers:{'Content-Type':'application/json'},
-                                            body: JSON.stringify({data:[text]}), signal: signal});
-        if (!r.ok) { last = new Error('HTTP ' + r.status); continue; }
-        var id = (await r.json()).event_id;
-        var s = await fetch(BASE + p + FN + '/' + id, {signal: signal});
-        return parseSSE(await s.text());
-      } catch (e) { if (e.name === 'AbortError') throw e; last = e; }
-    }
-    throw last || new Error('unreachable');
+    var r = await fetch(API, {method: 'POST', body: new URLSearchParams({text: text}), signal: signal});
+    var d = await r.json().catch(function(){ return {}; });
+    if (!r.ok || !d.translation) throw new Error(d.error || ('HTTP ' + r.status));
+    return d.translation;
   }
 
   async function run(){
@@ -50,8 +28,8 @@
     out.classList.remove('empty');
     out.innerHTML = '<span class="shimmer" style="width:92%"></span><span class="shimmer" style="width:78%"></span><span class="shimmer" style="width:55%"></span>';
     setStatus(L.working);
-    var slow = setTimeout(function(){ setStatus(L.waking); }, 7000);
-    var ctl = new AbortController(), kill = setTimeout(function(){ ctl.abort(); }, 150000);
+    var slow = setTimeout(function(){ setStatus(L.waking); }, 9000);
+    var ctl = new AbortController(), kill = setTimeout(function(){ ctl.abort(); }, 60000);
     try {
       var res = await call(text, ctl.signal);
       out.textContent = res.replace(/^\s*-\s*/, '');
