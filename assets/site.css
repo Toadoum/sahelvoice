@@ -665,3 +665,16 @@ footer.big .wrap{display:block}
 .pform-alt .alt-h{margin:0 0 12px;color:var(--text-muted);font-size:15px}
 .pform-alt .alt-h b{color:var(--text)}
 .selfcta .btn.ghost{color:var(--text);border-color:var(--rule);background:#fff}
+
+/* ---------- comparison ---------- */
+.vs{margin-top:48px;border:1px solid var(--rule);border-radius:20px;overflow-x:auto;background:var(--card)}
+.vs table{width:100%;border-collapse:collapse;min-width:640px}
+.vs th,.vs td{padding:16px 22px;text-align:left;vertical-align:top;border-bottom:1px solid var(--rule);font-size:16px}
+.vs tr:last-child th,.vs tr:last-child td{border-bottom:0}
+.vs thead th{font:500 12.5px/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted)}
+.vs tbody th{font-weight:600;width:24%}
+.vs td{color:var(--text-muted);width:34%}
+.vs .us{background:#f0fbf6;color:var(--text);font-weight:500}
+.vs thead .us{color:#0c6b47;font-weight:500}
+.vs tbody .us::before{content:"✓";color:#12a26b;font-weight:700;margin-right:9px}
+.vsfoot{margin-top:18px;color:var(--text-muted);font-size:16px;max-width:70ch}
