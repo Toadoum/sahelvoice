@@ -38,3 +38,19 @@
     if (el && history.replaceState) setTimeout(function(){ go(el); history.replaceState(null, '', location.pathname + location.search); }, 60);
   }
 })();
+
+// Video guide: replace the picture by the YouTube player only when the visitor asks for it.
+(function(){
+  document.querySelectorAll('.ytbox').forEach(function(box){
+    var start = function(){
+      if (box.querySelector('iframe')) return;
+      var f = document.createElement('iframe');
+      f.src = 'https://www.youtube-nocookie.com/embed/' + box.getAttribute('data-yt') + '?autoplay=1&rel=0&modestbranding=1';
+      f.title = box.getAttribute('data-title') || 'Video';
+      f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+      f.allowFullscreen = true; f.referrerPolicy = 'strict-origin-when-cross-origin';
+      box.innerHTML = ''; box.appendChild(f); box.style.cursor = 'auto';
+    };
+    box.addEventListener('click', start);
+  });
+})();
