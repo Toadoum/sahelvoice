@@ -678,3 +678,12 @@ footer.big .wrap{display:block}
 .vs thead .us{color:#0c6b47;font-weight:500}
 .vs tbody .us::before{content:"✓";color:#12a26b;font-weight:700;margin-right:9px}
 .vsfoot{margin-top:18px;color:var(--text-muted);font-size:16px;max-width:70ch}
+
+/* ---------- product screenshot ---------- */
+.shot{margin:48px 0 0;border:1px solid var(--rule);border-radius:18px;overflow:hidden;background:var(--card);box-shadow:0 40px 90px -50px rgba(13,26,58,.5)}
+.shot img{width:100%;height:auto}
+.shotbar{display:flex;align-items:center;gap:7px;padding:11px 16px;background:#eef1f7;border-bottom:1px solid var(--rule)}
+.shotbar i{width:10px;height:10px;border-radius:50%;background:#cbd2e1}
+.shotbar span{margin-left:12px;font:500 12.5px var(--mono);color:var(--text-muted);background:#fff;border:1px solid var(--rule);border-radius:999px;padding:3px 14px}
+.shot figcaption{padding:11px 16px;font-size:14px;color:var(--text-muted);border-top:1px solid var(--rule);text-align:center}
+.shot + .feat{margin-top:28px}

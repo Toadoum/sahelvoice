@@ -1,0 +1,5 @@
+Fonts served with SahelVoice, all under the SIL Open Font License 1.1 (https://openfontlicense.org):
+- Bricolage Grotesque, (c) The Bricolage Grotesque Project Authors
+- Instrument Sans, (c) The Instrument Sans Project Authors
+- JetBrains Mono, (c) The JetBrains Mono Project Authors
+Files packaged by Fontsource (https://fontsource.org).

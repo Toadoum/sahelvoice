@@ -10,16 +10,15 @@
 <style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui}img{max-width:100%}[hidden]{display:none!important}</style>
 </head>
 <body>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,750&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/assets/fonts.css?v=202611120900">
 <style>
 /* Layout: a working phone (what the respondent sees) beside the organisation's console (what the NGO receives). */
 :root{
-  --paper:#f2f4f7; --surface:#ffffff; --ink:#1b2232; --muted:#5a6377; --line:#d9dee7; --soft:#eef1f6;
+  --paper:#f4f6fa; --surface:#ffffff; --ink:#151c2c; --muted:#525d76; --line:#dde2ec; --soft:#eef0f5;
   --indigo:#2e3c8c; --indigo-ink:#ffffff; --indigo-soft:#e6e9f7;
-  --chat-bg:#e9e4dc; --bubble-out:#ffffff; --bubble-in:#d8f5d0; --chat-ink:#1b2232; --chat-link:#0b7bb0; --chat-head:#233f5c;
+  --chat-bg:#e9e4dc; --bubble-out:#ffffff; --bubble-in:#d8f5d0; --chat-ink:#1b2232; --chat-link:#0b7bb0; --chat-head:#0d1a3a;
   --ochre:#a2560b; --ochre-soft:#fbeedd; --green:#1b6f46; --green-soft:#dff1e7; --red:#a32f29; --red-soft:#f8e3e1;
-  --phone:#1b2232;
+  --phone:#081129; --mint:#3ddc97; --mint-ink:#07122b;
   --display:"Bricolage Grotesque",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
   --body:"Instrument Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
 }
@@ -53,14 +52,15 @@ p{margin:0}
 /* header */
 .top{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:18px}
 .brand{display:flex;align-items:center;gap:12px}
-.brand h1{font-size:30px;font-weight:750;letter-spacing:-.02em;line-height:1}
+.brand h1{font-size:30px;font-weight:800;letter-spacing:-.02em;line-height:1}
 .brand .tag{font-size:14px;color:var(--muted);margin-top:4px}
 .mark{width:42px;height:42px;flex:none}
 .lede{max-width:62ch;color:var(--muted)}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--indigo);background:var(--indigo);color:var(--indigo-ink);border-radius:9px;padding:9px 15px;font-weight:600;cursor:pointer;text-decoration:none;line-height:1.2}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid #3ddc97;background:#3ddc97;color:#07122b;border-radius:10px;padding:9px 15px;font-weight:600;cursor:pointer;text-decoration:none;line-height:1.2}
 .btn:hover{filter:brightness(1.08)}
 .btn.quiet{background:var(--surface);color:var(--ink);border-color:var(--line)}
 .btn.ok{background:var(--green);border-color:var(--green);color:var(--surface)}
+.btn.dark{background:var(--indigo);border-color:var(--indigo);color:var(--indigo-ink)}
 .btn.warn{background:var(--surface);color:var(--red);border-color:var(--red)}
 .btn.small{padding:6px 11px;font-size:13px}
 .btn[disabled]{opacity:.5;cursor:default}
@@ -131,8 +131,28 @@ p{margin:0}
 .tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--indigo)}
 .pane{padding:18px 20px 22px}
 .pane-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:14px}
-.stats{display:flex;gap:26px;flex-wrap:wrap;margin-bottom:16px}
-.stat b{display:block;font-family:var(--display);font-size:26px;font-weight:600;line-height:1.1;font-variant-numeric:tabular-nums}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:18px}
+@media (max-width:560px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.stat{border:1px solid var(--line);border-radius:12px;padding:11px 13px;background:var(--surface)}
+.res{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:start}
+@media (max-width:1100px){.res{grid-template-columns:minmax(0,1fr)}}
+.rq{border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.rq.wide{grid-column:1/-1}
+.rq .qn{font:500 11px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
+.rq h3{font-family:var(--body);font-size:15px}
+.rq .n{font-size:12.5px;color:var(--muted);margin:2px 0 12px}
+.bars{display:grid;gap:9px}
+.bar-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:3px 10px;align-items:baseline;font-size:14px}
+.bar-row .val{font-variant-numeric:tabular-nums;color:var(--muted);font-size:13px}
+.bar-row .val b{color:var(--ink)}
+.bar-row .track{grid-column:1/-1;height:9px;border-radius:5px;background:var(--soft)}
+.bar-row .track i{display:block;height:100%;border-radius:5px;background:var(--indigo)}
+.minis{display:flex;gap:22px;flex-wrap:wrap}
+.minis b{display:block;font:800 22px/1.1 var(--display);font-variant-numeric:tabular-nums}
+.minis span{font-size:12.5px;color:var(--muted)}
+.quotes{list-style:none;margin:0;padding:0;display:grid;gap:7px}
+.quotes li{border-left:3px solid #3ddc97;background:var(--soft);border-radius:0 9px 9px 0;padding:7px 11px;font-size:14px}
+.stat b{display:block;font-family:var(--display);font-size:26px;font-weight:800;letter-spacing:-.02em;line-height:1.1;font-variant-numeric:tabular-nums}
 .stat span{font-size:13px;color:var(--muted)}
 .tablewrap{overflow-x:auto}
 table{width:100%;border-collapse:collapse;font-size:14px}
@@ -228,6 +248,7 @@ footer{margin-top:22px;font-size:13px;color:var(--muted);max-width:80ch}
 .dhero .chip[aria-pressed="true"]{background:#3ddc97;border-color:#3ddc97;color:#07122b}
 .dhero .chip[aria-pressed="true"] small{color:#0d3a28}
 .dhero .fbtn{position:absolute;right:16px;top:34px}
+@media (min-width:901px){.dhero h1{max-width:calc(100% - 190px)}}
 @media (max-width:900px){.dhero .fbtn{position:static;margin-top:16px}}
 .wrap.main{padding-top:24px}
 /* phone: status bar + notch */
@@ -265,7 +286,7 @@ footer{margin-top:22px;font-size:13px;color:var(--muted);max-width:80ch}
   <button class="btn fbtn" type="button" id="goFeedback" style="background:#3ddc97;border-color:#3ddc97;color:#07122b">Donner mon avis</button>
   <div class="dguide">
     <div><p><b>Répondez</b><span>Touchez un bouton, écrivez, ou envoyez un vocal avec le micro.</span></p></div>
-    <div><p><b>Regardez</b><span>Le tableau de bord se remplit en direct, onglet « Réponses ».</span></p></div>
+    <div><p><b>Regardez</b><span>Le tableau de bord se remplit en direct : onglets « Réponses » et « Résultats ».</span></p></div>
     <div><p><b>Vérifiez</b><span>Onglet « À vérifier » : écoutez, corrigez, comme un enquêteur.</span></p></div>
   </div>
   <div class="scenarios" role="group" aria-label="Choisir un exemple">
@@ -314,11 +335,13 @@ footer{margin-top:22px;font-size:13px;color:var(--muted);max-width:80ch}
     <section class="console" aria-label="Console de l'organisation">
       <div class="tabs" role="tablist">
         <button type="button" role="tab" data-tab="responses" aria-selected="true">Réponses</button>
+        <button type="button" role="tab" data-tab="results" aria-selected="false">Résultats</button>
         <button type="button" role="tab" data-tab="review" aria-selected="false">À vérifier <span class="badge" id="tabBadge" hidden>0</span></button>
         <button type="button" role="tab" data-tab="form" aria-selected="false">Questionnaire</button>
         <button type="button" role="tab" data-tab="feedback" aria-selected="false">Votre avis</button>
       </div>
       <div class="pane" id="pane-responses"></div>
+      <div class="pane" id="pane-results" hidden></div>
       <div class="pane" id="pane-review" hidden></div>
       <div class="pane" id="pane-form" hidden></div>
       <div class="pane" id="pane-feedback" hidden></div>
@@ -820,7 +843,7 @@ function metrics() {
 function setTab(t) {
   S.tab = t;
   document.querySelectorAll(".tabs [role=tab]").forEach(b => b.setAttribute("aria-selected", String(b.dataset.tab === t)));
-  ["responses", "review", "form", "feedback"].forEach(p => $("pane-" + p).hidden = p !== t);
+  ["responses", "results", "review", "form", "feedback"].forEach(p => $("pane-" + p).hidden = p !== t);
   renderConsole();
 }
 document.querySelectorAll(".tabs [role=tab]").forEach(b => b.addEventListener("click", () => setTab(b.dataset.tab)));
@@ -829,6 +852,7 @@ function renderConsole() {
   const n = pendingList().length;
   for (const id of ["tabBadge", "swBadge"]) { $(id).hidden = n === 0; $(id).textContent = n; }
   if (S.tab === "responses") renderResponses();
+  if (S.tab === "results") renderResults();
   if (S.tab === "review") renderReview();
   if (S.tab === "form") renderForm();
   if (S.tab === "feedback") renderFeedback();
@@ -866,6 +890,45 @@ function renderResponses() {
   });
   $("pane-responses").querySelectorAll("[data-review]").forEach(b => b.addEventListener("click", (e) => { e.preventDefault(); e.stopPropagation(); S.reviewing = b.dataset.review; setTab("review"); }));
   $("csvBtn").addEventListener("click", exportCsv);
+}
+function renderResults() {
+  const sv = survey(), people = consented();
+  const nb = (x) => { const t = (Math.round(x * 10) / 10).toFixed(1).replace(".", ","); return t.endsWith(",0") ? t.slice(0, -2) : t; };
+  let html = `<div class="pane-head"><div><h2>Résultats</h2><p class="small muted">Un graphique par question, mis à jour à chaque réponse. Une réponse vérifiée remplace la lecture automatique.</p></div></div>`;
+  if (!people.length) { $("pane-results").innerHTML = html + `<div class="empty">Les résultats s'afficheront dès la première réponse.</div>`; return; }
+  html += `<div class="res">`;
+  let n = 0;
+  for (const q of sv.questions) {
+    if (q.type === "note") continue;
+    n++;
+    const got = people.map(s => s.answers[q.id]).filter(a => a && a.status !== "skipped");
+    const voice = got.filter(a => a.source === "voice").length;
+    let body = "", answered = 0;
+    if (q.type === "text") {
+      const texts = got.filter(a => a.review !== "inaudible").map(a => (finalText(a) || "").trim()).filter(Boolean);
+      answered = texts.length;
+      body = `<ul class="quotes">${texts.slice(-3).reverse().map(t => `<li>${esc(t.length > 160 ? t.slice(0, 157) + "…" : t)}</li>`).join("")}</ul>`;
+    } else {
+      const values = got.map(finalValue).filter(v => v != null && v !== "");
+      answered = values.length;
+      if (q.type === "number") {
+        const nums = values.map(Number).filter(Number.isFinite).sort((a, b) => a - b);
+        if (nums.length) { const m = nums.length >> 1, med = nums.length % 2 ? nums[m] : (nums[m - 1] + nums[m]) / 2;
+          body = `<div class="minis"><div><b>${nb(nums.reduce((a, b) => a + b, 0) / nums.length)}</b><span>moyenne</span></div><div><b>${nb(med)}</b><span>médiane</span></div><div><b>${nb(nums[0])} – ${nb(nums[nums.length - 1])}</b><span>minimum – maximum</span></div></div>`; }
+      } else {
+        const order = q.type === "yes_no" ? [["oui", "Oui"], ["non", "Non"]]
+          : q.type === "rating" ? Array.from({length: q.scale}, (_, i) => [String(i + 1), String(i + 1) + ((q.scale_labels || {})[i + 1] ? " · " + q.scale_labels[i + 1] : "")])
+          : q.options.map(o => [o.value, o.label]);
+        if (q.type === "rating" && values.length) body += `<div class="minis" style="margin-bottom:12px"><div><b>${nb(values.reduce((a, v) => a + Number(v), 0) / values.length)} / ${q.scale}</b><span>note moyenne</span></div></div>`;
+        body += `<div class="bars">${order.map(([k, label]) => { const c = values.filter(v => String(v) === k).length, pct = values.length ? 100 * c / values.length : 0;
+          return `<div class="bar-row"><span>${esc(label)}</span><span class="val"><b>${c}</b> · ${fmtPct(Math.round(pct))}</span><div class="track">${c ? `<i style="width:${pct.toFixed(1)}%"></i>` : ""}</div></div>`; }).join("")}</div>`;
+      }
+    }
+    if (!answered) body = `<p class="small muted">Pas encore de réponse à cette question.</p>`;
+    html += `<div class="rq${q.type === "text" ? " wide" : ""}"><div class="qn">Question ${n}</div><h3>${esc(q.text.split("\n")[0])}</h3>
+      <div class="n">${answered} réponse${answered > 1 ? "s" : ""}${voice ? ` · ${voice} par la voix` : ""}</div>${body}</div>`;
+  }
+  $("pane-results").innerHTML = html + `</div>`;
 }
 function detail(sv, s) {
   let h = `<div class="detail">`;
