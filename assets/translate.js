@@ -42,7 +42,7 @@
     if (!text) { ta.focus(); return; }
     btn.disabled = true; copy.hidden = true;
     out.classList.remove('empty');
-    out.innerHTML = '<span class="wait" style="width:90%"></span><span class="wait" style="width:74%"></span><span class="wait" style="width:52%"></span>';
+    out.innerHTML = '<span class="shimmer" style="width:92%"></span><span class="shimmer" style="width:78%"></span><span class="shimmer" style="width:55%"></span>';
     setStatus(st, L.working);
     var slow = setTimeout(function(){ setStatus(st, L.waking); }, 9000);
     var ctl = new AbortController(), kill = setTimeout(function(){ ctl.abort(); }, 60000);

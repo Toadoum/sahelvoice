@@ -15,7 +15,7 @@
 <meta name="theme-color" content="#081129">
 <link rel="icon" href="/assets/icon.svg" type="image/svg+xml"><link rel="icon" href="/favicon.ico" sizes="any"><link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <link rel="stylesheet" href="/assets/fonts.css?v=202611120900">
-<link rel="stylesheet" href="/assets/site.css?v=202611131300">
+<link rel="stylesheet" href="../../assets/site.css?v=202611131330">
 <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
@@ -23,7 +23,7 @@
 <header class="top">
   <div class="wrap">
     <nav aria-label="Main navigation">
-      <a class="brand" href="../"><svg width="34" height="34" viewBox="0 0 42 42" aria-hidden="true"><rect width="42" height="42" rx="11" fill="#2e3c8c"/><g stroke="#fff" stroke-width="3" stroke-linecap="round"><path d="M11 25v-8"/><path d="M16 29V13"/><path d="M21 26V16"/><path d="M26 22v-4"/><path d="M31 24v-6"/></g></svg>SahelVoice</a>
+      <a class="brand" href="../"><svg width="34" height="34" viewBox="0 0 42 42" aria-hidden="true"><rect width="42" height="42" rx="11" fill="#2e3c8c"/><g class="eq" stroke="#fff" stroke-width="3" stroke-linecap="round"><path d="M11 25v-8"/><path d="M16 29V13"/><path d="M21 26V16"/><path d="M26 22v-4"/><path d="M31 24v-6"/></g></svg>SahelVoice</a>
       <div class="links">
         <a href="../#how">How it works</a>
         <a href="../../demo/">Demo</a>
@@ -37,52 +37,56 @@
   </div>
 </header>
 
-<main>
-<section class="hero">
+<div class="dark">
+  <canvas class="wavefield" data-y=".92" aria-hidden="true"></canvas>
+  <div class="grid-bg"></div>
+  <div class="glow" style="width:520px;height:520px;right:-120px;top:-80px;background:#2e3c8c"></div>
   <div class="wrap phero">
     <div>
       <h1>A real survey, with your real respondents.</h1>
       <p class="lede">During a pilot, SahelVoice runs one of your surveys end to end on WhatsApp. You watch the answers arrive, your enumerators check the voice notes, and you leave with your data and a report.</p>
-      <div class="ctas">
-        <a class="btn" href="#demande">Request a pilot</a>
-        <a class="btn alt" href="/demo/">See the demo first</a>
+      <div class="ctas" style="display:flex;gap:12px;flex-wrap:wrap;margin-top:30px">
+        <a class="btn" href="#demande">Request a pilot <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn ghost" href="../demo/">See the demo first</a>
       </div>
-      <dl class="pfacts"><div><dt>0 CFA</dt><dd>for a first pilot</dd></div><div><dt>4 weeks</dt><dd>from preparation to report</dd></div><div><dt>1 survey</dt><dd>yours, with your respondents</dd></div></dl>
+      <div class="pfacts"><div><b>0 CFA</b><span>for a first pilot</span></div><div><b>4 weeks</b><span>from preparation to report</span></div><div><b>1 survey</b><span>yours, with your respondents</span></div></div>
     </div>
-    <div class="pcard"><h2>Your pilot at a glance</h2><ol><li><b>Prepare</b><span>Questionnaire adapted to WhatsApp, consent approved, tested on your phones</span></li><li><b>Launch</b><span>Invitations to your list, or a QR code and keyword on a poster</span></li><li><b>Collect</b><span>Answers while the survey runs, voice notes transcribed then checked</span></li><li><b>Wrap up</b><span>Export of your data and a report with figures</span></li></ol><p class="foot">Indicative timing, adjusted to your calendar.</p></div>
+    <div class="pcard"><h3>Your pilot at a glance</h3><ol><li><b>Prepare</b><span>Questionnaire adapted to WhatsApp, consent approved, tested on your phones</span></li><li><b>Launch</b><span>Invitations to your list, or a QR code and keyword on a poster</span></li><li><b>Collect</b><span>Live answers, voice notes transcribed then checked</span></li><li><b>Wrap up</b><span>Export of your data and a report with figures</span></li></ol><p class="foot">Indicative timing, adjusted to your calendar.</p></div>
   </div>
-</section>
+</div>
 
-  <section id="deroule" class="band">
+<main>
+  <section id="deroule">
     <div class="wrap">
-      <h2>Four weeks, from preparation to report.</h2><p class="intro">A typical schedule, which we adapt to your field work and deadlines.</p>
-      <ol class="weeks"><li><span class="wk">Week 1</span><h3>Preparation</h3><p>We adapt your questionnaire to WhatsApp.</p><ul><li>Import of your XLSForm, Word document or paper form</li><li>Consent text approved with you</li><li>Ngambay version proposed by AI and reviewed by a speaker (in testing)</li><li>Full test on your phones</li></ul></li><li><span class="wk">Week 2</span><h3>Launch</h3><p>Respondents receive the survey.</p><ul><li>Invitations to your contact list</li><li>Or a keyword and QR code on a poster</li><li>Dashboard walkthrough with your enumerators</li></ul></li><li><span class="wk">Week 3</span><h3>Collection</h3><p>Answers arrive live.</p><ul><li>Answers by button, text or voice note</li><li>Voice notes transcribed by AI, checked by your enumerators</li><li>Progress check with us</li></ul></li><li><span class="wk">Week 4</span><h3>Report</h3><p>You leave with your data.</p><ul><li>Excel export and audio files</li><li>Response rate, share of voice answers, measured transcription accuracy</li><li>Recommendations for next steps</li></ul></li></ol>
+      <div class="center"><p class="kicker rv">Timeline</p><h2 class="rv">Four weeks, from preparation to report.</h2><p class="intro rv">A typical schedule. We adapt it to your field work and deadlines.</p></div>
+      <div class="weeks"><article class="rv"><span class="wk">Week 1</span><h3>Preparation</h3><p>We adapt your questionnaire to WhatsApp.</p><ul><li>Import of your XLSForm, Word document or paper form</li><li>Consent text approved with you</li><li>Ngambay version proposed by AI and reviewed by a speaker (in testing)</li><li>Full test on your phones</li></ul></article><article class="rv"><span class="wk">Week 2</span><h3>Launch</h3><p>Respondents receive the survey.</p><ul><li>Invitations to your contact list</li><li>Or a keyword and QR code on a poster</li><li>Dashboard walkthrough with your enumerators</li></ul></article><article class="rv"><span class="wk">Week 3</span><h3>Collection</h3><p>Answers arrive live.</p><ul><li>Answers by button, text or voice note</li><li>Voice notes transcribed by AI, checked by your enumerators</li><li>Progress check with us</li></ul></article><article class="rv"><span class="wk">Week 4</span><h3>Report</h3><p>You leave with your data.</p><ul><li>Excel export and audio files</li><li>Response rate, share of voice answers, measured transcription accuracy</li><li>Recommendations for next steps</li></ul></article></div>
     </div>
   </section>
 
-  <section>
+  <section style="padding-top:0">
     <div class="wrap">
-      <h2>What you bring, what you get.</h2>
+      <div class="center"><p class="kicker rv">In practice</p><h2 class="rv">What you bring, what you get.</h2></div>
       <div class="give">
-        <article><h3>You bring</h3><p class="sub">Very little, and nothing technical.</p><dl><div><dt>Your questionnaire</dt><dd>KoBoToolbox or ODK XLSForm, a Word document, or a paper form.</dd></div><div><dt>Your respondents</dt><dd>A list of numbers with their consent, or a place to put up a QR code.</dd></div><div><dt>A focal point</dt><dd>One person we can reach during the pilot.</dd></div><div><dt>One or two enumerators</dt><dd>To listen to and check voice notes, on a computer or phone.</dd></div></dl></article>
-        <article><h3>You get</h3><p class="sub">A survey run end to end.</p><dl><div><dt>A secure workspace</dt><dd>A dashboard for your team only.</dd></div><div><dt>Your data</dt><dd>Excel or CSV and audio files; phone numbers replaced by a code.</dd></div><div><dt>A report with figures</dt><dd>Answers received, share of voice answers, accuracy measured by your enumerators.</dd></div><div><dt>Support</dt><dd>From preparation to report, on WhatsApp and video calls.</dd></div></dl></article>
+        <article class="rv"><h3>You bring</h3><p class="sub">Very little, and nothing technical.</p><ul><li><i>1</i><div><b>Your questionnaire</b><small>KoBoToolbox or ODK XLSForm, a Word document, or a paper form.</small></div></li><li><i>2</i><div><b>Your respondents</b><small>A list of numbers with their consent, or a place to put up a QR code.</small></div></li><li><i>3</i><div><b>A focal point</b><small>One person we can reach during the pilot.</small></div></li><li><i>4</i><div><b>One or two enumerators</b><small>To listen to and check voice notes, on a computer or phone.</small></div></li></ul></article>
+        <article class="dk rv"><h3>You get</h3><p class="sub">A survey run end to end.</p><ul><li><i>1</i><div><b>A secure workspace</b><small>A dashboard for your team only.</small></div></li><li><i>2</i><div><b>Your data</b><small>Excel or CSV and audio files; phone numbers replaced by a code.</small></div></li><li><i>3</i><div><b>A report with figures</b><small>Answers received, share of voice answers, accuracy measured by your enumerators.</small></div></li><li><i>4</i><div><b>Support</b><small>From preparation to report, on WhatsApp and video calls.</small></div></li></ul></article>
       </div>
-      <p class="plans-note">Your data stays yours. Every respondent consents before the first question and can stop at any time by writing STOP. Audio is deleted at the end of the pilot if you ask, and nothing is reused for research without respondents' separate consent.</p>
+      <p class="plans-note rv" style="max-width:70ch;margin-inline:auto">Your data stays yours. Every respondent consents before the first question and can stop at any time by writing STOP. Audio is deleted at the end of the pilot if you ask, and nothing is reused for research without respondents' separate consent.</p>
     </div>
   </section>
 
-  <section id="demande" class="band">
+  <section id="demande" style="padding-top:0">
     <div class="wrap pform-wrap">
       <div class="side">
-        <h2>Create your workspace in two minutes.</h2>
-        <p class="intro">Fill in the platform form. You receive a link to create your organisation's admin account, then a guide takes you to your first response.</p>
-        <ol class="selfsteps"><li><b>Form</b><span>Organisation, contact, your survey in a few words.</span></li><li><b>Approval</b><span>We open your workspace, usually within 24 h.</span></li><li><b>Personal link</b><span>You choose your password.</span></li><li><b>Guide</b><span>Import the questionnaire, keyword, test, QR code.</span></li></ol>
-        <div class="selfcta"><a class="btn" href="https://app.sahelvoice.app/rejoindre?lang=en">Create your workspace</a><a class="btn alt" href="https://app.sahelvoice.app/login">Sign in</a></div>
-        <ul><li>For NGOs, agencies, companies, institutions and associations in Chad</li><li>One SahelVoice WhatsApp number: your keyword opens your survey</li><li>Answers in French today; Ngambay and Chadian Arabic in preparation</li></ul>
+        <p class="kicker rv">Get started</p>
+        <h2 class="rv">Create your workspace in two minutes.</h2>
+        <p class="intro rv">Fill in the platform form. You receive a link to create your organisation's admin account, then a guide takes you to your first response.</p>
+        <ol class="selfsteps rv"><li><b>Form</b><span>Organisation, contact, your survey in a few words.</span></li><li><b>Approval</b><span>We open your workspace, usually within 24 h.</span></li><li><b>Personal link</b><span>You choose your password.</span></li><li><b>Guide</b><span>Import the questionnaire, keyword, test, QR code.</span></li></ol>
+        <div class="selfcta rv"><a class="btn" href="https://app.sahelvoice.app/rejoindre?lang=en">Create your workspace</a><a class="btn ghost" href="https://app.sahelvoice.app/login">Sign in</a></div>
+        <ul class="rv"><li>For NGOs, agencies, companies, institutions and associations in Chad</li><li>One SahelVoice WhatsApp number: your keyword opens your survey</li><li>Answers in French today; Ngambay and Chadian Arabic in preparation</li></ul>
       </div>
       <div class="pform-alt">
-      <p class="alt-h"><b>Rather talk first?</b> This form prepares a message you send us on WhatsApp or by email.</p>
-      <form class="pform" id="pform" data-l="{&quot;title&quot;: &quot;SahelVoice pilot request&quot;, &quot;subject&quot;: &quot;Pilot request&quot;, &quot;missing&quot;: &quot;Please fill in the fields in red (and at least one way to reach you).&quot;, &quot;fields&quot;: [[&quot;org&quot;, &quot;Organisation&quot;], [&quot;type&quot;, &quot;Type&quot;], [&quot;name&quot;, &quot;Contact&quot;], [&quot;phone&quot;, &quot;WhatsApp / phone&quot;], [&quot;email&quot;, &quot;Email&quot;], [&quot;topic&quot;, &quot;Topic&quot;], [&quot;audience&quot;, &quot;Respondents&quot;], [&quot;size&quot;, &quot;Number&quot;], [&quot;langs&quot;, &quot;Languages&quot;], [&quot;when&quot;, &quot;Start&quot;], [&quot;questionnaire&quot;, &quot;Questionnaire&quot;], [&quot;msg&quot;, &quot;Message&quot;]]}" onsubmit="return false" novalidate>
+      <p class="alt-h rv"><b>Rather talk first?</b> This form prepares a message you send us on WhatsApp or by email.</p>
+      <form class="pform rv" id="pform" data-l="{&quot;title&quot;: &quot;SahelVoice pilot request&quot;, &quot;subject&quot;: &quot;Pilot request&quot;, &quot;missing&quot;: &quot;Please fill in the fields in red (and at least one way to reach you).&quot;, &quot;fields&quot;: [[&quot;org&quot;, &quot;Organisation&quot;], [&quot;type&quot;, &quot;Type&quot;], [&quot;name&quot;, &quot;Contact&quot;], [&quot;phone&quot;, &quot;WhatsApp / phone&quot;], [&quot;email&quot;, &quot;Email&quot;], [&quot;topic&quot;, &quot;Topic&quot;], [&quot;audience&quot;, &quot;Respondents&quot;], [&quot;size&quot;, &quot;Number&quot;], [&quot;langs&quot;, &quot;Languages&quot;], [&quot;when&quot;, &quot;Start&quot;], [&quot;questionnaire&quot;, &quot;Questionnaire&quot;], [&quot;msg&quot;, &quot;Message&quot;]]}" onsubmit="return false" novalidate>
         <div class="grid2">
           <div class="f"><label for="org">Organisation</label><input id="org" name="org" required autocomplete="organization"></div>
           <div class="f"><label for="type">Type of organisation</label><select id="type" name="type" required><option value="">Choose…</option><option>NGO or international agency</option><option>Company or shop</option><option>Public institution</option><option>Association</option><option>University or research</option><option>Other</option></select></div>
@@ -108,10 +112,10 @@
     </div>
   </section>
 
-  <section>
+  <section style="padding-top:0">
     <div class="wrap faq-wrap">
-      <h2>Before you start.</h2>
-      <div class="faq"><details><summary>Is the pilot really free?</summary><p>Yes, for a first pilot. If you invite a contact list, WhatsApp charges for invitation messages at Meta's rates; we tell you before launch. With a QR code or keyword, respondents write first.</p></details><details><summary>Not all our respondents can write.</summary><p>They can answer by tapping a button or sending a voice note. Your enumerators then check the voice notes.</p></details><details><summary>Do we need to install anything?</summary><p>No. Respondents use WhatsApp. Your team uses the dashboard in a browser.</p></details><details><summary>What happens after the pilot?</summary><p>You decide: stop, or continue with the Organisation plan, quoted on your volume.</p></details></div>
+      <div><p class="kicker rv">Questions</p><h2 class="rv">Before you start.</h2></div>
+      <div class="faq rv"><details><summary>Is the pilot really free?</summary><p>Yes, for a first pilot. If you invite a contact list, WhatsApp charges for invitation messages at Meta's rates; we tell you before launch. With a QR code or keyword, respondents write first.</p></details><details><summary>Not all our respondents can write.</summary><p>They can answer by tapping a button or sending a voice note. Your enumerators then check the voice notes.</p></details><details><summary>Do we need to install anything?</summary><p>No. Respondents use WhatsApp. Your team uses the dashboard in a browser.</p></details><details><summary>What happens after the pilot?</summary><p>You decide: stop, or continue with the Organisation plan, quoted on your volume.</p></details></div>
     </div>
   </section>
 </main>
@@ -119,13 +123,13 @@
 <footer class="big">
   <div class="wrap">
     <div class="legal" style="margin-top:0;border-top:0;padding-top:0">
-      <span>© 2026 SahelVoice, a service of Quantum Qube Technologies, N'Djamena, Chad. RCCM TD-NDJ-01-2024-A10-01446.</span>
-      <span><a href="/en/">sahelvoice.app</a> <a href="mailto:contact@sahelvoice.app">contact@sahelvoice.app</a> <a href="/en/privacy/">Privacy</a> <a href="/en/terms/">Partner terms</a></span>
+      <span>© 2026 SahelVoice, a service of Quantum Qube Technologies, N'Djamena, Chad.</span>
+      <span><a href="../">sahelvoice.app</a> · <a href="mailto:contact@sahelvoice.app">contact@sahelvoice.app</a> · RCCM TD-NDJ-01-2024-A10-01446 · <a href="../privacy/">Privacy</a> · <a href="../terms/">Partner terms</a></span>
     </div>
   </div>
 </footer>
-<script src="../../assets/site.js?v=202611131300"></script>
+<script src="../../assets/site.js?v=202611111054"></script>
 <script src="../../assets/pilot.js?v=202611111054"></script>
-<script src="../../assets/menu.js?v=202611131300"></script>
+<script src="../../assets/menu.js?v=202611122000"></script>
 </body>
 </html>
