@@ -15,7 +15,7 @@
 <meta name="theme-color" content="#081129">
 <link rel="icon" href="/assets/icon.svg" type="image/svg+xml"><link rel="icon" href="/favicon.ico" sizes="any"><link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <link rel="stylesheet" href="/assets/fonts.css?v=202611120900">
-<link rel="stylesheet" href="../assets/site.css?v=202611122000">
+<link rel="stylesheet" href="/assets/site.css?v=202611131300">
 <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
@@ -23,7 +23,7 @@
 <header class="top">
   <div class="wrap">
     <nav aria-label="Navigation principale">
-      <a class="brand" href="../"><svg width="34" height="34" viewBox="0 0 42 42" aria-hidden="true"><rect width="42" height="42" rx="11" fill="#2e3c8c"/><g class="eq" stroke="#fff" stroke-width="3" stroke-linecap="round"><path d="M11 25v-8"/><path d="M16 29V13"/><path d="M21 26V16"/><path d="M26 22v-4"/><path d="M31 24v-6"/></g></svg>SahelVoice</a>
+      <a class="brand" href="../"><svg width="34" height="34" viewBox="0 0 42 42" aria-hidden="true"><rect width="42" height="42" rx="11" fill="#2e3c8c"/><g stroke="#fff" stroke-width="3" stroke-linecap="round"><path d="M11 25v-8"/><path d="M16 29V13"/><path d="M21 26V16"/><path d="M26 22v-4"/><path d="M31 24v-6"/></g></svg>SahelVoice</a>
       <div class="links">
         <a href="../#fonctionnement">Fonctionnement</a>
         <a href="../demo/">Démo</a>
@@ -37,57 +37,52 @@
   </div>
 </header>
 
-<div class="dark">
-  <canvas class="wavefield" data-y=".92" aria-hidden="true"></canvas>
-  <div class="grid-bg"></div>
-  <div class="glow" style="width:520px;height:520px;right:-120px;top:-80px;background:#2e3c8c"></div>
+<main>
+<section class="hero">
   <div class="wrap phero">
     <div>
-      <span class="pill"><span class="dot"><i></i></span>Test pilote gratuit · organisations au Tchad</span>
       <h1>Une vraie enquête, avec vos vrais participants.</h1>
       <p class="lede">Pendant un pilote, SahelVoice mène l'une de vos enquêtes de bout en bout sur WhatsApp. Vous voyez les réponses arriver, vos enquêteurs vérifient les messages vocaux, et vous repartez avec vos données et un bilan.</p>
-      <div class="ctas" style="display:flex;gap:12px;flex-wrap:wrap;margin-top:30px">
-        <a class="btn" href="#demande">Demander un pilote <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        <a class="btn ghost" href="../demo/">Voir la démo d'abord</a>
+      <div class="ctas">
+        <a class="btn" href="#demande">Demander un pilote</a>
+        <a class="btn alt" href="/demo/">Voir la démo d'abord</a>
       </div>
-      <div class="pfacts"><div><b>0 F CFA</b><span>pour un premier pilote</span></div><div><b>4 semaines</b><span>de la préparation au bilan</span></div><div><b>1 enquête</b><span>la vôtre, avec vos participants</span></div></div>
+      <dl class="pfacts"><div><dt>0 F CFA</dt><dd>pour un premier pilote</dd></div><div><dt>4 semaines</dt><dd>de la préparation au bilan</dd></div><div><dt>1 enquête</dt><dd>la vôtre, avec vos participants</dd></div></dl>
     </div>
-    <div class="pcard"><h3>Votre pilote en bref</h3><ol><li><b>Préparer</b><span>Questionnaire adapté à WhatsApp, consentement validé, test sur vos téléphones</span></li><li><b>Lancer</b><span>Invitations à votre liste, ou QR code et mot-clé sur affiche</span></li><li><b>Collecter</b><span>Réponses en direct, vocaux transcrits puis vérifiés</span></li><li><b>Conclure</b><span>Export de vos données et bilan chiffré</span></li></ol><p class="foot">Durée indicative, ajustée à votre calendrier.</p></div>
+    <div class="pcard"><h2>Votre pilote en bref</h2><ol><li><b>Préparer</b><span>Questionnaire adapté à WhatsApp, consentement validé, test sur vos téléphones</span></li><li><b>Lancer</b><span>Invitations à votre liste, ou QR code et mot-clé sur affiche</span></li><li><b>Collecter</b><span>Réponses pendant la collecte, vocaux transcrits puis vérifiés</span></li><li><b>Conclure</b><span>Export de vos données et bilan chiffré</span></li></ol><p class="foot">Durée indicative, ajustée à votre calendrier.</p></div>
   </div>
-</div>
+</section>
 
-<main>
-  <section id="deroule">
+  <section id="deroule" class="band">
     <div class="wrap">
-      <div class="center"><p class="kicker rv">Déroulé</p><h2 class="rv">Quatre semaines, de la préparation au bilan.</h2><p class="intro rv">Un calendrier type. Nous l'adaptons à votre terrain et à vos échéances.</p></div>
-      <div class="weeks"><article class="rv"><span class="wk">Semaine 1</span><h3>Préparation</h3><p>Nous adaptons votre questionnaire à WhatsApp.</p><ul><li>Import de votre XLSForm, document Word ou formulaire papier</li><li>Texte de consentement validé avec vous</li><li>Version ngambay proposée par l'IA et relue par un locuteur (en test)</li><li>Test complet sur vos téléphones</li></ul></article><article class="rv"><span class="wk">Semaine 2</span><h3>Lancement</h3><p>Les participants reçoivent l'enquête.</p><ul><li>Invitations à votre liste de contacts</li><li>Ou mot-clé et QR code sur affiche</li><li>Prise en main du tableau de bord avec vos enquêteurs</li></ul></article><article class="rv"><span class="wk">Semaine 3</span><h3>Collecte</h3><p>Les réponses arrivent en direct.</p><ul><li>Réponses par bouton, texte ou message vocal</li><li>Vocaux transcrits par l'IA, vérifiés par vos enquêteurs</li><li>Point d'étape avec nous</li></ul></article><article class="rv"><span class="wk">Semaine 4</span><h3>Bilan</h3><p>Vous repartez avec vos données.</p><ul><li>Export Excel et fichiers audio</li><li>Taux de réponse, part de vocaux, précision mesurée de la transcription</li><li>Recommandations pour la suite</li></ul></article></div>
+      <h2>Quatre semaines, de la préparation au bilan.</h2><p class="intro">Un calendrier type, que nous adaptons à votre terrain et à vos échéances.</p>
+      <ol class="weeks"><li><span class="wk">Semaine 1</span><h3>Préparation</h3><p>Nous adaptons votre questionnaire à WhatsApp.</p><ul><li>Import de votre XLSForm, document Word ou formulaire papier</li><li>Texte de consentement validé avec vous</li><li>Version ngambay proposée par l'IA et relue par un locuteur (en test)</li><li>Test complet sur vos téléphones</li></ul></li><li><span class="wk">Semaine 2</span><h3>Lancement</h3><p>Les participants reçoivent l'enquête.</p><ul><li>Invitations à votre liste de contacts</li><li>Ou mot-clé et QR code sur affiche</li><li>Prise en main du tableau de bord avec vos enquêteurs</li></ul></li><li><span class="wk">Semaine 3</span><h3>Collecte</h3><p>Les réponses arrivent en direct.</p><ul><li>Réponses par bouton, texte ou message vocal</li><li>Vocaux transcrits par l'IA, vérifiés par vos enquêteurs</li><li>Point d'étape avec nous</li></ul></li><li><span class="wk">Semaine 4</span><h3>Bilan</h3><p>Vous repartez avec vos données.</p><ul><li>Export Excel et fichiers audio</li><li>Taux de réponse, part de vocaux, précision mesurée de la transcription</li><li>Recommandations pour la suite</li></ul></li></ol>
     </div>
   </section>
 
-  <section style="padding-top:0">
+  <section>
     <div class="wrap">
-      <div class="center"><p class="kicker rv">Concrètement</p><h2 class="rv">Ce que vous apportez, ce que vous recevez.</h2></div>
+      <h2>Ce que vous apportez, ce que vous recevez.</h2>
       <div class="give">
-        <article class="rv"><h3>Vous apportez</h3><p class="sub">Peu de choses, et rien de technique.</p><ul><li><i>1</i><div><b>Votre questionnaire</b><small>XLSForm KoBoToolbox ou ODK, document Word, ou formulaire papier.</small></div></li><li><i>2</i><div><b>Vos participants</b><small>Une liste de numéros avec leur accord, ou un lieu pour afficher un QR code.</small></div></li><li><i>3</i><div><b>Un point focal</b><small>Une personne joignable pendant le pilote.</small></div></li><li><i>4</i><div><b>Un ou deux enquêteurs</b><small>Pour écouter et vérifier les vocaux, sur ordinateur ou téléphone.</small></div></li></ul></article>
-        <article class="dk rv"><h3>Vous recevez</h3><p class="sub">Une enquête menée de bout en bout.</p><ul><li><i>1</i><div><b>Un espace sécurisé</b><small>Un tableau de bord réservé à votre équipe.</small></div></li><li><i>2</i><div><b>Vos données</b><small>Excel ou CSV et fichiers audio ; numéros remplacés par un code.</small></div></li><li><i>3</i><div><b>Un bilan chiffré</b><small>Réponses reçues, part de vocaux, précision mesurée par vos enquêteurs.</small></div></li><li><i>4</i><div><b>Un accompagnement</b><small>De la préparation au bilan, par WhatsApp et en visioconférence.</small></div></li></ul></article>
+        <article><h3>Vous apportez</h3><p class="sub">Peu de choses, et rien de technique.</p><dl><div><dt>Votre questionnaire</dt><dd>XLSForm KoBoToolbox ou ODK, document Word, ou formulaire papier.</dd></div><div><dt>Vos participants</dt><dd>Une liste de numéros avec leur accord, ou un lieu pour afficher un QR code.</dd></div><div><dt>Un point focal</dt><dd>Une personne joignable pendant le pilote.</dd></div><div><dt>Un ou deux enquêteurs</dt><dd>Pour écouter et vérifier les vocaux, sur ordinateur ou téléphone.</dd></div></dl></article>
+        <article><h3>Vous recevez</h3><p class="sub">Une enquête menée de bout en bout.</p><dl><div><dt>Un espace sécurisé</dt><dd>Un tableau de bord réservé à votre équipe.</dd></div><div><dt>Vos données</dt><dd>Excel ou CSV et fichiers audio ; numéros remplacés par un code.</dd></div><div><dt>Un bilan chiffré</dt><dd>Réponses reçues, part de vocaux, précision mesurée par vos enquêteurs.</dd></div><div><dt>Un accompagnement</dt><dd>De la préparation au bilan, par WhatsApp et en visioconférence.</dd></div></dl></article>
       </div>
-      <p class="plans-note rv" style="max-width:70ch;margin-inline:auto">Vos données restent les vôtres. Chaque participant donne son accord avant la première question et peut tout arrêter en écrivant STOP. Les audios sont supprimés à la fin du pilote si vous le demandez, et rien n'est réutilisé pour la recherche sans un accord séparé des participants.</p>
+      <p class="plans-note">Vos données restent les vôtres. Chaque participant donne son accord avant la première question et peut tout arrêter en écrivant STOP. Les audios sont supprimés à la fin du pilote si vous le demandez, et rien n'est réutilisé pour la recherche sans un accord séparé des participants.</p>
     </div>
   </section>
 
-  <section id="demande" style="padding-top:0">
+  <section id="demande" class="band">
     <div class="wrap pform-wrap">
       <div class="side">
-        <p class="kicker rv">Démarrer</p>
-        <h2 class="rv">Créez votre espace en deux minutes.</h2>
-        <p class="intro rv">Remplissez le formulaire de la plateforme. Vous recevez un lien pour créer le compte administrateur de votre organisation, puis un guide vous accompagne jusqu'à la première réponse.</p>
-        <ol class="selfsteps rv"><li><b>Formulaire</b><span>Organisation, contact, votre enquête en quelques mots.</span></li><li><b>Validation</b><span>Nous ouvrons votre espace, en général sous 24 h.</span></li><li><b>Lien personnel</b><span>Vous choisissez votre mot de passe.</span></li><li><b>Guide</b><span>Import du questionnaire, mot-clé, essai, QR code.</span></li></ol>
-        <div class="selfcta rv"><a class="btn" href="https://app.sahelvoice.app/rejoindre">Créer votre espace</a><a class="btn ghost" href="https://app.sahelvoice.app/login">Se connecter</a></div>
-        <ul class="rv"><li>Pour les ONG, agences, entreprises, institutions et associations au Tchad</li><li>Un seul numéro WhatsApp SahelVoice : votre mot-clé ouvre votre enquête</li><li>Réponses en français aujourd'hui ; ngambay et arabe tchadien en préparation</li></ul>
+                <h2>Créez votre espace en deux minutes.</h2>
+        <p class="intro">Remplissez le formulaire de la plateforme. Vous recevez un lien pour créer le compte administrateur de votre organisation, puis un guide vous accompagne jusqu'à la première réponse.</p>
+        <ol class="selfsteps"><li><b>Formulaire</b><span>Organisation, contact, votre enquête en quelques mots.</span></li><li><b>Validation</b><span>Nous ouvrons votre espace, en général sous 24 h.</span></li><li><b>Lien personnel</b><span>Vous choisissez votre mot de passe.</span></li><li><b>Guide</b><span>Import du questionnaire, mot-clé, essai, QR code.</span></li></ol>
+        <div class="selfcta"><a class="btn" href="https://app.sahelvoice.app/rejoindre">Créer votre espace</a><a class="btn alt" href="https://app.sahelvoice.app/login">Se connecter</a></div>
+        <ul><li>Pour les ONG, agences, entreprises, institutions et associations au Tchad</li><li>Un seul numéro WhatsApp SahelVoice : votre mot-clé ouvre votre enquête</li><li>Réponses en français aujourd'hui ; ngambay et arabe tchadien en préparation</li></ul>
       </div>
       <div class="pform-alt">
-      <p class="alt-h rv"><b>Vous préférez en parler d'abord ?</b> Ce formulaire prépare un message que vous nous envoyez par WhatsApp ou par email.</p>
-      <form class="pform rv" id="pform" data-l="{&quot;title&quot;: &quot;Demande de test pilote SahelVoice&quot;, &quot;subject&quot;: &quot;Demande de test pilote&quot;, &quot;missing&quot;: &quot;Merci de remplir les champs en rouge (et au moins un moyen de vous joindre).&quot;, &quot;fields&quot;: [[&quot;org&quot;, &quot;Organisation&quot;], [&quot;type&quot;, &quot;Type&quot;], [&quot;name&quot;, &quot;Contact&quot;], [&quot;phone&quot;, &quot;WhatsApp / tél.&quot;], [&quot;email&quot;, &quot;Email&quot;], [&quot;topic&quot;, &quot;Sujet&quot;], [&quot;audience&quot;, &quot;Participants&quot;], [&quot;size&quot;, &quot;Nombre&quot;], [&quot;langs&quot;, &quot;Langues&quot;], [&quot;when&quot;, &quot;Début souhaité&quot;], [&quot;questionnaire&quot;, &quot;Questionnaire&quot;], [&quot;msg&quot;, &quot;Message&quot;]]}" onsubmit="return false" novalidate>
+      <p class="alt-h"><b>Vous préférez en parler d'abord ?</b> Ce formulaire prépare un message que vous nous envoyez par WhatsApp ou par email.</p>
+      <form class="pform" id="pform" data-l="{&quot;title&quot;: &quot;Demande de test pilote SahelVoice&quot;, &quot;subject&quot;: &quot;Demande de test pilote&quot;, &quot;missing&quot;: &quot;Merci de remplir les champs en rouge (et au moins un moyen de vous joindre).&quot;, &quot;fields&quot;: [[&quot;org&quot;, &quot;Organisation&quot;], [&quot;type&quot;, &quot;Type&quot;], [&quot;name&quot;, &quot;Contact&quot;], [&quot;phone&quot;, &quot;WhatsApp / tél.&quot;], [&quot;email&quot;, &quot;Email&quot;], [&quot;topic&quot;, &quot;Sujet&quot;], [&quot;audience&quot;, &quot;Participants&quot;], [&quot;size&quot;, &quot;Nombre&quot;], [&quot;langs&quot;, &quot;Langues&quot;], [&quot;when&quot;, &quot;Début souhaité&quot;], [&quot;questionnaire&quot;, &quot;Questionnaire&quot;], [&quot;msg&quot;, &quot;Message&quot;]]}" onsubmit="return false" novalidate>
         <div class="grid2">
           <div class="f"><label for="org">Organisation</label><input id="org" name="org" required autocomplete="organization"></div>
           <div class="f"><label for="type">Type d'organisation</label><select id="type" name="type" required><option value="">Choisir…</option><option>ONG ou agence internationale</option><option>Entreprise ou commerce</option><option>Institution publique</option><option>Association</option><option>Université ou recherche</option><option>Autre</option></select></div>
@@ -113,10 +108,10 @@
     </div>
   </section>
 
-  <section style="padding-top:0">
+  <section>
     <div class="wrap faq-wrap">
-      <div><p class="kicker rv">Questions</p><h2 class="rv">Avant de vous lancer.</h2></div>
-      <div class="faq rv"><details><summary>Le pilote est-il vraiment gratuit ?</summary><p>Oui, pour un premier pilote. Si vous invitez une liste de contacts, WhatsApp facture les messages d'invitation selon le tarif de Meta : nous vous le disons avant le lancement. Avec un QR code ou un mot-clé, ce sont les participants qui écrivent en premier.</p></details><details><summary>Nos participants ne savent pas tous écrire.</summary><p>Ils peuvent répondre en touchant un bouton ou en envoyant un message vocal. Vos enquêteurs vérifient ensuite les vocaux.</p></details><details><summary>Faut-il installer quelque chose ?</summary><p>Non. Les participants utilisent WhatsApp. Votre équipe utilise le tableau de bord dans un navigateur.</p></details><details><summary>Et après le pilote ?</summary><p>Vous choisissez : arrêter, ou continuer avec la formule Organisation, sur devis selon votre volume.</p></details></div>
+      <h2>Avant de vous lancer.</h2>
+      <div class="faq"><details><summary>Le pilote est-il vraiment gratuit ?</summary><p>Oui, pour un premier pilote. Si vous invitez une liste de contacts, WhatsApp facture les messages d'invitation selon le tarif de Meta : nous vous le disons avant le lancement. Avec un QR code ou un mot-clé, ce sont les participants qui écrivent en premier.</p></details><details><summary>Nos participants ne savent pas tous écrire.</summary><p>Ils peuvent répondre en touchant un bouton ou en envoyant un message vocal. Vos enquêteurs vérifient ensuite les vocaux.</p></details><details><summary>Faut-il installer quelque chose ?</summary><p>Non. Les participants utilisent WhatsApp. Votre équipe utilise le tableau de bord dans un navigateur.</p></details><details><summary>Et après le pilote ?</summary><p>Vous choisissez : arrêter, ou continuer avec la formule Organisation, sur devis selon votre volume.</p></details></div>
     </div>
   </section>
 </main>
@@ -124,13 +119,13 @@
 <footer class="big">
   <div class="wrap">
     <div class="legal" style="margin-top:0;border-top:0;padding-top:0">
-      <span>© 2026 SahelVoice, un service de Quantum Qube Technologies, N'Djaména, Tchad.</span>
-      <span><a href="../">sahelvoice.app</a> · <a href="mailto:contact@sahelvoice.app">contact@sahelvoice.app</a> · RCCM TD-NDJ-01-2024-A10-01446 · <a href="../confidentialite/">Confidentialité</a> · <a href="../conditions/">Conditions partenaires</a></span>
+      <span>© 2026 SahelVoice, un service de Quantum Qube Technologies, N'Djaména, Tchad. RCCM TD-NDJ-01-2024-A10-01446.</span>
+      <span><a href="/">sahelvoice.app</a> <a href="mailto:contact@sahelvoice.app">contact@sahelvoice.app</a> <a href="/confidentialite/">Confidentialité</a> <a href="/conditions/">Conditions partenaires</a></span>
     </div>
   </div>
 </footer>
-<script src="../assets/site.js?v=202611111054"></script>
+<script src="../assets/site.js?v=202611131300"></script>
 <script src="../assets/pilot.js?v=202611111054"></script>
-<script src="../assets/menu.js?v=202611122000"></script>
+<script src="../assets/menu.js?v=202611131300"></script>
 </body>
 </html>

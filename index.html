@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SahelVoice | L'IA vocale pour les enquêtes WhatsApp au Tchad</title>
-<meta name="description" content="SahelVoice transforme les réponses WhatsApp, écrites ou vocales, en données fiables. L'IA transcrit et comprend les messages vocaux, vos enquêteurs vérifient. Conçu au Tchad.">
-<meta property="og:title" content="SahelVoice | L'IA vocale pour les enquêtes WhatsApp">
-<meta property="og:description" content="Les gens répondent sur WhatsApp, par écrit ou à voix haute. L'IA transcrit, comprend et structure chaque réponse. Vos enquêteurs vérifient.">
+<title>SahelVoice | Enquêtes WhatsApp à voix haute, au Tchad</title>
+<meta name="description" content="SahelVoice envoie votre questionnaire KoBo ou ODK sur WhatsApp. Les gens répondent par un bouton, un texte ou un message vocal. Nous transcrivons les vocaux, vos enquêteurs vérifient. Conçu au Tchad.">
+<meta property="og:title" content="SahelVoice | Enquêtes WhatsApp à voix haute">
+<meta property="og:description" content="Les gens répondent sur WhatsApp, par écrit ou à voix haute. Nous transcrivons les vocaux, vos enquêteurs vérifient, vous exportez un tableau propre.">
 <meta property="og:image" content="https://sahelvoice.app/og.png">
 <meta property="og:url" content="https://sahelvoice.app/">
 <link rel="canonical" href="https://sahelvoice.app/">
@@ -17,7 +17,7 @@
 <link rel="alternate" hreflang="en" href="https://sahelvoice.app/en/">
 <link rel="alternate" hreflang="x-default" href="https://sahelvoice.app/">
 <link rel="stylesheet" href="/assets/fonts.css?v=202611120900">
-<link rel="stylesheet" href="assets/site.css?v=202611122000">
+<link rel="stylesheet" href="/assets/site.css?v=202611131300">
 <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
@@ -25,470 +25,337 @@
 <header class="top">
   <div class="wrap">
     <nav aria-label="Navigation principale">
-      <a class="brand" href="#"><svg width="34" height="34" viewBox="0 0 42 42" aria-hidden="true"><rect width="42" height="42" rx="11" fill="#2e3c8c"/><g class="eq" stroke="#fff" stroke-width="3" stroke-linecap="round"><path d="M11 25v-8"/><path d="M16 29V13"/><path d="M21 26V16"/><path d="M26 22v-4"/><path d="M31 24v-6"/></g></svg>SahelVoice</a>
+      <a class="brand" href="#"><svg width="32" height="32" viewBox="0 0 42 42" aria-hidden="true"><rect width="42" height="42" rx="11" fill="#2e3c8c"/><g stroke="#fff" stroke-width="3" stroke-linecap="round"><path d="M11 25v-8"/><path d="M16 29V13"/><path d="M21 26V16"/><path d="M26 22v-4"/><path d="M31 24v-6"/></g></svg>SahelVoice</a>
       <div class="links">
         <a href="#fonctionnement">Fonctionnement</a>
         <a href="#demo">Démo</a>
         <a href="#offres">Offres</a>
         <a href="#traduction">Traduction</a>
         <a href="#soutenir">Soutenir</a>
-        <a href="#faq">FAQ</a>
-        <span class="lsw" role="group" aria-label="Langue"><span aria-current="true">FR</span><a href="en/" hreflang="en" lang="en" data-setlang="en">EN</a></span>
+        <a href="#apropos">À propos</a>
+        <span class="lsw" role="group" aria-label="Langue"><span aria-current="true">FR</span><a href="/en/" hreflang="en" lang="en" data-setlang="en">EN</a></span>
         <a href="https://app.sahelvoice.app/login">Connexion</a>
-        <a class="btn" href="pilote/">Test pilote</a>
+        <a class="btn" href="/pilote/">Test pilote</a>
       </div>
     </nav>
   </div>
 </header>
 
-<div class="dark">
-  <canvas class="wavefield" data-y=".75" aria-hidden="true"></canvas>
-  <div class="grid-bg"></div>
-  <div class="glow" style="width:520px;height:520px;right:-120px;top:-80px;background:#2e3c8c"></div>
-  <div class="glow" style="width:380px;height:380px;right:22%;top:46%;background:#145e48;opacity:.45"></div>
-  <div class="wrap">
-    <div class="hero">
-      <div>
-        <span class="pill"><span class="dot"><i></i></span>IA vocale conçue au Tchad · tests pilotes ouverts</span>
-        <h1>Chaque message vocal devient <span class="hl">une donnée fiable.</span></h1>
-        <p class="lede">SahelVoice mène vos enquêtes sur WhatsApp. Les gens répondent en touchant un bouton, en écrivant ou à voix haute. L'IA transcrit, comprend et structure chaque réponse. Vos enquêteurs vérifient.</p>
-        <div class="ctas">
-          <a class="btn" href="demo/">Essayer la démo
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-          <a class="btn ghost" href="pilote/">Demander un test pilote</a>
-        </div>
-        <div class="facts">
-          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Aucune application à installer</span>
-          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Votre XLSForm KoBo ou ODK</span>
-          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Consentement d'abord</span>
-        </div>
-      </div>
-
-      <div class="console" id="console" aria-label="Exemple : comment SahelVoice traite une réponse vocale">
-        <div class="c-head">
-          <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
-          <span>sahelvoice · traitement d'une réponse</span>
-          <span class="tag">exemple</span>
-        </div>
-        <div class="c-body">
-          <p class="q">Question <span class="mono" id="c-n">2/7</span> · <b id="c-q">Combien de personnes vivent dans votre ménage, vous compris ?</b></p>
-
-          <div class="stage" data-s="0">
-            <div class="st-label"><i></i>Écoute</div>
-            <div><span class="vbubble">
-              <span class="play"><svg width="11" height="13" viewBox="0 0 16 18" aria-hidden="true"><path d="M2 1.5v15l13-7.5z" fill="#fff"/></svg></span>
-              <span class="wave" id="wave" aria-hidden="true"></span>
-              <span class="t" id="c-dur">0:04</span>
-            </span></div>
-          </div>
-
-          <div class="stage" data-s="1">
-            <div class="st-label"><i></i>Transcrit</div>
-            <p class="transcript" id="c-tr">« nous sommes <mark>sept</mark> à la maison »</p>
-          </div>
-
-          <div class="stage" data-s="2">
-            <div class="st-label"><i></i>Comprend</div>
-            <div class="parse">
-              <span class="chip" id="c-field">taille_menage</span>
-              <span class="chip" id="c-type">nombre entier</span>
-              <span class="arrow" aria-hidden="true">→</span>
-              <span class="chip val" id="c-val">7</span>
-            </div>
-          </div>
-
-          <div class="stage" data-s="3">
-            <div class="st-label"><i></i>Vérifie</div>
-            <div class="check" id="c-chk"><span>« Vous avez dit : <b>7</b>. C'est bien ça ? »</span><span class="ok">✓ confirmé par la personne</span></div>
-          </div>
-
-          <div class="stage" data-s="4">
-            <div class="st-label"><i></i>Données</div>
-            <div class="tablewrap"><table class="table">
-              <thead><tr><th>question</th><th>valeur</th><th>source</th><th>statut</th></tr></thead>
-              <tbody id="c-rows"><tr><td>taille_menage</td><td>7</td><td>vocal</td><td>confirmé</td></tr></tbody>
-            </table></div>
-          </div>
-        </div>
-        <div class="c-foot">
-          <span>texte, boutons ou voix</span>
-          <span class="prog" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span>
-        </div>
-      </div>
-    </div>
-
-    <div class="strip">
-      <span class="lbl">S'intègre à vos outils</span>
-      <div class="items">
-        <span>WhatsApp Business</span>
-        <span>XLSForm (KoBoToolbox, ODK)</span>
-        <span>Export Excel et CSV</span>
-        <span>Audios en ZIP</span>
-      </div>
-    </div>
-    <div class="feed-label"><i></i>Exemples · réponses vocales → données</div>
-    <div class="feed"><div class="feed-track">
-      <span class="fi"><span class="mic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3z"/><path d="M19 11a7 7 0 0 1-14 0M12 18v3"/></svg></span><span lang="fr">« nous sommes sept à la maison »</span><span class="to">→</span><code>taille_menage = 7</code></span>
-      <span class="fi"><span class="mic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3z"/><path d="M19 11a7 7 0 0 1-14 0M12 18v3"/></svg></span><span lang="fr">« oui on a tout reçu merci »</span><span class="to">→</span><code>kit_complet = oui</code></span>
-      <span class="fi"><span class="mic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3z"/><path d="M19 11a7 7 0 0 1-14 0M12 18v3"/></svg></span><span lang="fr">« je donne quatre »</span><span class="to">→</span><code>note_service = 4</code></span>
-      <span class="fi"><span class="mic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3z"/><path d="M19 11a7 7 0 0 1-14 0M12 18v3"/></svg></span><span lang="fr">« deux heures de marche »</span><span class="to">→</span><code>temps_trajet = 2</code></span>
-      <span class="fi"><span class="mic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3z"/><path d="M19 11a7 7 0 0 1-14 0M12 18v3"/></svg></span><span lang="fr">« non pas encore »</span><span class="to">→</span><code>paiement_recu = non</code></span>
-      <span class="fi"><span class="mic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3z"/><path d="M19 11a7 7 0 0 1-14 0M12 18v3"/></svg></span><span lang="fr">« très satisfait »</span><span class="to">→</span><code>satisfaction = très satisfait</code></span>
-      <span class="fi"><span class="mic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3z"/><path d="M19 11a7 7 0 0 1-14 0M12 18v3"/></svg></span><span lang="fr">« cinq enfants »</span><span class="to">→</span><code>nb_enfants = 5</code></span>
-      <span class="fi"><span class="mic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3z"/><path d="M19 11a7 7 0 0 1-14 0M12 18v3"/></svg></span><span lang="fr">« il manquait le savon »</span><span class="to">→</span><code>commentaire = texte</code></span>
-    </div></div>
-  </div>
-</div>
-
 <main>
-  <!-- ===== How it works ===== -->
-  <section id="fonctionnement">
-    <div class="wrap">
-      <div class="center"><p class="kicker rv">Comment ça marche</p><h2 class="rv">3 étapes pour lancer votre enquête.</h2><p class="intro rv">Pas de formation, pas d'application à installer. Votre équipe garde ses outils, les participants gardent WhatsApp.</p></div>
-      <div class="how"><article class="rv"><span class="st">Étape 01</span><div class="big">01</div><h3>Importez votre questionnaire</h3><p>Le fichier XLSForm de KoBoToolbox ou ODK, tel quel.</p><ul><li>Questions, choix et conditions repris</li><li>Alertes claires sur ce que WhatsApp ne permet pas</li><li>Version ngambay proposée par l'IA (en test)</li></ul></article><article class="rv"><span class="st">Étape 02</span><div class="big">02</div><h3>Invitez les participants</h3><p>Une liste de contacts, ou un mot-clé et un QR code sur une affiche.</p><ul><li>Consentement demandé avant la première question</li><li>Réponse par bouton, texte ou message vocal</li><li>STOP respecté, pour toujours</li></ul></article><article class="rv"><span class="st">Étape 03</span><div class="big">03</div><h3>Suivez et vérifiez</h3><p>Les réponses arrivent en direct dans votre tableau de bord.</p><ul><li>Messages vocaux transcrits par l'IA</li><li>File de vérification pour vos enquêteurs</li><li>Export Excel et audios prêts à analyser</li></ul></article></div>
-      <div class="how-cta rv"><a class="btn" href="demo/">Essayer la démo</a><a class="btn ghost" href="#offres">Voir les offres</a><span class="note">Premier test pilote gratuit · Aucune application à installer</span></div>
-    </div>
-  </section>
-
-  <!-- ===== AI ===== -->
-  <section class="dark" id="ia" style="background:var(--navy)">
-    <div class="wrap">
-      <p class="kicker rv">L'intelligence artificielle</p>
-      <h2 class="rv">Une IA qui écoute, comprend, vérifie et apprend.</h2>
-      <p class="intro rv">Au Tchad, beaucoup de gens préfèrent parler qu'écrire. SahelVoice met la reconnaissance vocale au service des enquêtes, avec un humain pour vérifier ce que la machine n'est pas sûre d'avoir compris.</p>
-
-      <div class="ai-flow" aria-hidden="true"></div>
-      <div class="ai-grid">
-        <article class="ai-card rv">
-          <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3z"/><path d="M19 11a7 7 0 0 1-14 0M12 18v3"/></svg></div>
-          <span class="num">01</span>
-          <h3>Écoute</h3>
-          <p>Un modèle de reconnaissance vocale (Whisper) transcrit chaque message vocal en quelques secondes, sur nos serveurs.</p>
-          <div class="demo">audio <span class="w">0:04</span><br>→ <span class="g">« nous sommes sept à la maison »</span></div>
-        </article>
-        <article class="ai-card rv">
-          <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3H5a2 2 0 0 0-2 2v4M15 3h4a2 2 0 0 1 2 2v4M9 21H5a2 2 0 0 1-2-2v-4M15 21h4a2 2 0 0 0 2-2v-4"/><path d="M8 12h8"/></svg></div>
-          <span class="num">02</span>
-          <h3>Comprend</h3>
-          <p>Elle extrait la réponse attendue : un nombre dit en toutes lettres, un oui ou un non, un choix de la liste, une note de 1 à 5.</p>
-          <div class="demo">« je donne <span class="g">quatre</span> »<br>→ <span class="v">note_service</span> = <span class="g">4</span></div>
-        </article>
-        <article class="ai-card rv">
-          <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6l-8-3z"/><path d="m9 12 2 2 4-4"/></svg></div>
-          <span class="num">03</span>
-          <h3>Vérifie</h3>
-          <p>Un nombre dicté est relu à la personne pour confirmation. Une réponse incomprise est redemandée une fois, puis envoyée à vos enquêteurs.</p>
-          <div class="demo">« Vous avez dit : <span class="w">7</span>. C'est bien ça ? »<br>→ <span class="g">Oui</span> ✓</div>
-        </article>
-        <article class="ai-card rv">
-          <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16M3 21v-5h5"/></svg></div>
-          <span class="num">04</span>
-          <h3>Apprend</h3>
-          <p>Chaque correction d'un enquêteur mesure la précision réelle de la transcription. Avec un accord séparé des personnes, elle sert à entraîner nos modèles pour les langues du Tchad.</p>
-          <div class="demo">« <span class="w">cette</span> » corrigé en « <span class="g">sept</span> »<br>→ taux d'erreur mesuré</div>
-        </article>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <h1>Posez vos questions sur WhatsApp. Les gens répondent à voix haute.</h1>
+        <p class="lede">SahelVoice envoie votre questionnaire KoBo ou ODK sur WhatsApp. Chacun répond avec un bouton, un texte ou un message vocal. Nous transcrivons les vocaux, vos enquêteurs les vérifient, et vous exportez un tableau propre.</p>
+        <div class="ctas">
+          <a class="btn" href="/demo/">Essayer la démo</a>
+          <a class="btn alt" href="/pilote/">Demander un test pilote</a>
+        </div>
+        <p class="hero-note">Tests pilotes gratuits pour les organisations au Tchad. Les participants n'installent rien.</p>
       </div>
 
-      <p class="loop-note rv">Nous ne publions pas de taux de précision avant de l'avoir mesuré sur de vraies réponses tchadiennes. Le tableau de bord calcule ce taux à partir des vérifications de vos propres enquêteurs.</p>
-    </div>
-  </section>
-
-  <!-- ===== Platform ===== -->
-  <section id="plateforme">
-    <div class="wrap">
-      <p class="kicker rv">La plateforme</p>
-      <h2 class="rv">Tout le cycle d'une enquête, au même endroit.</h2>
-      <p class="intro rv">De l'import du questionnaire à l'export final, SahelVoice remplace la saisie papier et les appels un par un.</p>
-
-      <figure class="shot rv">
-        <div class="shotbar" aria-hidden="true"><i></i><i></i><i></i><span>app.sahelvoice.app</span></div>
-        <img src="/assets/tableau-de-bord-1020.jpg" srcset="/assets/tableau-de-bord-1020.jpg 1020w, /assets/tableau-de-bord.jpg 2040w" sizes="(max-width:1180px) 100vw, 1140px" width="2040" height="1290" loading="lazy" alt="Tableau de bord SahelVoice : résultats d'une enquête, un graphique par question">
-        <figcaption>Le vrai tableau de bord, avec des données de démonstration.</figcaption>
+      <figure class="convo">
+        <div class="chat" aria-label="Exemple de conversation WhatsApp">
+          <div class="chat-head"><span class="av" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 42 42"><g stroke="#fff" stroke-width="3.4" stroke-linecap="round"><path d="M11 25v-8"/><path d="M16 29V13"/><path d="M21 26V16"/><path d="M26 22v-4"/><path d="M31 24v-6"/></g></svg></span><div><b>SahelVoice</b><small>Suivi après distribution</small></div></div>
+          <div class="msgs">
+            <p class="b in">Combien de personnes vivent dans votre ménage, vous compris ?<span class="tm">10:42</span></p>
+            <p class="b out voice"><span class="play" aria-hidden="true"><svg width="10" height="12" viewBox="0 0 16 18"><path d="M2 1.5v15l13-7.5z" fill="currentColor"/></svg></span><span class="wf" aria-hidden="true"><i style="height:30%"></i><i style="height:60%"></i><i style="height:85%"></i><i style="height:45%"></i><i style="height:95%"></i><i style="height:60%"></i><i style="height:35%"></i><i style="height:70%"></i><i style="height:100%"></i><i style="height:50%"></i><i style="height:75%"></i><i style="height:40%"></i><i style="height:65%"></i><i style="height:85%"></i><i style="height:45%"></i><i style="height:30%"></i><i style="height:55%"></i><i style="height:35%"></i></span><span class="sr">Message vocal de 4 secondes</span><span class="tm">0:04</span></p>
+            <p class="b in">Vous avez dit : <b>7</b>. C'est bien ça ?<span class="tm">10:42</span></p>
+            <p class="b out">Oui<span class="tm">10:43</span></p>
+          </div>
+        </div>
+        <figcaption class="sheet">
+          <span class="sheet-t">Ce que voit votre équipe</span>
+          <span class="sheet-row"><code>taille_menage</code><span class="said">« nous sommes sept à la maison »</span><b>7</b><span class="ok">Confirmé</span></span>
+        </figcaption>
       </figure>
+    </div>
+  </section>
 
+  <section id="fonctionnement" class="band">
+    <div class="wrap">
+      <h2>Votre questionnaire part sur WhatsApp en trois étapes.</h2>
+      <p class="intro">Votre équipe garde ses outils. Les participants gardent WhatsApp.</p>
+      <ol class="steps">
+        <li><h3>Importez votre questionnaire</h3><p>Le fichier XLSForm de KoBoToolbox ou d'ODK, tel quel. SahelVoice reprend les questions, les choix et les conditions, et vous dit en français ce que WhatsApp ne sait pas faire.</p></li>
+        <li><h3>Invitez les participants</h3><p>Envoyez une invitation à une liste de contacts, ou affichez un mot-clé et un QR code. Chaque personne donne son accord avant la première question et peut tout arrêter en écrivant STOP.</p></li>
+        <li><h3>Suivez et vérifiez</h3><p>Les réponses arrivent dans votre tableau de bord pendant la collecte. Vos enquêteurs écoutent les vocaux, puis vous exportez en Excel avec les audios.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="ia">
+    <div class="wrap">
+      <h2>Ce qui arrive à un message vocal.</h2>
+      <p class="intro">Au Tchad, beaucoup de gens préfèrent parler plutôt qu'écrire. Voici le trajet d'un vocal, de WhatsApp à votre export.</p>
+      <ol class="pipe">
+        <li><h3>Transcription</h3><p>Whisper, un modèle de reconnaissance vocale, transcrit le vocal sur nos serveurs en quelques secondes.</p><p class="ex"><span class="k">audio 0:04</span> « nous sommes sept à la maison »</p></li>
+        <li><h3>Lecture de la réponse</h3><p>SahelVoice cherche la réponse attendue : un nombre dit en toutes lettres, un oui ou un non, un choix de la liste, une note de 1 à 5.</p><p class="ex">« sept » <span class="k">donne</span> <code>taille_menage = 7</code></p></li>
+        <li><h3>Confirmation</h3><p>Quand la personne dicte un nombre, SahelVoice le lui relit. Si la réponse reste floue, il la redemande une fois, puis la passe à vos enquêteurs.</p><p class="ex">« Vous avez dit : 7. C'est bien ça ? » <span class="k">Oui</span></p></li>
+        <li><h3>Vérification humaine</h3><p>Vos enquêteurs écoutent chaque vocal dans une file : correct, à corriger, ou inaudible. Une correction remplace la valeur dans l'export et l'original reste visible.</p><p class="ex">« cette » corrigé en « sept »</p></li>
+      </ol>
+      <p class="note">Nous ne publions pas de taux de précision tant que nous ne l'avons pas mesuré sur de vraies réponses tchadiennes. Votre tableau de bord le calcule à partir des corrections de vos propres enquêteurs.</p>
+    </div>
+  </section>
+
+  <section id="plateforme" class="band">
+    <div class="wrap">
+      <h2>Le tableau de bord de votre équipe.</h2>
+      <p class="intro">De l'import du questionnaire à l'export final, sans saisie papier ni appels un par un.</p>
+      <figure class="shot">
+        <img src="/assets/tableau-de-bord-1020.jpg" srcset="/assets/tableau-de-bord-1020.jpg 1020w, /assets/tableau-de-bord.jpg 2040w" sizes="(max-width:1180px) 100vw, 1120px" width="2040" height="1290" loading="lazy" alt="Tableau de bord SahelVoice : résultats d'une enquête, un graphique par question">
+        <figcaption>Le vrai tableau de bord, rempli avec des données de démonstration.</figcaption>
+      </figure>
       <div class="feat">
-        <div class="rv"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg></span>
-          <h3>Votre questionnaire tel quel</h3><p>Importez le fichier XLSForm de KoBoToolbox ou ODK. Les conditions simples sont respectées ; ce que WhatsApp ne peut pas faire est signalé en français.</p></div>
-        <div class="rv"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3z"/><path d="M14 14h3v3h-3zM20 14v.01M14 20v.01M17 20h4v-3"/></svg></span>
-          <h3>Invitations et QR code</h3><p>Envoyez une invitation à une liste de contacts, ou affichez un mot-clé et un QR code. La personne écrit, l'enquête commence.</p></div>
-        <div class="rv"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="m7 14 4-4 3 3 5-6"/></svg></span>
-          <h3>Résultats en direct</h3><p>Un graphique par question, mis à jour à chaque réponse. Chaque réponse s'ouvre avec son audio à écouter.</p></div>
-        <div class="rv"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1v-6h3zM3 19a2 2 0 0 0 2 2h1v-6H3z"/></svg></span>
-          <h3>File de vérification</h3><p>Vos enquêteurs écoutent les vocaux un par un : c'est correct, corriger, ou inaudible. Le suivant s'ouvre tout seul.</p></div>
-        <div class="rv"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M5 21h14"/></svg></span>
-          <h3>Export prêt à analyser</h3><p>Une ligne par personne, les valeurs vérifiées, en Excel ou CSV. Les audios en ZIP, nommés comme les colonnes.</p></div>
-        <div class="rv"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></svg></span>
-          <h3>Équipe et rôles</h3><p>Administrateurs et enquêteurs ont chacun leur accès. Chaque organisation ne voit que ses propres enquêtes.</p></div>
+        <div><h3>Résultats pendant la collecte</h3><p>Un graphique par question, mis à jour à chaque réponse. Chaque réponse s'ouvre avec son audio.</p></div>
+        <div><h3>File de vérification</h3><p>Vos enquêteurs écoutent les vocaux un par un. Le suivant s'ouvre dès qu'ils ont tranché.</p></div>
+        <div><h3>Export prêt à analyser</h3><p>Une ligne par personne en Excel ou CSV, avec les valeurs vérifiées. Les audios partent dans un ZIP, nommés comme les colonnes.</p></div>
+        <div><h3>Invitations et QR code</h3><p>Une liste de contacts, ou un mot-clé sur une affiche. La personne écrit, l'enquête commence.</p></div>
+        <div><h3>Équipe et rôles</h3><p>Administrateurs et enquêteurs ont chacun leur accès. Une organisation ne voit que ses propres enquêtes.</p></div>
+        <div><h3>Questionnaire en ngambay</h3><p>Notre modèle propose une traduction ngambay de vos questions. Un locuteur la relit avant l'envoi. En test.</p></div>
       </div>
     </div>
   </section>
 
-  <section id="guide" style="padding-top:0">
+  <section id="guide">
     <div class="wrap">
-      <div class="center"><p class="kicker rv">Guide vidéo</p><h2 class="rv">Votre première enquête, en 3 minutes.</h2><p class="intro rv">Créer votre espace, ajouter vos enquêteurs, importer le questionnaire, vérifier les réponses et lire les résultats : tout le parcours, sur le vrai tableau de bord.</p></div>
-      <div class="ytbox rv" data-yt="O3KwfT2WjCA" data-title="Guide vidéo SahelVoice : mener une enquête sur WhatsApp de A à Z">
+      <h2>Une enquête complète, en trois minutes de vidéo.</h2>
+      <p class="intro">Créer l'espace, ajouter les enquêteurs, importer le questionnaire, vérifier les vocaux et lire les résultats, sur le vrai tableau de bord.</p>
+      <div class="ytbox" data-yt="O3KwfT2WjCA" data-title="Guide vidéo SahelVoice : mener une enquête sur WhatsApp de A à Z">
         <img src="/assets/guide-video.jpg" width="1280" height="720" loading="lazy" alt="Guide vidéo SahelVoice : mener une enquête sur WhatsApp de A à Z">
         <button type="button" class="ytplay" aria-label="Lire la vidéo"><svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></button>
       </div>
-      <p class="ytfoot rv"><a href="https://youtu.be/O3KwfT2WjCA" target="_blank" rel="noopener">Voir sur YouTube ↗</a> · La vidéo ne se charge depuis YouTube que si vous cliquez.</p>
+      <p class="ytfoot">La vidéo se charge depuis YouTube quand vous cliquez dessus. <a href="https://youtu.be/O3KwfT2WjCA" target="_blank" rel="noopener">Ouvrir sur YouTube</a></p>
     </div>
   </section>
 
-  <section id="difference" style="padding-top:0">
+  <section id="difference" class="band">
     <div class="wrap">
-      <p class="kicker rv">Notre différence</p>
-      <h2 class="rv">Là où le formulaire s'arrête, la voix continue.</h2>
-      <p class="intro rv">Les outils de collecte par formulaire sont excellents quand un enquêteur formé est sur place avec une tablette. SahelVoice atteint les personnes que le formulaire n'atteint pas.</p>
-      <div class="vs rv"><table>
+      <h2>SahelVoice à côté d'un formulaire sur tablette.</h2>
+      <p class="intro">Un formulaire marche bien quand un enquêteur formé se tient devant la personne avec une tablette. SahelVoice va chercher celles que l'enquêteur ne peut pas voir.</p>
+      <div class="vs"><table>
         <thead><tr><th></th><th scope="col">Formulaire sur tablette ou lien web</th><th scope="col" class="us">SahelVoice</th></tr></thead>
-        <tbody><tr><th scope="row">Qui répond</th><td>L'enquêteur saisit pour la personne</td><td class="us">La personne répond elle-même, sur son téléphone</td></tr><tr><th scope="row">Ce qu'il faut</th><td>Une application, une tablette, une formation</td><td class="us">WhatsApp, déjà installé</td></tr><tr><th scope="row">Lire et écrire</th><td>Nécessaire pour répondre seul</td><td class="us">Pas nécessaire : un message vocal suffit</td></tr><tr><th scope="row">Langues</th><td>Celle du formulaire</td><td class="us">Français aujourd'hui ; ngambay et arabe tchadien en préparation</td></tr><tr><th scope="row">Zones difficiles d'accès</th><td>Déplacement de l'équipe à chaque passage</td><td class="us">Suivi à distance, aussi souvent que nécessaire</td></tr><tr><th scope="row">Qualité des données</th><td>Contrôle après la saisie</td><td class="us">Chaque vocal réécouté par votre équipe, taux d'erreur mesuré</td></tr><tr><th scope="row">Votre questionnaire</th><td>XLSForm</td><td class="us">Le même XLSForm, sans le refaire</td></tr></tbody>
+        <tbody><tr><th scope="row">Qui répond</th><td>L'enquêteur saisit pour la personne</td><td class="us">La personne répond elle-même, sur son téléphone</td></tr><tr><th scope="row">Ce qu'il faut</th><td>Une application, une tablette, une formation</td><td class="us">WhatsApp, déjà installé</td></tr><tr><th scope="row">Lire et écrire</th><td>Nécessaire pour répondre seul</td><td class="us">Facultatif : un message vocal suffit</td></tr><tr><th scope="row">Langues</th><td>Celle du formulaire</td><td class="us">Français aujourd'hui ; ngambay et arabe tchadien en préparation</td></tr><tr><th scope="row">Zones difficiles d'accès</th><td>L'équipe se déplace à chaque passage</td><td class="us">Suivi à distance, aussi souvent que vous voulez</td></tr><tr><th scope="row">Qualité des données</th><td>Contrôle après la saisie</td><td class="us">Votre équipe réécoute chaque vocal et mesure le taux d'erreur</td></tr><tr><th scope="row">Votre questionnaire</th><td>XLSForm</td><td class="us">Le même XLSForm, sans le refaire</td></tr></tbody>
       </table></div>
-      <p class="vsfoot rv">SahelVoice ne remplace pas KoBoToolbox ou ODK : même questionnaire en entrée, même tableau en sortie. Vous gardez vos outils d'analyse.</p>
+      <p class="after">Gardez KoBoToolbox ou ODK : le même questionnaire entre, le même tableau sort, et vos outils d'analyse ne changent pas.</p>
     </div>
   </section>
 
-  <section style="padding-top:0">
-    <div class="wrap split">
-      <div>
-        <p class="kicker rv">Humain + IA</p>
-        <h2 class="rv">L'IA propose. Vos enquêteurs décident.</h2>
-        <p class="intro rv">La machine fait le travail répétitif. Les personnes qui connaissent le terrain gardent le dernier mot sur chaque réponse vocale.</p>
-        <ul class="list">
-          <li class="rv"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Les vocaux à vérifier sont rangés dans une file, prêts à être écoutés.</span></li>
-          <li class="rv"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Une correction remplace la valeur dans l'export, sans perdre l'original.</span></li>
-          <li class="rv"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Le panneau Qualité affiche le taux d'erreur réel et la part de réponses corrigées.</span></li>
-        </ul>
-      </div>
-      <div class="dash rv" role="img" aria-label="Aperçu du tableau de bord : compteurs de réponses et file de vérification des messages vocaux">
-        <div class="dash-top"><b>Suivi après distribution · exemple</b><span class="live"><i></i>en direct</span></div>
-        <div class="kpis">
-          <div><small>Réponses</small><b>48</b></div>
-          <div><small>Vocales</small><b>19</b></div>
-          <div><small>À vérifier</small><b>6</b></div>
-        </div>
-        <div class="review">
-          <div class="row"><span class="pl"><svg width="10" height="12" viewBox="0 0 16 18" aria-hidden="true"><path d="M2 1.5v15l13-7.5z" fill="#3ddc97"/></svg></span>
-            <span class="tx"><small>kit_complet</small><span>« oui on a tout reçu, merci »</span></span><span class="st ok">vérifié</span></div>
-          <div class="row"><span class="pl"><svg width="10" height="12" viewBox="0 0 16 18" aria-hidden="true"><path d="M2 1.5v15l13-7.5z" fill="#3ddc97"/></svg></span>
-            <span class="tx"><small>taille_menage</small><span>« nous sommes cette à la maison »</span></span><span class="st fix">corrigé : 7</span></div>
-          <div class="row"><span class="pl"><svg width="10" height="12" viewBox="0 0 16 18" aria-hidden="true"><path d="M2 1.5v15l13-7.5z" fill="#3ddc97"/></svg></span>
-            <span class="tx"><small>article_manquant</small><span>« il manquait le savon »</span></span><span class="st wait">à écouter</span></div>
-        </div>
-        <p class="dash-note">Exemple illustratif, pas de vraies données.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== Demo ===== -->
-  <section class="dark" id="demo" style="background:var(--navy)">
-    <canvas class="wavefield" data-y=".97" aria-hidden="true"></canvas>
-    <div class="grid-bg"></div>
+  <section id="demo">
     <div class="wrap demo-band">
       <div>
-        <p class="kicker rv">Démo interactive</p>
-        <h2 class="rv">Essayez SahelVoice en deux minutes.</h2>
-        <p class="intro rv">Dans votre navigateur, sans inscription. Vous répondez comme un participant, et vous voyez en même temps ce que reçoit l'organisation.</p>
-        <ol class="dsteps rv"><li><div><b>Répondez sur le téléphone</b><span>Touchez un bouton, écrivez, ou envoyez un message vocal.</span></div></li><li><div><b>Voyez la réponse arriver</b><span>Le tableau de bord de l'organisation se remplit en direct.</span></div></li><li><div><b>Vérifiez comme un enquêteur</b><span>Écoutez, corrigez, puis exportez en Excel.</span></div></li></ol>
-        <div class="demo-cta rv">
-          <a class="btn" href="demo/">Lancer la démo <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-          <a class="btn ghost" href="demo/#organisation">Voir le tableau de bord</a>
-        </div>
+        <h2>Essayez SahelVoice dans votre navigateur.</h2>
+        <p class="intro">Sans inscription. Vous répondez comme un participant sur un téléphone simulé, et vous voyez à côté ce que reçoit l'organisation : la réponse, la file de vérification, l'export.</p>
       </div>
-      <div class="mini rv" aria-hidden="true">
-        <div class="mini-phone"><div class="mini-screen">
-          <div class="mini-head"><i></i><div><b>ONG partenaire</b><span>WhatsApp Business</span></div></div>
-          <div class="mini-msgs">
-            <div class="mm o">(2/7) Combien de personnes vivent dans votre ménage ?</div>
-            <div class="mm i"><div class="v"><i></i><em></em><small>0:04</small></div></div>
-            <div class="mm o">Vous avez dit : <b>7</b>. C'est bien ça ?</div>
-            <div class="mm i">Oui</div>
-            <div class="mm o">(3/7) Avez-vous reçu le kit complet ?</div>
-          </div>
-        </div></div>
-        <div class="mini-card"><small>Tableau de bord</small><b>taille_menage = 7</b><span>✓ confirmé par la personne</span></div>
+      <div class="demo-go">
+        <a class="btn" href="/demo/">Lancer la démo</a>
+        <a class="btn alt" href="/demo/#organisation">Voir le tableau de bord</a>
       </div>
     </div>
   </section>
 
-  <!-- ===== Audiences ===== -->
-  <section style="padding-top:0">
+  <section class="band">
     <div class="wrap">
-      <p class="kicker rv">Pour qui</p>
-      <h2 class="rv">Pour tous ceux qui ont besoin de l'avis des gens.</h2>
+      <h2>Qui s'en sert.</h2>
       <div class="aud">
-        <article class="rv"><h3>ONG et agences</h3><p>Suivi après distribution, retours des bénéficiaires, évaluation de projets. Les personnes qui écrivent peu peuvent répondre à voix haute.</p>
-          <p class="ex">« Avez-vous reçu le kit complet ? »</p></article>
-        <article class="rv"><h3>Entreprises et commerces</h3><p>Satisfaction des clients, retours après livraison, avis sur un service. Un QR code en boutique suffit pour commencer.</p>
-          <p class="ex">« Quelle note donnez-vous au service ? »</p></article>
-        <article class="rv"><h3>Formations et associations</h3><p>Évaluation d'une formation, d'un atelier ou d'un programme de mentorat, avec les résultats visibles en direct.</p>
-          <p class="ex">« Qu'avez-vous appris aujourd'hui ? »</p></article>
+        <article><h3>ONG et agences</h3><p>Suivi après distribution, retours des bénéficiaires, évaluation de projets. Les personnes qui écrivent peu répondent à voix haute.</p><p class="ex">« Avez-vous reçu le kit complet ? »</p></article>
+        <article><h3>Entreprises et commerces</h3><p>Satisfaction des clients, retours après livraison, avis sur un service. Un QR code au comptoir suffit pour commencer.</p><p class="ex">« Quelle note donnez-vous au service ? »</p></article>
+        <article><h3>Formations et associations</h3><p>Évaluation d'une formation, d'un atelier ou d'un programme de mentorat, avec les résultats sous les yeux.</p><p class="ex">« Qu'avez-vous appris aujourd'hui ? »</p></article>
       </div>
     </div>
   </section>
 
-  <!-- ===== Plans ===== -->
   <section id="offres">
     <div class="wrap">
-      <div class="center"><p class="kicker rv">Offres</p><h2 class="rv">Une formule pour chaque organisation.</h2><p class="intro rv">Commencez par un pilote gratuit, puis choisissez la formule qui suit votre rythme d'enquêtes.</p></div>
-      <div class="plans"><article class="plan rv"><span class="pn">Pilote</span><div class="price">Gratuit<small>1re enquête</small></div><p>Pour découvrir SahelVoice avec une vraie enquête.</p><ul><li>Questionnaire importé et préparé avec vous</li><li>Réponses en texte, boutons et voix</li><li>Tableau de bord et file de vérification</li><li>Export Excel et audios</li></ul><a class="btn" href="https://app.sahelvoice.app/rejoindre">Créer votre espace</a></article><article class="plan top rv"><span class="badge">Recommandé</span><span class="pn">Organisation</span><div class="price">Sur devis<small>selon le volume</small></div><p>Pour les ONG, agences et entreprises qui enquêtent régulièrement.</p><ul><li>Plusieurs enquêtes et plusieurs équipes</li><li>Invitations, mots-clés et QR codes</li><li>Accompagnement au lancement</li><li>Version ngambay de vos questionnaires (en test)</li></ul><a class="btn" href="mailto:contact@sahelvoice.app?subject=Offre%20Organisation%20-%20SahelVoice">Nous contacter</a></article><article class="plan rv"><span class="pn">Sur mesure</span><div class="price">Parlons-en<small></small></div><p>Pour les grandes campagnes et les besoins spécifiques.</p><ul><li>API et export vers vos outils</li><li>Hébergement et données dédiés</li><li>Langues et parcours vocaux sur mesure</li></ul><a class="btn" href="mailto:contact@sahelvoice.app?subject=Offre%20sur%20mesure%20-%20SahelVoice">Parler à l'équipe</a></article></div>
-      <p class="plans-note rv">Les invitations WhatsApp sont facturées par Meta selon son propre tarif ; nous vous l'expliquons avant de commencer.</p>
-    </div>
-  </section>
-
-  <!-- ===== Languages ===== -->
-  <section class="dark" id="langues">
-    <div class="grid-bg"></div>
-    <div class="wrap">
-      <p class="kicker rv">Langues</p>
-      <h2 class="rv">Le français aujourd'hui. Les langues du Tchad ensuite.</h2>
-      <p class="intro rv">Les grands modèles vocaux comprennent mal les langues du Tchad, faute de données. Nous construisons ces données avec les communautés, uniquement avec l'accord explicite des personnes.</p>
-      <div class="langs">
-        <div class="lang now rv"><div class="name">Français</div><div class="native">Transcription et compréhension</div><div class="lw" aria-hidden="true"></div><span class="status">● disponible</span></div>
-        <div class="lang rv"><div class="name">Arabe tchadien</div><div class="native">Collecte de données vocales</div><div class="lw" aria-hidden="true"></div><span class="status">○ en préparation</span></div>
-        <div class="lang test rv"><div class="name">Ngambay</div><div class="native">Traduction écrite et collecte de données vocales</div><div class="lw" aria-hidden="true"></div><div class="stack"><span class="status test">◐ traduction écrite : en test</span><span class="status">○ voix : en préparation</span></div><p class="more">Avec notre modèle ngambay–français, que nous continuons d'améliorer. <a href="#traduction">Essayer</a> · <a href="#recherche">Voir la recherche</a></p></div>
+      <h2>Commencez par un pilote gratuit.</h2>
+      <p class="intro">Ensuite, choisissez la formule qui suit votre rythme d'enquêtes.</p>
+      <div class="plans">
+        <article class="plan"><h3>Pilote</h3><p class="price">Gratuit</p><p class="for">Une première vraie enquête, pour voir si SahelVoice vous convient.</p><ul><li>Questionnaire importé et préparé avec vous</li><li>Réponses en texte, boutons et voix</li><li>Tableau de bord et file de vérification</li><li>Export Excel et audios</li></ul><a class="btn" href="https://app.sahelvoice.app/rejoindre">Créer votre espace</a></article>
+        <article class="plan"><h3>Organisation</h3><p class="price">Sur devis</p><p class="for">Pour les ONG, agences et entreprises qui enquêtent souvent. Le prix suit le volume.</p><ul><li>Plusieurs enquêtes et plusieurs équipes</li><li>Invitations, mots-clés et QR codes</li><li>Accompagnement au lancement</li><li>Version ngambay de vos questionnaires, en test</li></ul><a class="btn alt" href="mailto:contact@sahelvoice.app?subject=Offre%20Organisation%20-%20SahelVoice">Nous écrire</a></article>
+        <article class="plan"><h3>Sur mesure</h3><p class="price">Parlons-en</p><p class="for">Pour les grandes campagnes et les besoins particuliers.</p><ul><li>API et export vers vos outils</li><li>Hébergement et données dédiés</li><li>Langues et parcours vocaux sur mesure</li></ul><a class="btn alt" href="mailto:contact@sahelvoice.app?subject=Offre%20sur%20mesure%20-%20SahelVoice">Parler à l'équipe</a></article>
       </div>
+      <p class="after">Meta facture les invitations WhatsApp à son propre tarif. Nous vous donnons le montant avant le lancement. Avec un QR code ou un mot-clé, ce sont les participants qui écrivent en premier, et Meta ne facture rien.</p>
     </div>
   </section>
 
-  <!-- ===== Live translation ===== -->
-  <section id="traduction" style="padding-bottom:40px">
+  <section id="langues" class="band">
+    <div class="wrap split">
+      <div>
+        <h2>Le français aujourd'hui, les langues du Tchad ensuite.</h2>
+        <p class="intro">Les grands modèles vocaux comprennent mal les langues du Tchad, faute de données. Nous construisons ces données avec les communautés, et seulement avec l'accord explicite de chaque personne.</p>
+      </div>
+      <div class="lt"><table>
+        <thead><tr><th scope="col">Langue</th><th scope="col">Questions écrites</th><th scope="col">Réponses vocales</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Français</th><td><span class="s on">Disponible</span></td><td><span class="s on">Disponible</span></td></tr>
+          <tr><th scope="row">Ngambay</th><td><span class="s test">En test</span><small>Traduites par notre modèle, relues par un locuteur</small></td><td><span class="s">En préparation</span></td></tr>
+          <tr><th scope="row">Arabe tchadien</th><td><span class="s">En préparation</span></td><td><span class="s">En préparation</span><small>Collecte de données vocales à financer</small></td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </section>
+
+  <section id="traduction">
     <div class="wrap">
-      <p class="kicker rv">Traduction en direct</p>
-      <h2 class="rv">Essayez notre modèle français → ngambay.</h2>
-      <p class="intro rv">C'est le modèle issu de nos recherches qui traduit les questionnaires de SahelVoice en ngambay. Il est en test et nous l'améliorons en continu : vos retours nous aident.</p>
-      <div class="trx rv" id="trx" data-l="{&quot;working&quot;: &quot;Traduction en cours…&quot;, &quot;waking&quot;: &quot;Encore quelques secondes : le modèle compare plusieurs traductions…&quot;, &quot;done&quot;: &quot;Traduction automatique, à faire relire.&quot;, &quot;error&quot;: &quot;Le modèle ne répond pas pour l&#x27;instant. Réessayez dans quelques minutes.&quot;, &quot;placeholder&quot;: &quot;La traduction apparaîtra ici.&quot;, &quot;copy&quot;: &quot;Copier&quot;, &quot;copied&quot;: &quot;Copié&quot;}">
+      <h2>Traduisez du français vers le ngambay.</h2>
+      <p class="intro">Ce modèle sort de nos recherches et traduit déjà les questionnaires de SahelVoice. Il est en test : chaque traduction doit être relue par un locuteur, et vos retours nous aident à l'améliorer.</p>
+      <div class="trx" id="trx" data-l="{&quot;working&quot;: &quot;Traduction en cours…&quot;, &quot;waking&quot;: &quot;Encore quelques secondes, le modèle compare plusieurs traductions…&quot;, &quot;done&quot;: &quot;Traduction automatique. Faites-la relire.&quot;, &quot;error&quot;: &quot;Le modèle ne répond pas pour l&#x27;instant. Réessayez dans quelques minutes.&quot;, &quot;placeholder&quot;: &quot;La traduction apparaîtra ici.&quot;, &quot;copy&quot;: &quot;Copier&quot;, &quot;copied&quot;: &quot;Copié&quot;, &quot;pick&quot;: &quot;Choisissez un fichier .docx, .pdf ou .txt.&quot;, &quot;toobig&quot;: &quot;Ce fichier dépasse 3 Mo.&quot;, &quot;sending&quot;: &quot;Envoi du fichier…&quot;, &quot;queued&quot;: &quot;En file d&#x27;attente, position {n}.&quot;, &quot;progress&quot;: &quot;Traduction : {d} phrases sur {t}.&quot;, &quot;ready&quot;: &quot;C&#x27;est prêt. Le fichier ne se télécharge qu&#x27;une fois et disparaît de nos serveurs ensuite.&quot;, &quot;taken&quot;: &quot;Fichier téléchargé et supprimé de nos serveurs.&quot;, &quot;lost&quot;: &quot;La traduction a expiré. Envoyez le fichier à nouveau.&quot;, &quot;docerror&quot;: &quot;&quot;}">
         <div class="trx-top">
-          <div class="trx-dir"><span>Français</span><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span>Ngambay</span></div>
-          <div class="trx-badges"><span class="beta">Version bêta</span><span>Modèle Toadoum/ngambay-fr-v1</span></div>
-        </div>
-        <div class="trx-panes">
-          <div class="trx-pane">
-            <label class="trx-lbl" for="trx-in"><span>Texte en français</span><span class="trx-count"></span></label>
-            <textarea id="trx-in" maxlength="1000" lang="fr" placeholder="Écrivez ou collez un texte en français…"></textarea>
-          </div>
-          <div class="trx-pane">
-            <div class="trx-lbl"><span>Traduction en ngambay</span><button type="button" class="trx-copy" hidden>Copier</button></div>
-            <div class="trx-out empty" lang="sba" aria-live="polite">La traduction apparaîtra ici.</div>
+          <p class="trx-dir">Français vers ngambay <span class="beta">Version de test</span></p>
+          <div class="trx-tabs" role="tablist" aria-label="Que voulez-vous traduire ?">
+            <button type="button" role="tab" id="tab-text" aria-controls="pane-text" aria-selected="true">Un texte</button>
+            <button type="button" role="tab" id="tab-doc" aria-controls="pane-doc" aria-selected="false" tabindex="-1">Un document</button>
           </div>
         </div>
-        <div class="trx-bar">
-          <div class="trx-ex"><button type="button">Bonjour, comment allez-vous aujourd’hui ?</button><button type="button">Avez-vous reçu le kit complet ?</button><button type="button">Merci pour votre participation et votre soutien.</button></div>
-          <div class="trx-go"><span class="trx-status" role="status"></span><button type="button" class="btn trx-run">Traduire</button></div>
+        <div id="pane-text" role="tabpanel" aria-labelledby="tab-text">
+          <div class="trx-panes">
+            <div class="trx-pane">
+              <label class="trx-lbl" for="trx-in"><span>Votre texte en français</span><span class="trx-count"></span></label>
+              <textarea id="trx-in" maxlength="1000" lang="fr" placeholder="Écrivez ou collez un texte en français…"></textarea>
+            </div>
+            <div class="trx-pane">
+              <div class="trx-lbl"><span>Traduction en ngambay</span><button type="button" class="trx-copy" hidden>Copier</button></div>
+              <div class="trx-out empty" lang="sba" aria-live="polite">La traduction apparaîtra ici.</div>
+            </div>
+          </div>
+          <div class="trx-bar">
+            <div class="trx-ex"><span>Exemples :</span><button type="button">Bonjour, comment allez-vous aujourd'hui ?</button><button type="button">Avez-vous reçu le kit complet ?</button><button type="button">Merci pour votre participation et votre soutien.</button></div>
+            <div class="trx-go"><span class="trx-status" role="status"></span><button type="button" class="btn dark trx-run">Traduire</button></div>
+          </div>
         </div>
-        <p class="trx-foot">Le texte est traduit par notre modèle, sur nos propres serveurs, et n'est pas conservé. Évitez d'y mettre des données personnelles. Une traduction automatique se relit toujours par un locuteur. Pour traduire un document (.docx, .pdf), <a href="https://huggingface.co/spaces/Toadoum/ngambay-french-c2translate">ouvrez notre démo sur Hugging Face</a>.</p>
+        <div id="pane-doc" role="tabpanel" aria-labelledby="tab-doc" hidden>
+          <div class="doc">
+            <label class="drop" for="doc-file">
+              <input type="file" id="doc-file" accept=".docx,.pdf,.txt,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/pdf,text/plain">
+              <b class="drop-t">Choisir un fichier</b>
+              <span class="drop-n">Word (.docx), PDF ou texte (.txt), 3 Mo et environ 3 pages au plus.</span>
+            </label>
+            <div class="doc-side">
+              <label class="opt"><input type="checkbox" id="doc-bi"> <span>Version bilingue : chaque paragraphe en français, suivi de sa traduction</span></label>
+              <p class="doc-how">Un fichier Word revient en Word, avec ses titres, ses tableaux et sa mise en forme. Un PDF ou un texte revient en document Word.</p>
+              <div class="doc-go"><button type="button" class="btn dark doc-run">Traduire le document</button><a class="btn doc-dl" hidden download>Télécharger la traduction</a></div>
+              <p class="doc-status" role="status" aria-live="polite"></p>
+              <div class="doc-bar" hidden><i></i></div>
+            </div>
+          </div>
+        </div>
+        <p class="trx-foot">Notre modèle tourne sur nos propres serveurs. Nous ne gardons ni les textes ni les documents : un document traduit est supprimé dès que vous le téléchargez, ou au bout d'une heure. N'y mettez pas de données personnelles.</p>
       </div>
     </div>
   </section>
 
-  <!-- ===== Research ===== -->
-  <section id="recherche">
+  <section id="recherche" class="band">
     <div class="wrap research">
       <div>
-        <p class="kicker rv">Recherche</p>
-        <h2 class="rv">La science derrière SahelVoice.</h2>
-        <p class="intro rv">SahelVoice s'appuie sur des travaux publiés en traitement automatique des langues africaines peu dotées, à commencer par le ngambay, l'une des langues les plus parlées au sud du Tchad.</p>
-        <div class="bridge"><div class="rv"><span class="n">01</span><div><h3>Des données là où il n'y en avait pas</h3><p>Le premier corpus parallèle ngambay–français, rendu public pour la recherche.</p></div></div><div class="rv"><span class="n">02</span><div><h3>Des modèles adaptés au Tchad</h3><p>Des modèles de traduction pré-entraînés, ajustés sur ce corpus pour une langue qu'ils ne connaissaient pas.</p></div></div><div class="rv"><span class="n">03</span><div><h3>Vers la voix</h3><p>Le modèle traduit déjà les questionnaires en ngambay, en test, et nous l'améliorons. La même démarche guide la reconnaissance vocale que nous préparons.</p></div></div></div>
+        <h2>La recherche publiée sur laquelle repose SahelVoice.</h2>
+        <p class="intro">Nous travaillons sur le traitement automatique des langues africaines peu dotées, en commençant par le ngambay, l'une des langues les plus parlées au sud du Tchad.</p>
+        <ul class="facts-list">
+          <li><b>Des données là où il n'y en avait pas.</b> Le premier corpus parallèle ngambay-français, ouvert à la recherche.</li>
+          <li><b>Des modèles ajustés pour le ngambay.</b> Trois modèles de traduction pré-entraînés, affinés sur ce corpus. M2M100 donne les meilleurs résultats.</li>
+          <li><b>La même méthode pour la voix.</b> Elle guide la reconnaissance vocale du ngambay et de l'arabe tchadien que nous préparons.</li>
+        </ul>
       </div>
-      <article class="paper rv">
-        <div class="venue"><span class="hl">NLP4TIA 2023</span><span>Varna, Bulgarie</span><span>ACL Anthology</span></div>
+      <article class="paper">
+        <p class="venue">NLP4TIA 2023, Varna (Bulgarie). Actes publiés dans l'ACL Anthology.</p>
         <h3 lang="en">Ngambay-French Neural Machine Translation (sba-Fr)</h3>
         <p class="authors"><b>Sakayo Toadoum Sari</b>, Angela Fan, Lema Logamou Seknewna</p>
-        <ul><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><span lang="fr">Premier jeu de données de traduction ngambay → français (sba-Fr).</span></span></li><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><span lang="fr">Trois modèles de traduction pré-entraînés ajustés sur ces données ; M2M100 obtient les meilleurs résultats.</span></span></li><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><span lang="fr">Corpus parallèle accessible publiquement pour la recherche.</span></span></li></ul>
-        <div class="links">
-          <a class="main" href="https://aclanthology.org/2023.nlp4tia-1.6/">Lire l'article <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a>
-          <a href="https://aclanthology.org/2023.nlp4tia-1.6.pdf">PDF <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a>
-          <a href="https://arxiv.org/abs/2308.13497">arXiv <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a>
+        <div class="paper-links">
+          <a class="btn dark" href="https://aclanthology.org/2023.nlp4tia-1.6/">Lire l'article</a>
+          <a class="btn alt" href="https://aclanthology.org/2023.nlp4tia-1.6.pdf">PDF</a>
+          <a class="btn alt" href="https://arxiv.org/abs/2308.13497">arXiv</a>
         </div>
       </article>
     </div>
   </section>
 
-  <!-- ===== Trust ===== -->
   <section>
-    <div class="wrap">
-      <p class="kicker rv">Données respectées</p>
-      <h2 class="rv">Les répondants gardent le contrôle.</h2>
-      <div class="trust">
-        <div class="rv"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span><div><h3>Consentement d'abord</h3><p>Demandé avant la première question. Sans accord, rien n'est enregistré et la personne n'apparaît nulle part.</p></div></div>
-        <div class="rv"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/></svg></span><div><h3>STOP arrête tout</h3><p>Écrire STOP met fin aux messages, pour toutes les organisations, pour toujours.</p></div></div>
-        <div class="rv"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span><div><h3>Numéros masqués</h3><p>Les numéros de téléphone sont remplacés par un code dans les exports et cachés dans le tableau de bord.</p></div></div>
-        <div class="rv"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div><h3>Audios supprimés à temps</h3><p>Les vocaux sont effacés après la durée choisie par l'organisation. Leur réutilisation pour la recherche demande un second accord, séparé.</p></div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== Support ===== -->
-  <section class="dark support" id="soutenir">
-    <div class="grid-bg"></div>
-    <div class="glow" style="width:460px;height:460px;right:-140px;top:10%;background:#145e48;opacity:.35"></div>
-    <div class="wrap">
-      <p class="kicker rv">Soutenir la collecte de données</p>
-      <h2 class="rv" style="max-width:22ch">Aidez-nous à donner une voix numérique aux langues du Tchad.</h2>
-      <p class="intro rv">Les assistants vocaux ne comprennent ni l'arabe tchadien ni le ngambay, parce que les données vocales n'existent pas. Nous voulons les créer avec les communautés, avec l'accord de chaque personne. Pour cela, nous cherchons des entreprises, des organisations et des fondations partenaires.</p>
-      <div class="why"><div class="rv"><span class="n">01</span><h3>Rémunérer les locuteurs</h3><p>Chaque personne qui enregistre sa voix donne son accord et reçoit une rémunération juste.</p></div><div class="rv"><span class="n">02</span><h3>Transcrire et vérifier</h3><p>Des locuteurs natifs transcrivent et contrôlent chaque enregistrement.</p></div><div class="rv"><span class="n">03</span><h3>Entraîner les modèles</h3><p>Reconnaissance vocale, synthèse vocale et traduction pour l'arabe tchadien et le ngambay.</p></div><div class="rv"><span class="n">04</span><h3>Partager le savoir</h3><p>Publier les résultats et, quand l'accord le permet, des jeux de données pour la recherche.</p></div></div>
-      <p class="kicker rv" style="margin-top:64px">Trois façons de devenir partenaire</p>
-      <div class="tiers two"><article class="tier rv"><span class="who">Fondations · agences · entreprises</span><h3>Parrainer une langue</h3><p>Financez une campagne de collecte en arabe tchadien ou en ngambay.</p><ul><li>Rapports d'avancement réguliers</li><li>Mention comme partenaire fondateur</li><li>Accès anticipé aux modèles</li></ul><a class="btn ghost" href="mailto:contact@sahelvoice.app?subject=Parrainer%20une%20langue%20-%20SahelVoice">Parrainer une langue</a></article><article class="tier rv"><span class="who">Universités · laboratoires</span><h3>Partenaire de recherche</h3><p>Construisons ensemble les données et les évaluations pour les langues du Tchad.</p><ul><li>Corpus et benchmarks co-construits</li><li>Publications communes</li><li>Projets étudiants encadrés</li></ul><a class="btn ghost" href="mailto:contact@sahelvoice.app?subject=Collaboration%20de%20recherche%20-%20SahelVoice">Proposer une collaboration</a></article></div>
-      <div class="support-cta rv">
-        <div><b>Parlons de votre projet.</b><span>Dites-nous ce que vous voulez soutenir : nous revenons vers vous avec une proposition.</span></div>
-        <div class="row"><a class="btn" href="mailto:contact@sahelvoice.app?subject=Partenariat%20-%20collecte%20de%20donn%C3%A9es%20SahelVoice">contact@sahelvoice.app</a><a class="btn ghost" href="https://wa.me/23566049094?text=Bonjour%2C%20je%20souhaite%20soutenir%20la%20collecte%20de%20donn%C3%A9es%20de%20SahelVoice.">WhatsApp</a></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== About ===== -->
-  <section id="apropos" style="padding-top:0">
-    <div class="wrap about2">
+    <div class="wrap split">
       <div>
-        <p class="kicker rv">À propos</p>
-        <h2 class="rv">Une entreprise tchadienne de l'IA vocale.</h2>
-        <p class="intro rv">SahelVoice est développé par Quantum Qube Technologies, entreprise enregistrée à N'Djaména. Nous réunissons la recherche en intelligence artificielle sur les langues africaines et la connaissance du terrain tchadien, pour que chaque personne puisse être entendue, dans sa langue.</p>
-        <div class="facts2 rv"><div><b>Enregistrée au Tchad</b><span>RCCM N'Djaména, 2024</span></div><div><b>Recherche publiée</b><span>Traduction ngambay–français, RANLP 2023</span></div><div><b>Données protégées</b><span>Consentement, STOP, numéros masqués</span></div><div><b>Pensée pour WhatsApp</b><span>Aucune application à installer</span></div></div>
+        <h2>Les répondants gardent le contrôle.</h2>
+        <p class="intro">Ces règles sont dans le code de la plateforme. Aucune organisation ne peut les désactiver.</p>
       </div>
-      <div class="fnote rv"><img src="fondateur-640.jpg" alt="Sakayo Toadoum Sari" width="64" height="64" loading="lazy"><div><b>Fondé par Sakayo Toadoum Sari</b><span>Chercheur en IA, spécialiste des langues africaines</span><a href="https://www.linkedin.com/in/toadoum" rel="noopener">LinkedIn →</a></div></div>
+      <dl class="rules">
+        <div><dt>Consentement d'abord</dt><dd>SahelVoice demande l'accord avant la première question. Sans accord, nous n'enregistrons rien et la personne n'apparaît nulle part.</dd></div>
+        <div><dt>STOP arrête tout</dt><dd>La personne écrit STOP et ne reçoit plus aucun message, de toutes les organisations, pour toujours.</dd></div>
+        <div><dt>Numéros masqués</dt><dd>Un code remplace le numéro de téléphone dans les exports. Le tableau de bord le cache aussi.</dd></div>
+        <div><dt>Audios supprimés à temps</dt><dd>Nous effaçons les vocaux après la durée choisie par l'organisation. Les réutiliser pour la recherche demande un second accord, séparé.</dd></div>
+      </dl>
     </div>
   </section>
 
-  <!-- ===== FAQ ===== -->
-  <section id="faq">
-    <div class="wrap faq-wrap">
-      <div>
-        <p class="kicker rv">Questions fréquentes</p>
-        <h2 class="rv">Ce qu'on nous demande souvent.</h2>
+  <section class="dark" id="soutenir">
+    <div class="wrap">
+      <h2>Financez la collecte de voix en ngambay et en arabe tchadien.</h2>
+      <p class="intro">Les assistants vocaux ne comprennent ni l'arabe tchadien ni le ngambay, parce que les enregistrements n'existent pas. Nous voulons les créer avec les communautés et l'accord de chaque personne. Nous cherchons des entreprises, des organisations et des fondations pour les financer.</p>
+      <div class="pays">
+        <p class="pays-t">Votre financement paie</p>
+        <ul>
+          <li><b>Les locuteurs.</b> Chaque personne qui enregistre sa voix donne son accord et reçoit une rémunération juste.</li>
+          <li><b>La transcription.</b> Des locuteurs natifs transcrivent et contrôlent chaque enregistrement.</li>
+          <li><b>Les modèles.</b> Reconnaissance vocale, synthèse vocale et traduction pour les deux langues.</li>
+          <li><b>Le partage.</b> Des publications et, quand l'accord le permet, des jeux de données ouverts à la recherche.</li>
+        </ul>
       </div>
-      <div class="faq rv">
+      <div class="partners">
+        <article><h3>Parrainer une langue</h3><p class="who">Pour les fondations, les agences et les entreprises.</p><p>Vous financez une campagne de collecte en arabe tchadien ou en ngambay. Vous recevez des rapports d'avancement, une mention comme partenaire fondateur et un accès anticipé aux modèles.</p><a class="btn ghost" href="mailto:contact@sahelvoice.app?subject=Parrainer%20une%20langue%20-%20SahelVoice">Parrainer une langue</a></article>
+        <article><h3>Partenaire de recherche</h3><p class="who">Pour les universités et les laboratoires.</p><p>Nous construisons ensemble les corpus et les évaluations pour les langues du Tchad, avec des publications communes et des projets étudiants encadrés.</p><a class="btn ghost" href="mailto:contact@sahelvoice.app?subject=Collaboration%20de%20recherche%20-%20SahelVoice">Proposer une collaboration</a></article>
+      </div>
+      <p class="support-cta">Dites-nous ce que vous voulez soutenir, nous revenons avec une proposition. <a href="mailto:contact@sahelvoice.app?subject=Partenariat%20-%20collecte%20de%20donn%C3%A9es%20SahelVoice">contact@sahelvoice.app</a> ou <a href="https://wa.me/23566049094?text=Bonjour%2C%20je%20souhaite%20soutenir%20la%20collecte%20de%20donn%C3%A9es%20de%20SahelVoice.">WhatsApp</a></p>
+    </div>
+  </section>
+
+  <section id="apropos">
+    <div class="wrap about">
+      <div class="about-text">
+        <h2>Qui construit SahelVoice.</h2>
+        <p class="intro">SahelVoice est un produit de Quantum Qube Technologies, une entreprise enregistrée à N'Djaména en 2024.</p>
+        <p>Sakayo Toadoum Sari a fondé l'entreprise. Il est né au Tchad, parle le mbay, sa langue maternelle, et le ngambay, la langue sur laquelle il fait de la recherche depuis 2021.</p>
+        <p>Il a fait un master en mathématiques industrielles à AIMS Cameroun, avec une bourse de la Fondation Mastercard, puis l'African Master's in Machine Intelligence (AMMI) à AIMS Sénégal, financé par Google et Meta. Il a aussi fait un stage à l'EPFL, en Suisse. Il prépare aujourd'hui un doctorat en intelligence artificielle, sur le traitement automatique des langues.</p>
+        <p>Son projet de fin de master à l'AMMI a donné le premier corpus de traduction ngambay-français et des modèles entraînés dessus, publiés en 2023 avec Angela Fan et Lema Logamou Seknewna. Ce travail traduit aujourd'hui les questionnaires de SahelVoice.</p>
+        <p>Il a créé SahelVoice pour que les organisations au Tchad entendent aussi les personnes qui ne remplissent pas de formulaire en français.</p>
+      </div>
+      <figure class="founder">
+        <img src="/fondateur-640.jpg" alt="Sakayo Toadoum Sari" width="320" height="320" loading="lazy">
+        <figcaption><b>Sakayo Toadoum Sari</b><span>Fondateur de SahelVoice</span></figcaption>
+        <ul class="profiles">
+          <li><a href="https://www.linkedin.com/in/toadoum" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://scholar.google.com/citations?user=uKClSfsAAAAJ" rel="noopener">Google Scholar</a></li>
+          <li><a href="https://github.com/Toadoum" rel="noopener">GitHub</a></li>
+          <li><a href="https://huggingface.co/Toadoum" rel="noopener">Hugging Face</a></li>
+        </ul>
+      </figure>
+    </div>
+  </section>
+
+  <section id="faq" class="band">
+    <div class="wrap split">
+      <h2>Questions fréquentes.</h2>
+      <div class="faq">
         <details><summary>Les répondants doivent-ils installer une application ?</summary><p>Non. Tout se passe dans WhatsApp, que la personne utilise déjà. Elle écrit un mot-clé, scanne un QR code ou répond à une invitation, et l'enquête commence.</p></details>
-        <details><summary>Faut-il savoir écrire pour répondre ?</summary><p>Non. Les questions arrivent par écrit, mais la personne peut répondre en touchant un bouton ou en envoyant un message vocal. L'IA transcrit la voix et vos enquêteurs vérifient.</p></details>
-        <details><summary>Pouvons-nous utiliser notre questionnaire KoBo ou ODK ?</summary><p>Oui. Importez votre fichier XLSForm tel quel. Les questions, les choix et les conditions simples sont repris. Ce que WhatsApp ne peut pas faire, comme une photo ou un point GPS, est signalé avant l'envoi.</p></details>
-        <details><summary>Quelles langues sont prises en charge ?</summary><p>Le français aujourd'hui, à l'écrit et à l'oral. Pour le ngambay, la traduction écrite des questionnaires est en test avec notre propre modèle ngambay–français, que nous continuons d'améliorer ; chaque traduction est relue par un locuteur. La reconnaissance vocale du ngambay et de l'arabe tchadien est en préparation, avec des données recueillies uniquement avec l'accord des personnes.</p></details>
-        <details><summary>Que deviennent les données ?</summary><p>Chaque organisation ne voit que ses propres enquêtes. Les numéros sont masqués dans les exports, les vocaux sont supprimés après la durée que vous choisissez, et leur réutilisation pour la recherche demande un second accord, séparé.</p></details>
-        <details><summary>Comment soutenir SahelVoice ?</summary><p>En parrainant la collecte de données vocales en arabe tchadien ou en ngambay, en lançant une enquête avec nous, ou en devenant partenaire de recherche. Écrivez à contact@sahelvoice.app : nous vous proposons la formule qui vous convient.</p></details>
-        <details><summary>Combien ça coûte ?</summary><p>Les premiers tests pilotes au Tchad sont gratuits. Nous préparons l'enquête avec vous. Écrivez-nous pour en parler.</p></details>
+        <details><summary>Faut-il savoir écrire pour répondre ?</summary><p>Non. Les questions arrivent par écrit, mais la personne peut répondre en touchant un bouton ou en envoyant un message vocal. Nous transcrivons la voix et vos enquêteurs vérifient.</p></details>
+        <details><summary>Pouvons-nous utiliser notre questionnaire KoBo ou ODK ?</summary><p>Oui. Importez votre fichier XLSForm tel quel. SahelVoice reprend les questions, les choix et les conditions simples. Il vous signale avant l'envoi ce que WhatsApp ne sait pas faire, comme une photo ou un point GPS.</p></details>
+        <details><summary>Quelles langues sont prises en charge ?</summary><p>Le français aujourd'hui, à l'écrit et à l'oral. Pour le ngambay, notre propre modèle traduit les questionnaires, en test, et un locuteur relit chaque traduction. La reconnaissance vocale du ngambay et de l'arabe tchadien est en préparation, avec des données recueillies uniquement avec l'accord des personnes.</p></details>
+        <details><summary>Que deviennent les données ?</summary><p>Chaque organisation ne voit que ses propres enquêtes. Un code remplace les numéros dans les exports, nous supprimons les vocaux après la durée que vous choisissez, et les réutiliser pour la recherche demande un second accord, séparé.</p></details>
+        <details><summary>Comment soutenir SahelVoice ?</summary><p>Parrainez la collecte de données vocales en arabe tchadien ou en ngambay, lancez une enquête avec nous, ou devenez partenaire de recherche. Écrivez à contact@sahelvoice.app.</p></details>
+        <details><summary>Combien ça coûte ?</summary><p>Les premiers tests pilotes au Tchad sont gratuits, et nous préparons l'enquête avec vous. Ensuite, le prix dépend du volume. Écrivez-nous pour en parler.</p></details>
       </div>
     </div>
   </section>
 
-  <!-- ===== Contact ===== -->
   <section class="dark" id="contact">
-    <canvas class="wavefield" data-y=".88" aria-hidden="true"></canvas>
-    <div class="grid-bg"></div>
-    <div class="glow" style="width:420px;height:420px;left:-120px;bottom:-160px;background:#2e3c8c;opacity:.5"></div>
     <div class="wrap cta">
       <div>
-        <p class="kicker">Tests pilotes</p>
         <h2>Lancez votre première enquête vocale.</h2>
-        <p class="intro">Vous êtes une ONG, une entreprise ou une association au Tchad ? Les premiers tests sont gratuits. Nous préparons l'enquête avec vous.</p>
-        <div class="ctas" style="display:flex;gap:12px;flex-wrap:wrap;margin-top:30px">
-          <a class="btn" href="pilote/">Demander un test pilote</a><a class="btn ghost" href="https://wa.me/23566049094?text=Bonjour%2C%20je%20souhaite%20tester%20SahelVoice">WhatsApp</a>
-          <a class="btn ghost" href="#soutenir">Soutenir la collecte</a>
+        <p class="intro">Vous êtes une ONG, une entreprise ou une association au Tchad ? Les premiers tests sont gratuits et nous préparons l'enquête avec vous.</p>
+        <div class="ctas">
+          <a class="btn" href="/pilote/">Demander un test pilote</a><a class="btn ghost" href="https://wa.me/23566049094?text=Bonjour%2C%20je%20souhaite%20tester%20SahelVoice">Écrire sur WhatsApp</a>
         </div>
       </div>
-      <div class="cbox">
-        <dl>
-          <div><dt>WhatsApp</dt><dd><a href="https://wa.me/23566049094">+235 66 04 90 94</a></dd></div>
-          <div><dt>Email</dt><dd><a href="mailto:contact@sahelvoice.app">contact@sahelvoice.app</a></dd></div>
-          <div><dt>Siège</dt><dd style="font-weight:500;font-size:18px">N'Djaména, Tchad</dd></div>
-        </dl>
-      </div>
+      <dl class="cbox">
+        <div><dt>WhatsApp</dt><dd><a href="https://wa.me/23566049094">+235 66 04 90 94</a></dd></div>
+        <div><dt>Email</dt><dd><a href="mailto:contact@sahelvoice.app">contact@sahelvoice.app</a></dd></div>
+        <div><dt>Siège</dt><dd>N'Djaména, Tchad</dd></div>
+      </dl>
     </div>
   </section>
 </main>
@@ -497,44 +364,22 @@
   <div class="wrap">
     <div class="cols">
       <div>
-        <a class="brand" href="#"><svg width="32" height="32" viewBox="0 0 42 42" aria-hidden="true"><rect width="42" height="42" rx="11" fill="#2e3c8c"/><g class="eq" stroke="#fff" stroke-width="3" stroke-linecap="round"><path d="M11 25v-8"/><path d="M16 29V13"/><path d="M21 26V16"/><path d="M26 22v-4"/><path d="M31 24v-6"/></g></svg>SahelVoice</a>
-        <p class="tag">L'IA vocale pour les enquêtes WhatsApp. Conçu au Tchad.</p>
+        <a class="brand" href="#"><svg width="30" height="30" viewBox="0 0 42 42" aria-hidden="true"><rect width="42" height="42" rx="11" fill="#2e3c8c"/><g stroke="#fff" stroke-width="3" stroke-linecap="round"><path d="M11 25v-8"/><path d="M16 29V13"/><path d="M21 26V16"/><path d="M26 22v-4"/><path d="M31 24v-6"/></g></svg>SahelVoice</a>
+        <p class="tag">Enquêtes WhatsApp, par écrit ou à voix haute. Conçu au Tchad.</p>
       </div>
-      <div><h4>Produit</h4><ul><li><a href="#fonctionnement">Fonctionnement</a></li><li><a href="demo/">Démo</a></li><li><a href="#offres">Offres</a></li><li><a href="pilote/">Test pilote</a></li><li><a href="https://app.sahelvoice.app/rejoindre">Créer un espace</a></li><li><a href="https://app.sahelvoice.app/login">Se connecter</a></li><li><a href="#traduction">Traduction ngambay</a></li></ul></div>
-      <div><h4>Entreprise</h4><ul><li><a href="#apropos">À propos</a></li><li><a href="#recherche">Recherche</a></li><li><a href="#soutenir">Soutenir la collecte</a></li><li><a href="#faq">Questions fréquentes</a></li><li><a href="en/" hreflang="en" lang="en">English</a></li></ul></div>
+      <div><h4>Produit</h4><ul><li><a href="#fonctionnement">Fonctionnement</a></li><li><a href="/demo/">Démo</a></li><li><a href="#offres">Offres</a></li><li><a href="/pilote/">Test pilote</a></li><li><a href="https://app.sahelvoice.app/rejoindre">Créer un espace</a></li><li><a href="https://app.sahelvoice.app/login">Se connecter</a></li><li><a href="#traduction">Traduction ngambay</a></li></ul></div>
+      <div><h4>Entreprise</h4><ul><li><a href="#apropos">À propos</a></li><li><a href="#recherche">Recherche</a></li><li><a href="#soutenir">Soutenir la collecte</a></li><li><a href="#faq">Questions fréquentes</a></li><li><a href="/en/" hreflang="en" lang="en">English</a></li></ul></div>
       <div><h4>Contact</h4><ul><li><a href="mailto:contact@sahelvoice.app">contact@sahelvoice.app</a></li><li><a href="https://wa.me/23566049094">+235 66 04 90 94</a></li><li>N'Djaména, Tchad</li></ul></div>
     </div>
     <div class="legal">
-      <span>© 2026 SahelVoice, un service de Quantum Qube Technologies, N'Djaména, Tchad.</span>
-      <span>RCCM TD-NDJ-01-2024-A10-01446 · <a href="confidentialite/">Confidentialité</a> · <a href="conditions/">Conditions partenaires</a></span>
+      <span>© 2026 SahelVoice, un service de Quantum Qube Technologies, N'Djaména, Tchad. RCCM TD-NDJ-01-2024-A10-01446.</span>
+      <span><a href="/confidentialite/">Confidentialité</a> <a href="/conditions/">Conditions partenaires</a></span>
     </div>
   </div>
 </footer>
 
-<script>
-window.SV = {
-  waiting: 'en attente',
-  examples: [
-    {n:'2/7', q:'Combien de personnes vivent dans votre ménage, vous compris ?', dur:'0:04',
-     before:'nous sommes ', key:'sept', after:' à la maison',
-     field:'taille_menage', type:'nombre entier', val:'7',
-     chk:'<span>« Vous avez dit : <b>7</b>. C\'est bien ça ? »</span><span class="ok">✓ confirmé par la personne</span>',
-     row:['taille_menage','7','vocal','confirmé']},
-    {n:'4/7', q:'Avez-vous reçu le kit complet ?', dur:'0:03',
-     before:'', key:'oui', after:' on a tout reçu merci',
-     field:'kit_complet', type:'oui / non', val:'oui',
-     chk:'<span>Réponse claire, gardée avec l\'audio.</span><span class="ok">✓ prête à vérifier</span>',
-     row:['kit_complet','oui','vocal','à vérifier']},
-    {n:'6/7', q:'Quelle note donnez-vous à la distribution, de 1 à 5 ?', dur:'0:02',
-     before:'je donne ', key:'quatre', after:'',
-     field:'note_distribution', type:'note 1 à 5', val:'4',
-     chk:'<span>« Vous avez dit : <b>4</b>. C\'est bien ça ? »</span><span class="ok">✓ confirmé par la personne</span>',
-     row:['note_distribution','4','vocal','confirmé']}
-  ]
-};
-</script>
-<script src="assets/site.js?v=202611111054"></script>
-<script src="assets/translate.js?v=202611111054"></script>
-<script src="assets/menu.js?v=202611122000"></script>
+<script src="/assets/site.js?v=202611131300"></script>
+<script src="/assets/translate.js?v=202611131300"></script>
+<script src="/assets/menu.js?v=202611131300"></script>
 </body>
 </html>
