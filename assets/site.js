@@ -152,6 +152,83 @@
     })(performance.now());
   });
 
+
+  // demo phone: a WhatsApp conversation that plays by itself, the dashboard fills in beside it
+  (function(){
+    var mini = document.getElementById('mini'); if (!mini) return;
+    var msgs = document.getElementById('mini-msgs'), sub = document.getElementById('mh-sub'), field = document.getElementById('mp-field');
+    var mic = document.getElementById('mp-mic'), recT = document.getElementById('mp-rec'), rw = document.getElementById('mp-rw');
+    var rowsEl = document.getElementById('md-rows'), live = document.getElementById('md-live'), phone = mini.querySelector('.mini-phone'), dash = document.getElementById('mini-dash');
+    var D = mini.dataset, clock = 2, on = false;
+    var TICK = '<svg width="15" height="9" viewBox="0 0 18 11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6l3.5 3.5L11 2M7 9.5l1 1L16 2"/></svg>';
+    var PLAY = '<svg width="10" height="12" viewBox="0 0 16 18"><path d="M2 1.5v15l13-7.5z" fill="currentColor"/></svg>';
+    function sleep(ms){ return new Promise(function(r){ setTimeout(r, ms); }); }
+    async function awake(){ while (!on || document.hidden) await sleep(300); }
+    function time(){ clock++; return '10:' + (clock < 10 ? '0' : '') + clock; }
+    function add(html, cls){ var d = document.createElement('div'); d.className = cls; d.innerHTML = html; msgs.appendChild(d);
+      while (msgs.children.length > 9) msgs.removeChild(msgs.firstChild); return d; }
+    function bars(n){ var o = ''; for (var i = 0; i < n; i++) o += '<b style="height:' + (25 + Math.round(70 * Math.abs(Math.sin(i * 1.7) * Math.cos(i * .6)))) + '%"></b>'; return o; }
+    async function typing(ms){ sub.textContent = 'écrit…'; sub.classList.add('typing'); var t = add('<i></i><i></i><i></i>', 'wtyping');
+      await sleep(ms); t.remove(); sub.textContent = 'en ligne'; sub.classList.remove('typing'); }
+    async function playVoice(el, ms){ var bs = el.querySelectorAll('.bars b');
+      for (var k = 0; k <= bs.length; k++){ for (var j = 0; j < bs.length; j++) bs[j].classList.toggle('lit', j < k); await sleep(ms / bs.length); } }
+    function orgText(t){ return add(t + '<span class="meta">' + time() + '</span>', 'wm o'); }
+    function orgVoice(d){ return add('<span class="tts">🔊 voix de synthèse</span><div class="wv"><span class="pl">' + PLAY + '</span><span class="bars">' + bars(26) + '</span><small>' + d + '</small></div><span class="meta">' + time() + '</span>', 'wm o'); }
+    function meText(t){ var m = add(t + '<span class="meta">' + time() + ' ' + TICK + '</span>', 'wm i'); setTimeout(function(){ var x = m.querySelector('.meta'); if (x) x.classList.add('read'); }, 700); return m; }
+    function meVoice(d){ var m = add('<div class="wv"><span class="pl">' + PLAY + '</span><span class="bars">' + bars(26) + '</span><small>' + d + '</small></div><span class="meta">' + time() + ' ' + TICK + '</span>', 'wm i');
+      setTimeout(function(){ var x = m.querySelector('.meta'); if (x) x.classList.add('read'); }, 900); return m; }
+    async function record(sec){ field.classList.add('recording'); mic.classList.add('hold'); rw.innerHTML = '';
+      var steps = Math.round(sec * 1000 / 90);
+      for (var i = 0; i < steps; i++){ var b = document.createElement('b'); b.style.height = (20 + Math.round(75 * Math.abs(Math.sin(i * .9) * Math.sin(i * .37)))) + '%'; rw.appendChild(b);
+        while (rw.children.length > 40) rw.removeChild(rw.firstChild);
+        recT.textContent = '0:0' + Math.floor(i * 90 / 1000); await sleep(90); }
+      field.classList.remove('recording'); mic.classList.remove('hold'); }
+    async function buttons(q, pick){ orgText(q); var b = add('<span>Oui</span><span>Non</span>', 'wbtns'); await sleep(1100);
+      b.children[pick].classList.add('tap'); await sleep(320); return b.children[pick].textContent; }
+    function row(fieldName, val, how){
+      var e = rowsEl.querySelector('.md-empty'); if (e) e.remove();
+      var r = document.createElement('div'); r.className = 'md-row';
+      r.innerHTML = '<code>' + fieldName + '</code><b>' + val + '</b><span>✓ ' + D.ok + ' · ' + how + '</span>';
+      rowsEl.insertBefore(r, rowsEl.firstChild); while (rowsEl.children.length > 3) rowsEl.removeChild(rowsEl.lastChild);
+      live.textContent = D.live; live.classList.add('on'); setTimeout(function(){ live.classList.remove('on'); }, 2200);
+    }
+    async function run(){
+      while (true){
+        await awake();
+        msgs.classList.remove('fade'); msgs.innerHTML = ''; clock = 2;
+        rowsEl.innerHTML = '<div class="md-empty">' + (rowsEl.dataset.empty || '') + '</div>';
+        await sleep(500);
+        await typing(800);
+        var v = orgVoice('0:05'); await sleep(350); await playVoice(v, 1700);
+        orgText('(2/7) Combien de personnes vivent dans votre ménage, vous compris ?'); await sleep(900);
+        await awake(); await record(2.2); meVoice('0:02'); await sleep(900);
+        await typing(900);
+        await buttons('Vous avez dit : <b>7</b>. C\'est bien ça ?', 0); meText('Oui'); await sleep(500);
+        row('taille_menage', '7', D.voice); await sleep(1300);
+        await awake(); await typing(800);
+        await buttons('(3/7) Avez-vous reçu le kit complet ?', 0); meText('Oui'); await sleep(500);
+        row('kit_complet', 'oui', D.button); await sleep(3200);
+        msgs.classList.add('fade'); await sleep(600);
+      }
+    }
+    // tilt with the pointer
+    if (!reduce && window.matchMedia('(pointer:fine)').matches) {
+      mini.addEventListener('pointermove', function(e){
+        var r = mini.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+        phone.style.setProperty('--ry', (x * 14 - 4).toFixed(2) + 'deg'); phone.style.setProperty('--rx', (-y * 10 + 2).toFixed(2) + 'deg');
+        dash.style.setProperty('--dx', (x * 18).toFixed(1) + 'px'); dash.style.setProperty('--dy', (y * 14).toFixed(1) + 'px');
+      });
+      mini.addEventListener('pointerleave', function(){ ['--ry','--rx'].forEach(function(k){ phone.style.removeProperty(k); }); dash.style.removeProperty('--dx'); dash.style.removeProperty('--dy'); });
+    }
+    var empty = rowsEl.querySelector('.md-empty'); rowsEl.dataset.empty = empty ? empty.textContent : '';
+    if (reduce) {                        // a still picture of the end of the conversation
+      msgs.innerHTML = ''; orgText('(2/7) Combien de personnes vivent dans votre ménage, vous compris ?'); meVoice('0:02');
+      orgText('Vous avez dit : <b>7</b>. C\'est bien ça ?'); meText('Oui'); row('taille_menage', '7', D.voice); return;
+    }
+    if ('IntersectionObserver' in window) new IntersectionObserver(function(es){ on = es[0].isIntersecting; }).observe(mini); else on = true;
+    run();
+  })();
+
   // animated voice-wave background
   document.querySelectorAll('canvas.wavefield').forEach(function(cv){
     var ctx = cv.getContext('2d'); if (!ctx) return;
