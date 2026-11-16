@@ -18,7 +18,7 @@
 <link rel="alternate" hreflang="en" href="https://sahelvoice.app/en/">
 <link rel="alternate" hreflang="x-default" href="https://sahelvoice.app/">
 <link rel="stylesheet" href="/assets/fonts.css?v=202611161200">
-<link rel="stylesheet" href="../assets/site.css?v=202611161300">
+<link rel="stylesheet" href="../assets/site.css?v=202611161400">
 <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
@@ -64,30 +64,37 @@
         </div>
       </div>
 
-      <div class="console" id="console" aria-label="Example: how SahelVoice processes a voice answer">
+      <div class="console-wrap" id="console-wrap">
+      <div class="phone-card" id="phone-card" aria-hidden="true">
+        <div class="pc-head"><span class="pc-av"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></span><div><b>Participant · 4f2a</b><span>on WhatsApp</span></div></div>
+        <div class="pc-q" id="pc-q">How many people live in your household, including you?</div>
+        <div class="pc-voice"><span class="pc-play"><svg width="9" height="11" viewBox="0 0 16 18" aria-hidden="true"><path d="M2 1.5v15l13-7.5z" fill="#fff"/></svg></span><span class="pc-wave" id="pc-wave"></span><span class="pc-t" id="pc-dur">0:04</span></div>
+        <div class="pc-tick" id="pc-tick"><svg width="16" height="10" viewBox="0 0 18 11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 6l3.5 3.5L11 2M7 9.5l1 1L16 2"/></svg><span>received by SahelVoice</span></div>
+      </div>
+      <div class="console" id="console" data-dec="." aria-label="Example: how SahelVoice processes a voice answer">
+        <div class="c-scan" aria-hidden="true"></div>
         <div class="c-head">
           <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
           <span>sahelvoice · processing an answer</span>
-          <span class="tag">example · in French</span>
         </div>
         <div class="c-body">
           <p class="q">Question <span class="mono" id="c-n">2/7</span> · <b id="c-q">How many people live in your household, including you?</b></p>
+          <div class="stages">
+          <span class="rail" aria-hidden="true"><b id="c-rail"></b></span>
 
           <div class="stage" data-s="0">
             <div class="st-label"><i></i>Listen</div>
-            <div><span class="vbubble">
+            <div class="listen"><span class="vbubble">
               <span class="play"><svg width="11" height="13" viewBox="0 0 16 18" aria-hidden="true"><path d="M2 1.5v15l13-7.5z" fill="#fff"/></svg></span>
               <span class="wave" id="wave" aria-hidden="true"></span>
-              <span class="t" id="c-dur">0:04</span>
-            </span></div>
+              <span class="t"><span id="c-pos">0:00</span> / <span id="c-dur">0:04</span></span>
+            </span><span class="model">whisper · French</span></div>
           </div>
 
           <div class="stage" data-s="1">
             <div class="st-label"><i></i>Transcribe</div>
-            <div>
-              <p class="transcript" id="c-tr" lang="fr">« nous sommes <mark>sept</mark> à la maison »</p>
-              <p class="gloss" id="c-gl">“there are seven of us at home”</p>
-            </div>
+            <div><p class="transcript" id="c-tr">« nous sommes <mark>sept</mark> à la maison »</p>
+              <div class="conf" aria-hidden="true"><span>confidence</span><i><b id="c-conf-bar"></b></i><em id="c-conf">0.94</em></div></div>
           </div>
 
           <div class="stage" data-s="2">
@@ -95,7 +102,7 @@
             <div class="parse">
               <span class="chip" id="c-field">household_size</span>
               <span class="chip" id="c-type">integer</span>
-              <span class="arrow" aria-hidden="true">→</span>
+              <span class="beam" aria-hidden="true"><i></i></span>
               <span class="chip val" id="c-val">7</span>
             </div>
           </div>
@@ -112,11 +119,13 @@
               <tbody id="c-rows"><tr><td>household_size</td><td>7</td><td>voice</td><td>confirmed</td></tr></tbody>
             </table></div>
           </div>
+          </div>
         </div>
         <div class="c-foot">
-          <span>text, buttons or voice</span>
+          <span><span class="tag">example · in French</span>text, buttons or voice</span>
           <span class="prog" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span>
         </div>
+      </div>
       </div>
     </div>
 
@@ -583,21 +592,21 @@ window.SV = {
      before:'nous sommes ', key:'sept', after:' à la maison', gloss:'“there are seven of us at home”',
      field:'household_size', type:'integer', val:'7',
      chk:'<span>“You said: <b>7</b>. Is that right?”</span><span class="ok">✓ confirmed by the person</span>',
-     row:['household_size','7','voice','confirmed']},
+     row:['household_size','7','voice','confirmed'], conf:.94},
     {n:'4/7', q:'Did you receive the full kit?', dur:'0:03',
      before:'', key:'oui', after:' on a tout reçu merci', gloss:'“yes, we got everything, thanks”',
      field:'full_kit', type:'yes / no', val:'yes',
      chk:'<span>Clear answer, kept with the audio.</span><span class="ok">✓ ready to check</span>',
-     row:['full_kit','yes','voice','to check']},
+     row:['full_kit','yes','voice','to check'], conf:.97},
     {n:'6/7', q:'How would you rate the distribution, from 1 to 5?', dur:'0:02',
      before:'je donne ', key:'quatre', after:'', gloss:'“I give it four”',
      field:'distribution_rating', type:'rating 1 to 5', val:'4',
      chk:'<span>“You said: <b>4</b>. Is that right?”</span><span class="ok">✓ confirmed by the person</span>',
-     row:['distribution_rating','4','voice','confirmed']}
+     row:['distribution_rating','4','voice','confirmed'], conf:.91}
   ]
 };
 </script>
-<script src="../assets/site.js?v=202611161300"></script>
+<script src="../assets/site.js?v=202611161400"></script>
 <script src="../assets/translate.js?v=202611131330"></script>
 <script src="../assets/menu.js?v=202611122000"></script>
 </body>

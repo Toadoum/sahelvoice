@@ -210,31 +210,81 @@
 
   var stages = document.querySelectorAll('.stage');
   var prog = document.querySelectorAll('.prog i');
-  if (reduce || !cfg.examples.length) { stages.forEach(function(s){ s.classList.add('done'); }); return; }
+  var $ = function(id){ return document.getElementById(id); };
+  var con = $('console'), wrapEl = $('console-wrap'), card = $('phone-card'), rail = $('c-rail');
+  var DEC = (con && con.getAttribute('data-dec')) || '.';
+
+  // small waveform inside the phone card
+  var pcw = $('pc-wave');
+  if (pcw) [40,70,100,55,85,35,65,90,50,75,30,60,80,45,70,35].forEach(function(h){
+    var b = document.createElement('b'); b.style.height = h + '%'; pcw.appendChild(b);
+  });
+
+  // tilt the console towards the pointer, the phone card drifts the other way
+  if (wrapEl && con && !reduce && window.matchMedia('(pointer:fine)').matches) {
+    wrapEl.addEventListener('pointermove', function(e){
+      var r = wrapEl.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+      con.style.transform = 'rotateY(' + (x * 7).toFixed(2) + 'deg) rotateX(' + (-y * 6).toFixed(2) + 'deg)';
+      con.style.setProperty('--gx', ((x + .5) * 100).toFixed(1) + '%'); con.style.setProperty('--gy', ((y + .5) * 100).toFixed(1) + '%');
+      if (card) { card.style.setProperty('--px', (-x * 14).toFixed(1) + 'px'); card.style.setProperty('--py', (-y * 12).toFixed(1) + 'px'); }
+    });
+    wrapEl.addEventListener('pointerleave', function(){ con.style.transform = ''; if (card) { card.style.removeProperty('--px'); card.style.removeProperty('--py'); } });
+  }
+
+  function placeRail(k){
+    if (!rail || !stages[k]) return;
+    var s = stages[k], top = rail.parentElement.offsetTop;
+    rail.style.setProperty('--rp', Math.max(0, s.offsetTop + 19 - top) + 'px');
+  }
+  if (reduce || !cfg.examples.length) { stages.forEach(function(s){ s.classList.add('done'); }); placeRail(stages.length - 1); return; }
 
   var EX = cfg.examples;
-  var $ = function(id){ return document.getElementById(id); };
   var tr = $('c-tr'), gl = $('c-gl'), rows = $('c-rows');
+  var bars = [];
   var visible = true;
   if ('IntersectionObserver' in window) {
-    new IntersectionObserver(function(es){ visible = es[0].isIntersecting; }).observe($('console'));
+    new IntersectionObserver(function(es){ visible = es[0].isIntersecting; }).observe(con);
   }
   function sleep(ms){ return new Promise(function(r){ setTimeout(r, ms); }); }
   async function waitVisible(){ while(!visible || document.hidden){ await sleep(300); } }
   function setStage(k){
     stages.forEach(function(s,i){ s.classList.toggle('on', i===k); s.classList.toggle('done', i<k); });
     prog.forEach(function(p,i){ p.classList.toggle('on', i<=k); });
+    placeRail(k);
   }
+  window.addEventListener('resize', function(){ var k = Array.prototype.findIndex.call(stages, function(s){ return s.classList.contains('on'); }); placeRail(k < 0 ? 0 : k); });
   function esc(s){ return s.replace(/[&<>]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c]; }); }
+  function num(v){ return v.toFixed(2).replace('.', DEC); }
+  function pop(el){ if (!el) return; el.classList.remove('pop'); void el.offsetWidth; el.classList.add('pop'); }
+  function secs(d){ var p = d.split(':'); return (+p[0]) * 60 + (+p[1]); }
+
+  async function play(ex){                       // the playhead runs over the bars, the time counts up
+    if (!bars.length) bars = Array.prototype.slice.call(document.querySelectorAll('#wave b'));
+    var total = secs(ex.dur), ms = 1900, t0 = performance.now();
+    while (true) {
+      var u = Math.min(1, (performance.now() - t0) / ms);
+      var lit = Math.round(u * bars.length);
+      bars.forEach(function(b, i){ b.classList.toggle('lit', i < lit); });
+      var s = Math.floor(u * total); $('c-pos').textContent = '0:' + (s < 10 ? '0' : '') + s;
+      if (u >= 1) break;
+      await sleep(60);
+    }
+  }
 
   async function typeTranscript(ex){
-    var full = ex.before + ex.key + ex.after, out = '';
-    for (var i = 0; i < full.length; i++){
-      out += full[i];
-      tr.innerHTML = '« ' + esc(out) + '<span class="caret"></span>';
-      await sleep(42);
+    var words = (ex.before + ex.key + ex.after).split(' ').filter(Boolean), keyAt = ex.before.split(' ').filter(Boolean).length;
+    var bar = $('c-conf-bar'), cv = $('c-conf');
+    tr.innerHTML = '« <span class="caret"></span>';
+    for (var i = 0; i < words.length; i++){
+      var caret = tr.querySelector('.caret');
+      var w = document.createElement('span'); w.className = 'wd' + (i === keyAt ? ' kw' : ''); w.textContent = words[i];
+      tr.insertBefore(w, caret); tr.insertBefore(document.createTextNode(' '), caret);
+      var c = ex.conf * (i + 1) / words.length;
+      if (bar) bar.style.setProperty('--cf', (c * 100).toFixed(0) + '%'); if (cv) cv.textContent = num(c);
+      await sleep(210);
     }
-    tr.innerHTML = '« ' + esc(ex.before) + '<span class="kw">' + esc(ex.key) + '</span>' + esc(ex.after) + ' »';
+    var cr = tr.querySelector('.caret'); if (cr) cr.remove();
+    tr.appendChild(document.createTextNode('»'));
     if (gl && ex.gloss) gl.textContent = ex.gloss;
   }
 
@@ -244,23 +294,29 @@
     while (true){
       var ex = EX[k % EX.length];
       await waitVisible();
-      $('c-n').textContent = ex.n; $('c-q').textContent = ex.q; $('c-dur').textContent = ex.dur;
+      if (card) { card.classList.add('away'); await sleep(350); $('pc-q').textContent = ex.q; $('pc-dur').textContent = ex.dur;
+        $('pc-tick').classList.remove('read'); card.classList.remove('away'); }
+      $('c-n').textContent = ex.n; $('c-q').textContent = ex.q; $('c-dur').textContent = ex.dur; $('c-pos').textContent = '0:00';
       tr.innerHTML = '<span class="caret"></span>';
+      if ($('c-conf-bar')) { $('c-conf-bar').style.setProperty('--cf', '0%'); $('c-conf').textContent = num(0); }
       if (gl) gl.textContent = '';
       $('c-field').textContent = ex.field; $('c-type').textContent = ex.type; $('c-val').textContent = '…';
       $('c-chk').innerHTML = '<span style="color:var(--dim)">' + esc(cfg.waiting) + '</span>';
-      setStage(0); await sleep(1800);
-      setStage(1); await typeTranscript(ex); await sleep(gl ? 900 : 500);
+      con.classList.remove('scan'); void con.offsetWidth; con.classList.add('scan');
+      setStage(0); await sleep(500);
+      if (card) $('pc-tick').classList.add('read');
+      await play(ex); await sleep(250);
+      setStage(1); await typeTranscript(ex); await sleep(gl ? 900 : 450);
       setStage(2);
-      var kw = tr.querySelector('.kw'); if (kw){ kw.outerHTML = '<mark>' + esc(ex.key) + '</mark>'; }
-      await sleep(700); $('c-val').textContent = ex.val; await sleep(1100);
-      setStage(3); $('c-chk').innerHTML = ex.chk; await sleep(1700);
+      var kw = tr.querySelector('.kw'); if (kw){ var m = document.createElement('mark'); m.textContent = kw.textContent; kw.replaceWith(m); }
+      await sleep(900); $('c-val').textContent = ex.val; pop($('c-val')); await sleep(1000);
+      setStage(3); $('c-chk').innerHTML = ex.chk; pop($('c-chk').querySelector('.ok')); await sleep(1700);
       setStage(4);
       var trEl = document.createElement('tr'); trEl.className = 'new';
       trEl.innerHTML = ex.row.map(function(c){ return '<td>' + esc(c) + '</td>'; }).join('');
       rows.insertBefore(trEl, rows.firstChild);
       while (rows.children.length > 3) rows.removeChild(rows.lastChild);
-      await sleep(2600);
+      await sleep(2800);
       k++;
     }
   }
