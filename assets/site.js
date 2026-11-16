@@ -60,6 +60,98 @@
     });
   });
 
+
+  // headline: each word rises like a voice level (variable font weight and width), once
+  var h1 = document.querySelector('.hero h1');
+  if (h1 && !reduce) {
+    var i = 0;
+    (function split(node){
+      Array.prototype.slice.call(node.childNodes).forEach(function(n){
+        if (n.nodeType === 3) {
+          var frag = document.createDocumentFragment();
+          n.textContent.split(/(\s+)/).forEach(function(part){
+            if (!part) return;
+            if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+            var w = document.createElement('span'); w.className = 'w'; w.style.setProperty('--i', i++);
+            w.textContent = part; frag.appendChild(w);
+          });
+          node.replaceChild(frag, n);
+        } else if (n.nodeType === 1) split(n);
+      });
+    })(h1);
+    var paint = function(){                       // one gradient running through the highlighted words, line after line
+      var ws = h1.querySelectorAll('.hl .w'), total = 0, gap = 12, at = [];
+      ws.forEach(function(w){ at.push(total); total += w.offsetWidth + gap; });
+      ws.forEach(function(w, k){ w.style.setProperty('--bw', total + 'px'); w.style.setProperty('--bx', (-at[k]) + 'px'); });
+    };
+    paint(); window.addEventListener('resize', paint);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(paint);
+    setTimeout(paint, 1400);
+  }
+
+  // dot fields: a grid of dots that ripples like sound (follows the pointer too), or an equaliser
+  document.querySelectorAll('canvas.dotfield').forEach(function(cv){
+    var ctx = cv.getContext('2d'); if (!ctx) return;
+    var mode = cv.getAttribute('data-mode') || 'ripple';
+    var host = cv.parentElement, w = 0, h = 0, dpr = Math.min(1.5, window.devicePixelRatio || 1);
+    var on = false, last = 0, t0 = performance.now(), ptr = {x: -1, y: -1, at: -1e9};
+    var GAP = mode === 'eq' ? 18 : 26;
+    function size(){
+      var r = host.getBoundingClientRect(); w = r.width; h = r.height;
+      cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    function col(u, a){                          // green on the left, violet on the right
+      var r = Math.round(61 + (143 - 61) * u), g = Math.round(220 + (156 - 220) * u), b = Math.round(151 + (255 - 151) * u);
+      return 'rgba(' + r + ',' + g + ',' + b + ',' + a.toFixed(3) + ')';
+    }
+    function ripple(t){
+      var S = [
+        {x: w * (.5 + .36 * Math.sin(t * .11)), y: h * (.5 + .3 * Math.cos(t * .14)), k: 1},
+        {x: w * (.5 + .4 * Math.cos(t * .07 + 2)), y: h * (.5 + .34 * Math.sin(t * .09 + 1)), k: .8}
+      ];
+      var age = (performance.now() - ptr.at) / 1000;
+      if (age < 3) S.push({x: ptr.x, y: ptr.y, k: 1.3 * (1 - age / 3)});
+      var R = Math.max(w, h) * .45;
+      for (var y = GAP / 2; y < h; y += GAP) for (var x = GAP / 2; x < w; x += GAP) {
+        var v = 0;
+        for (var j = 0; j < S.length; j++) {
+          var dx = x - S[j].x, dy = y - S[j].y, d = Math.sqrt(dx * dx + dy * dy);
+          var wave = .5 + .5 * Math.sin(d * .05 - t * 2.4 + j * 1.7);
+          v += S[j].k * Math.pow(wave, 6) * Math.exp(-d / R);
+        }
+        v = Math.min(1, v);
+        ctx.beginPath(); ctx.arc(x, y, .7 + 2.1 * v, 0, 6.283);
+        ctx.fillStyle = col(x / w, .12 + .6 * v); ctx.fill();
+      }
+    }
+    function eq(t){
+      var cols = Math.ceil(w / GAP), rows = Math.ceil(h / GAP);
+      for (var c = 0; c < cols; c++) {
+        var x = c * GAP + GAP / 2;
+        var lv = (.5 + .5 * Math.sin(c * .31 + t * 1.3)) * (.55 + .45 * Math.sin(c * .09 - t * .6)) + .15 * Math.sin(c * 1.7 + t * 3.1);
+        var lit = Math.max(1, Math.round(rows * .55 * Math.max(0, lv)));
+        for (var r = 0; r < rows; r++) {
+          var y = h - (r * GAP + GAP / 2), up = r < lit;
+          ctx.beginPath(); ctx.arc(x, y, up ? 2 : 1, 0, 6.283);
+          ctx.fillStyle = col(c / cols, up ? .55 - .35 * (r / lit) : .06); ctx.fill();
+        }
+      }
+    }
+    function draw(t){ ctx.clearRect(0, 0, w, h); (mode === 'eq' ? eq : ripple)(t); }
+    size(); draw(3);
+    if (window.ResizeObserver) new ResizeObserver(function(){ size(); draw((performance.now() - t0) / 1000); }).observe(host);
+    if (reduce) return;
+    host.addEventListener('pointermove', function(e){
+      var r = host.getBoundingClientRect(); ptr = {x: e.clientX - r.left, y: e.clientY - r.top, at: performance.now()};
+    }, {passive: true});
+    if ('IntersectionObserver' in window) new IntersectionObserver(function(es){ on = es[0].isIntersecting; }).observe(host);
+    else on = true;
+    (function loop(now){
+      if (on && !document.hidden && now - last > 33) { last = now; draw((now - t0) / 1000); }
+      requestAnimationFrame(loop);
+    })(performance.now());
+  });
+
   // animated voice-wave background
   document.querySelectorAll('canvas.wavefield').forEach(function(cv){
     var ctx = cv.getContext('2d'); if (!ctx) return;
