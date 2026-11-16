@@ -18,7 +18,7 @@
 <link rel="alternate" hreflang="en" href="https://sahelvoice.app/en/">
 <link rel="alternate" hreflang="x-default" href="https://sahelvoice.app/">
 <link rel="stylesheet" href="/assets/fonts.css?v=202611161200">
-<link rel="stylesheet" href="../assets/site.css?v=202611161500">
+<link rel="stylesheet" href="../assets/site.css?v=202611161600">
 <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
@@ -310,7 +310,7 @@
         </div>
       </div>
       <div class="mini rv" id="mini" aria-hidden="true" data-title="Dashboard" data-live="just now" data-ok="confirmed" data-voice="voice" data-button="button">
-        <div class="mini-phone"><span class="mp-island"></span><div class="mini-screen">
+        <div class="mini-phone"><div class="mp-body" id="mp-body"><div class="face front"><span class="mp-island"></span><div class="mini-screen">
           <div class="mp-status"><span>10:02</span><span class="mp-icons"><svg width="17" height="11" viewBox="0 0 17 11" aria-hidden="true"><rect x="0" y="7" width="3" height="4" rx="1" fill="currentColor"/><rect x="4.5" y="5" width="3" height="6" rx="1" fill="currentColor"/><rect x="9" y="2.5" width="3" height="8.5" rx="1" fill="currentColor"/><rect x="13.5" y="0" width="3" height="11" rx="1" fill="currentColor"/></svg><svg width="24" height="11" viewBox="0 0 24 11" aria-hidden="true"><rect x=".5" y=".5" width="20" height="10" rx="3" fill="none" stroke="currentColor" opacity=".5"/><rect x="2" y="2" width="14" height="7" rx="1.6" fill="currentColor"/><rect x="21.5" y="3.5" width="1.6" height="4" rx=".8" fill="currentColor" opacity=".5"/></svg></span></div>
           <div class="mini-head">
             <svg class="mh-back" width="10" height="16" viewBox="0 0 10 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2 2 8l6 6"/></svg>
@@ -325,7 +325,44 @@
           </div>
           <div class="mp-input"><div class="mp-field" id="mp-field"><span class="ph">Message</span><span class="rec"><i></i><em id="mp-rec">0:00</em><span class="rw" id="mp-rw"></span></span></div><span class="mp-mic" id="mp-mic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 3a3 3 0 0 0-3 3v5a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3zM5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/></svg></span></div>
         </div></div>
-        <div class="mini-dash" id="mini-dash"><div class="md-head"><small>Dashboard</small><span id="md-live"></span></div><div class="md-rows" id="md-rows"><div class="md-empty">Answers arrive here.</div></div></div>
+          <div class="face back"><span class="mp-island"></span><div class="mini-screen app">
+            <div class="mp-status dark-s"><span>10:09</span><span class="mp-icons"><svg width="17" height="11" viewBox="0 0 17 11" aria-hidden="true"><rect x="0" y="7" width="3" height="4" rx="1" fill="currentColor"/><rect x="4.5" y="5" width="3" height="6" rx="1" fill="currentColor"/><rect x="9" y="2.5" width="3" height="8.5" rx="1" fill="currentColor"/><rect x="13.5" y="0" width="3" height="11" rx="1" fill="currentColor"/></svg><svg width="24" height="11" viewBox="0 0 24 11" aria-hidden="true"><rect x=".5" y=".5" width="20" height="10" rx="3" fill="none" stroke="currentColor" opacity=".5"/><rect x="2" y="2" width="14" height="7" rx="1.6" fill="currentColor"/><rect x="21.5" y="3.5" width="1.6" height="4" rx=".8" fill="currentColor" opacity=".5"/></svg></span></div>
+            <div class="ap-head">
+              <span class="ap-logo"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M4 10v4M8 7v10M12 4v16M16 8v8M20 11v2"/></svg></span>
+              <div><b>Suivi post-distribution</b><span>ONG partenaire · tableau de bord</span></div>
+            </div>
+            <div class="ap-tabs" id="ap-tabs"><span data-v="rx">Réponses</span><span data-v="ver">À vérifier</span><span data-v="res">Résultats</span><i id="ap-ink"></i></div>
+            <div class="ap-views">
+              <section class="ap-v" data-v="rx">
+                <div class="ap-kpis"><div><small>Terminées</small><b id="ap-done">12</b></div><div><small>Vocaux</small><b id="ap-voc">9</b></div><div><small>À vérifier</small><b id="ap-tv">2</b></div></div>
+                <div class="ap-card" id="ap-new">
+                  <div class="ap-who"><span class="ap-av">4f</span><div><b>Participant · 4f2a</b><span>à l'instant · WhatsApp</span></div><em class="ap-flag">nouveau</em></div>
+                  <div class="ap-ans"><code>taille_menage</code><b>7</b><span class="src v">vocal</span></div>
+                  <div class="ap-ans"><code>kit_complet</code><b>oui</b><span class="src">bouton</span></div>
+                </div>
+              </section>
+              <section class="ap-v" data-v="ver">
+                <div class="ap-card">
+                  <div class="ap-q">Combien de personnes vivent dans votre ménage ?</div>
+                  <div class="ap-audio"><span class="pl"><svg width="10" height="12" viewBox="0 0 16 18" aria-hidden="true"><path d="M2 1.5v15l13-7.5z" fill="currentColor"/></svg></span><span class="bars" id="ap-bars"></span><small>0:02</small></div>
+                  <div class="ap-tr"><small>Transcription</small>« nous sommes <mark>sept</mark> à la maison »</div>
+                  <div class="ap-val"><small>Valeur</small><b>7</b><span class="ap-conf">confiance 0,94</span></div>
+                  <div class="ap-acts"><span class="ap-ok" id="ap-ok">Valider</span><span class="ap-fix">Corriger</span></div>
+                  <div class="ap-stamp" id="ap-stamp">✓ vérifié par l'équipe</div>
+                </div>
+              </section>
+              <section class="ap-v" data-v="res">
+                <div class="ap-card">
+                  <div class="ap-ct">Taille du ménage</div>
+                  <div class="ap-chart" id="ap-chart"><div><i style="--h:30%"></i><span>1-2</span></div><div><i style="--h:62%"></i><span>3-4</span></div><div><i style="--h:100%"></i><span>5-6</span></div><div class="hl"><i style="--h:78%"></i><span>7+</span></div></div>
+                </div>
+                <div class="ap-card ap-row2"><div><div class="ap-ct">Kit complet</div><b class="ap-pct"><span id="ap-pct">0</span> %</b></div><div class="ap-ring" id="ap-ring"></div></div>
+                <div class="ap-export"><span class="ap-xl" id="ap-xl"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Exporter en Excel</span></div>
+                <div class="ap-toast" id="ap-toast">suivi_vivres.xlsx · téléchargé</div>
+              </section>
+            </div>
+          </div></div>
+        </div></div>
       </div>
     </div>
   </section>
@@ -611,7 +648,7 @@ window.SV = {
   ]
 };
 </script>
-<script src="../assets/site.js?v=202611161500"></script>
+<script src="../assets/site.js?v=202611161600"></script>
 <script src="../assets/translate.js?v=202611131330"></script>
 <script src="../assets/menu.js?v=202611122000"></script>
 </body>

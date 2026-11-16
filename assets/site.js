@@ -153,77 +153,106 @@
   });
 
 
-  // demo phone: a WhatsApp conversation that plays by itself, the dashboard fills in beside it
+  // demo phone: a WhatsApp conversation plays, then the phone flips to show what the organisation does with it
   (function(){
     var mini = document.getElementById('mini'); if (!mini) return;
-    var msgs = document.getElementById('mini-msgs'), sub = document.getElementById('mh-sub'), field = document.getElementById('mp-field');
-    var mic = document.getElementById('mp-mic'), recT = document.getElementById('mp-rec'), rw = document.getElementById('mp-rw');
-    var rowsEl = document.getElementById('md-rows'), live = document.getElementById('md-live'), phone = mini.querySelector('.mini-phone'), dash = document.getElementById('mini-dash');
-    var D = mini.dataset, clock = 2, on = false;
+    var $ = function(id){ return document.getElementById(id); };
+    var msgs = $('mini-msgs'), sub = $('mh-sub'), field = $('mp-field'), mic = $('mp-mic'), recT = $('mp-rec'), rw = $('mp-rw');
+    var body = $('mp-body'), phone = mini.querySelector('.mini-phone');
+    var steps = document.querySelectorAll('.demo-band .dsteps li');
+    var clock = 2, on = false;
     var TICK = '<svg width="15" height="9" viewBox="0 0 18 11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6l3.5 3.5L11 2M7 9.5l1 1L16 2"/></svg>';
     var PLAY = '<svg width="10" height="12" viewBox="0 0 16 18"><path d="M2 1.5v15l13-7.5z" fill="currentColor"/></svg>';
     function sleep(ms){ return new Promise(function(r){ setTimeout(r, ms); }); }
     async function awake(){ while (!on || document.hidden) await sleep(300); }
+    function step(k){ steps.forEach(function(li, i){ li.classList.toggle('on', i === k); }); }
     function time(){ clock++; return '10:' + (clock < 10 ? '0' : '') + clock; }
     function add(html, cls){ var d = document.createElement('div'); d.className = cls; d.innerHTML = html; msgs.appendChild(d);
-      while (msgs.children.length > 9) msgs.removeChild(msgs.firstChild); return d; }
+      while (msgs.children.length > 11) msgs.removeChild(msgs.firstChild); return d; }
     function bars(n){ var o = ''; for (var i = 0; i < n; i++) o += '<b style="height:' + (25 + Math.round(70 * Math.abs(Math.sin(i * 1.7) * Math.cos(i * .6)))) + '%"></b>'; return o; }
     async function typing(ms){ sub.textContent = 'écrit…'; sub.classList.add('typing'); var t = add('<i></i><i></i><i></i>', 'wtyping');
       await sleep(ms); t.remove(); sub.textContent = 'en ligne'; sub.classList.remove('typing'); }
-    async function playVoice(el, ms){ var bs = el.querySelectorAll('.bars b');
+    async function lightBars(el, ms){ var bs = el.querySelectorAll('.bars b');
       for (var k = 0; k <= bs.length; k++){ for (var j = 0; j < bs.length; j++) bs[j].classList.toggle('lit', j < k); await sleep(ms / bs.length); } }
     function orgText(t){ return add(t + '<span class="meta">' + time() + '</span>', 'wm o'); }
     function orgVoice(d){ return add('<span class="tts">🔊 voix de synthèse</span><div class="wv"><span class="pl">' + PLAY + '</span><span class="bars">' + bars(26) + '</span><small>' + d + '</small></div><span class="meta">' + time() + '</span>', 'wm o'); }
-    function meText(t){ var m = add(t + '<span class="meta">' + time() + ' ' + TICK + '</span>', 'wm i'); setTimeout(function(){ var x = m.querySelector('.meta'); if (x) x.classList.add('read'); }, 700); return m; }
-    function meVoice(d){ var m = add('<div class="wv"><span class="pl">' + PLAY + '</span><span class="bars">' + bars(26) + '</span><small>' + d + '</small></div><span class="meta">' + time() + ' ' + TICK + '</span>', 'wm i');
-      setTimeout(function(){ var x = m.querySelector('.meta'); if (x) x.classList.add('read'); }, 900); return m; }
+    function read(m, ms){ setTimeout(function(){ var x = m.querySelector('.meta'); if (x) x.classList.add('read'); }, ms); return m; }
+    function meText(t){ return read(add(t + '<span class="meta">' + time() + ' ' + TICK + '</span>', 'wm i'), 700); }
+    function meVoice(d){ return read(add('<div class="wv"><span class="pl">' + PLAY + '</span><span class="bars">' + bars(26) + '</span><small>' + d + '</small></div><span class="meta">' + time() + ' ' + TICK + '</span>', 'wm i'), 900); }
     async function record(sec){ field.classList.add('recording'); mic.classList.add('hold'); rw.innerHTML = '';
-      var steps = Math.round(sec * 1000 / 90);
-      for (var i = 0; i < steps; i++){ var b = document.createElement('b'); b.style.height = (20 + Math.round(75 * Math.abs(Math.sin(i * .9) * Math.sin(i * .37)))) + '%'; rw.appendChild(b);
-        while (rw.children.length > 40) rw.removeChild(rw.firstChild);
-        recT.textContent = '0:0' + Math.floor(i * 90 / 1000); await sleep(90); }
+      for (var i = 0, n = Math.round(sec * 1000 / 90); i < n; i++){ var b = document.createElement('b'); b.style.height = (20 + Math.round(75 * Math.abs(Math.sin(i * .9) * Math.sin(i * .37)))) + '%'; rw.appendChild(b);
+        while (rw.children.length > 44) rw.removeChild(rw.firstChild); recT.textContent = '0:0' + Math.floor(i * 90 / 1000); await sleep(90); }
       field.classList.remove('recording'); mic.classList.remove('hold'); }
     async function buttons(q, pick){ orgText(q); var b = add('<span>Oui</span><span>Non</span>', 'wbtns'); await sleep(1100);
       b.children[pick].classList.add('tap'); await sleep(320); return b.children[pick].textContent; }
-    function row(fieldName, val, how){
-      var e = rowsEl.querySelector('.md-empty'); if (e) e.remove();
-      var r = document.createElement('div'); r.className = 'md-row';
-      r.innerHTML = '<code>' + fieldName + '</code><b>' + val + '</b><span>✓ ' + D.ok + ' · ' + how + '</span>';
-      rowsEl.insertBefore(r, rowsEl.firstChild); while (rowsEl.children.length > 3) rowsEl.removeChild(rowsEl.lastChild);
-      live.textContent = D.live; live.classList.add('on'); setTimeout(function(){ live.classList.remove('on'); }, 2200);
+
+    // back of the phone
+    var tabs = document.querySelectorAll('#ap-tabs span'), ink = $('ap-ink'), views = document.querySelectorAll('.ap-v');
+    var apBars = $('ap-bars'); if (apBars) apBars.innerHTML = bars(30);
+    function view(name){
+      var idx = 0;
+      tabs.forEach(function(t, i){ var m = t.getAttribute('data-v') === name; t.classList.toggle('on', m); if (m) idx = i; });
+      if (ink) ink.style.setProperty('--t', idx);
+      var past = true;
+      views.forEach(function(v){ var m = v.getAttribute('data-v') === name; if (m) past = false; v.classList.toggle('on', m); v.classList.toggle('gone', !m && past); });
     }
+    function resetBack(){
+      $('ap-done').textContent = '12'; $('ap-voc').textContent = '9'; $('ap-tv').textContent = '2';
+      $('ap-new').classList.remove('in'); document.querySelectorAll('.ap-ans').forEach(function(x){ x.classList.remove('in'); });
+      $('ap-ok').classList.remove('tap'); $('ap-stamp').classList.remove('in');
+      document.querySelectorAll('#ap-bars b').forEach(function(x){ x.classList.remove('lit'); });
+      $('ap-chart').classList.remove('grow'); $('ap-pct').textContent = '0'; $('ap-ring').style.setProperty('--p', 0);
+      $('ap-xl').classList.remove('tap'); $('ap-toast').classList.remove('in');
+      view('rx');
+    }
+    function bump(id, v){ var e = $(id); e.textContent = v; e.classList.remove('bump'); void e.offsetWidth; e.classList.add('bump'); }
+    async function flip(toBack){ body.classList.add('flipping'); body.classList.toggle('flipped', toBack); await sleep(1150); body.classList.remove('flipping'); }
+    async function count(id, to, ms, ring){ var e = $(id), t0 = performance.now();
+      while (true){ var u = Math.min(1, (performance.now() - t0) / ms), v = Math.round(to * (1 - Math.pow(1 - u, 3)));
+        e.textContent = v; if (ring) ring.style.setProperty('--p', v); if (u >= 1) break; await sleep(30); } }
+
     async function run(){
       while (true){
         await awake();
-        msgs.classList.remove('fade'); msgs.innerHTML = ''; clock = 2;
-        rowsEl.innerHTML = '<div class="md-empty">' + (rowsEl.dataset.empty || '') + '</div>';
+        msgs.classList.remove('fade'); msgs.innerHTML = ''; clock = 2; resetBack(); step(0);
         await sleep(500);
+        // 1. the participant answers on WhatsApp
         await typing(800);
-        var v = orgVoice('0:05'); await sleep(350); await playVoice(v, 1700);
+        var v = orgVoice('0:05'); await sleep(350); await lightBars(v, 1700);
         orgText('(2/7) Combien de personnes vivent dans votre ménage, vous compris ?'); await sleep(900);
         await awake(); await record(2.2); meVoice('0:02'); await sleep(900);
         await typing(900);
-        await buttons('Vous avez dit : <b>7</b>. C\'est bien ça ?', 0); meText('Oui'); await sleep(500);
-        row('taille_menage', '7', D.voice); await sleep(1300);
+        await buttons('Vous avez dit : <b>7</b>. C\'est bien ça ?', 0); meText('Oui'); await sleep(900);
         await awake(); await typing(800);
-        await buttons('(3/7) Avez-vous reçu le kit complet ?', 0); meText('Oui'); await sleep(500);
-        row('kit_complet', 'oui', D.button); await sleep(3200);
-        msgs.classList.add('fade'); await sleep(600);
+        await buttons('(3/7) Avez-vous reçu le kit complet ?', 0); meText('Oui'); await sleep(1400);
+        // 2. flip: the answer arrives in the organisation's dashboard
+        await awake(); step(1); await flip(true);
+        bump('ap-done', '13'); await sleep(250); bump('ap-voc', '10'); await sleep(250); bump('ap-tv', '3'); await sleep(350);
+        $('ap-new').classList.add('in'); await sleep(450);
+        var ans = document.querySelectorAll('.ap-ans'); for (var i = 0; i < ans.length; i++){ ans[i].classList.add('in'); await sleep(450); }
+        await sleep(1500);
+        // 3. an enumerator listens and validates
+        await awake(); step(2); view('ver'); await sleep(700);
+        await lightBars($('ap-bars').parentNode, 1600); await sleep(500);
+        $('ap-ok').classList.add('tap'); await sleep(250); $('ap-stamp').classList.add('in'); bump('ap-tv', '2'); await sleep(1500);
+        // 4. results and export
+        await awake(); view('res'); await sleep(500);
+        $('ap-chart').classList.add('grow'); await count('ap-pct', 92, 1200, $('ap-ring')); await sleep(900);
+        $('ap-xl').classList.add('tap'); await sleep(300); $('ap-toast').classList.add('in'); await sleep(2400);
+        // back to the start
+        await flip(false); msgs.classList.add('fade'); await sleep(500);
       }
     }
-    // tilt with the pointer
     if (!reduce && window.matchMedia('(pointer:fine)').matches) {
       mini.addEventListener('pointermove', function(e){
         var r = mini.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
         phone.style.setProperty('--ry', (x * 14 - 4).toFixed(2) + 'deg'); phone.style.setProperty('--rx', (-y * 10 + 2).toFixed(2) + 'deg');
-        dash.style.setProperty('--dx', (x * 18).toFixed(1) + 'px'); dash.style.setProperty('--dy', (y * 14).toFixed(1) + 'px');
       });
-      mini.addEventListener('pointerleave', function(){ ['--ry','--rx'].forEach(function(k){ phone.style.removeProperty(k); }); dash.style.removeProperty('--dx'); dash.style.removeProperty('--dy'); });
+      mini.addEventListener('pointerleave', function(){ phone.style.removeProperty('--ry'); phone.style.removeProperty('--rx'); });
     }
-    var empty = rowsEl.querySelector('.md-empty'); rowsEl.dataset.empty = empty ? empty.textContent : '';
-    if (reduce) {                        // a still picture of the end of the conversation
+    if (reduce) {                        // a still picture: the conversation, no flip
       msgs.innerHTML = ''; orgText('(2/7) Combien de personnes vivent dans votre ménage, vous compris ?'); meVoice('0:02');
-      orgText('Vous avez dit : <b>7</b>. C\'est bien ça ?'); meText('Oui'); row('taille_menage', '7', D.voice); return;
+      orgText('Vous avez dit : <b>7</b>. C\'est bien ça ?'); meText('Oui'); return;
     }
     if ('IntersectionObserver' in window) new IntersectionObserver(function(es){ on = es[0].isIntersecting; }).observe(mini); else on = true;
     run();
