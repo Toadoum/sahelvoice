@@ -258,6 +258,25 @@
     run();
   })();
 
+
+  // attention points: each plays once, when its section comes into view
+  (function(){
+    // words of the closing call, split like the headline
+    document.querySelectorAll('h2.lvl').forEach(function(h){
+      var i = 0;
+      h.innerHTML = h.textContent.split(/(\s+)/).map(function(part){
+        return /^\s+$/.test(part) || !part ? part : '<span class="w" style="--i:' + (i++) + '">' + part + '</span>';
+      }).join('');
+    });
+    document.querySelectorAll('.vs tbody tr').forEach(function(tr, r){ tr.style.setProperty('--r', r); });
+    var targets = document.querySelectorAll('#fonctionnement, #how, #difference, #offres, #plans, #contact');
+    if (reduce || !('IntersectionObserver' in window)) { targets.forEach(function(t){ t.classList.add('go'); }); return; }
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add('go'); io.unobserve(e.target); } });
+    }, {threshold: 0.15});
+    targets.forEach(function(t){ io.observe(t); });
+  })();
+
   // animated voice-wave background
   document.querySelectorAll('canvas.wavefield').forEach(function(cv){
     var ctx = cv.getContext('2d'); if (!ctx) return;
