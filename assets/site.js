@@ -518,3 +518,35 @@
     navigator.clipboard.writeText(pre.textContent).then(function(){ copy.textContent = copy.dataset.lDone; setTimeout(function(){ copy.textContent = copy.dataset.lCopy; }, 1600); });
   });
 })();
+
+/* Hero: hear a question read by the SahelVoice voice. Hidden if the server cannot serve it. */
+(function(){
+  var box = document.querySelector('.listen');
+  if (!box) return;
+  var a = new Audio(); a.preload = 'metadata'; a.src = box.dataset.src;
+  var wave = box.querySelector('.listen-wave'), t = box.querySelector('.listen-t'), h = '';
+  for (var i = 0; i < 22; i++){ var v = .25 + .75 * Math.abs(Math.sin(i * 1.9) * Math.cos(i * .47)); h += '<i style="height:' + Math.round(5 + 20 * v) + 'px"></i>'; }
+  wave.innerHTML = h;
+  var bars = wave.querySelectorAll('i');
+  function fmt(x){ x = Math.max(0, Math.round(x || 0)); return Math.floor(x / 60) + ':' + String(x % 60).padStart(2, '0'); }
+  a.addEventListener('loadedmetadata', function(){ t.textContent = fmt(a.duration); });
+  a.addEventListener('error', function(){ box.classList.add('off'); });
+  a.addEventListener('timeupdate', function(){ var k = a.currentTime / (a.duration || 1); for (var i = 0; i < bars.length; i++) bars[i].classList.toggle('on', i / bars.length < k); t.textContent = fmt(a.currentTime); });
+  a.addEventListener('ended', function(){ box.classList.remove('playing'); for (var i = 0; i < bars.length; i++) bars[i].classList.remove('on'); t.textContent = fmt(a.duration); });
+  box.querySelector('.listen-btn').addEventListener('click', function(){
+    if (!a.paused){ a.pause(); box.classList.remove('playing'); return; }
+    box.classList.add('playing'); a.play().catch(function(){ box.classList.remove('playing'); });
+  });
+})();
+
+/* Numbers band: count up once when it comes into view. */
+(function(){
+  var nums = document.querySelectorAll('.nb b[data-n]');
+  if (!nums.length || !('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  nums.forEach(function(b){ if (+b.dataset.n > 0) b.textContent = '0'; });
+  var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (!e.isIntersecting) return; io.unobserve(e.target);
+    var b = e.target, n = +b.dataset.n, t0 = null; if (!n) return;
+    function step(ts){ if (t0 === null) t0 = ts; var k = Math.min(1, (ts - t0) / 900); b.textContent = Math.round(n * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(step); }
+    requestAnimationFrame(step); }); }, { threshold: .6 });
+  nums.forEach(function(b){ io.observe(b); });
+})();
