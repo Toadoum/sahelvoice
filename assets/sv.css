@@ -520,3 +520,25 @@ footer{padding-bottom:0;overflow:hidden}
   .js .step::before{transform:scaleX(1);transition:none}.js .step .n{opacity:1}
   .note-bar .dot{animation:none}.rows .ex .caret{display:none}
 }
+
+/* hero: sound rings spreading from behind the listening card */
+.lc-wrap{position:relative;isolation:isolate}
+.lc-wrap .ring{position:absolute;left:50%;top:44%;width:520px;height:520px;margin:-260px 0 0 -260px;border-radius:50%;border:1px solid rgba(46,60,140,.22);z-index:-1;pointer-events:none;opacity:0;animation:ring 7.5s cubic-bezier(.2,.6,.3,1) infinite}
+.lc-wrap .ring:nth-child(2){animation-delay:2.5s}
+.lc-wrap .ring:nth-child(3){animation-delay:5s}
+@keyframes ring{0%{transform:scale(.55);opacity:0}15%{opacity:1}100%{transform:scale(1.65);opacity:0}}
+.hero{overflow:hidden}
+@media (max-width:980px){.lc-wrap .ring{width:380px;height:380px;margin:-190px 0 0 -190px}}
+
+/* languages: faint bars swaying along the bottom of the section */
+.sway-sec{position:relative;overflow:hidden;isolation:isolate}
+.sway{position:absolute;left:0;right:0;bottom:0;height:120px;display:flex;align-items:flex-end;justify-content:space-between;gap:6px;padding:0 6px;z-index:-1;pointer-events:none}
+.sway i{flex:1;max-width:14px;height:calc(var(--h) * 100%);border-radius:7px 7px 0 0;background:#e1e5f1;transform-origin:bottom;animation:sway 3.2s ease-in-out var(--d) infinite alternate}
+.sway i:nth-child(9n+5){background:#cfeee0}
+@keyframes sway{from{transform:scaleY(.35)}to{transform:scaleY(1)}}
+
+/* footer word: the bar under the pointer turns green, like the logo */
+.giant-bars rect.hot{fill:#3ddc97}
+
+@media (prefers-reduced-motion:reduce){.lc-wrap .ring{display:none}.sway i{animation:none;transform:scaleY(.6)}}
+.sway-sec{padding-bottom:180px}@media (max-width:720px){.sway-sec{padding-bottom:140px}.sway{height:90px}}

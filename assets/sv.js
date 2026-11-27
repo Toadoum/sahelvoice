@@ -226,7 +226,7 @@
         var target = Math.min(1, Math.max(.06, base + near * .65)) * level;
         b.h += (target - b.h) * .12;
         var hh = b.h * H; b.el.setAttribute('y', (H - hh).toFixed(1)); b.el.setAttribute('height', hh.toFixed(1));
-        b.el.classList.toggle('hot', near > .35);
+        b.el.classList.toggle('hot', near > .8);
       });
     }
     function frame(){ if (!live) return; T += .03; place(1); requestAnimationFrame(frame); }
