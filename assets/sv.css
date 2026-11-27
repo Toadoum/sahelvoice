@@ -71,9 +71,9 @@ section.mist + section{border-top:0}
 
 /* ---------- hero ---------- */
 .hero{padding:88px 0 56px;border-top:0}
-.hero-grid{display:grid;grid-template-columns:minmax(0,1.02fr) minmax(0,1fr);gap:64px;align-items:center}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.14fr) minmax(0,1fr);gap:56px;align-items:center}
 @media (max-width:980px){.hero-grid{grid-template-columns:minmax(0,1fr);gap:48px}}
-.hero h1{font-size:clamp(42px,5.6vw,70px);line-height:1.02;letter-spacing:-.03em}
+.hero h1{font-size:clamp(40px,5.2vw,66px);line-height:1.03;letter-spacing:-.03em}
 .hero .lede{margin-top:24px;font-size:20px;line-height:1.55;color:var(--ink-2);max-width:34em}
 .hero .btns{margin-top:34px}
 .hero .fine{margin-top:16px;font-size:14.5px;color:var(--ink-3)}
@@ -604,3 +604,15 @@ footer{padding-bottom:0;overflow:hidden}
 .d-toast.ok .d-wave i{background:#fff;animation:none;height:30%}
 .d-toast.btn .d-wave{background:#eceefa}.d-toast.btn .d-wave i{background:#2e3c8c;animation:none;height:55%}
 @media (prefers-reduced-motion:reduce){.d-bar em::after,.d-toast{transition:none}.d-wave i{animation:none}}
+
+/* hero headline: a fixed first sentence, a second one in green that changes every 6 s */
+.hero h1 .h1a{display:block}
+.rot{display:grid;color:#14895a;margin-top:.04em}
+.rot-i{grid-area:1/1}
+.rot-i:not(.on){visibility:hidden}
+.rot.ready .rot-i{visibility:visible}
+.rot .wd{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.1em;margin-bottom:-.1em}
+.hero h1 .rot .wd > span{display:inline-block;transform:translateY(105%);transition:transform .7s cubic-bezier(.2,.75,.15,1)}
+.hero h1 .rot .rot-i.on .wd > span{transform:none}
+.hero h1 .rot .rot-i.out .wd > span{transform:translateY(-105%);transition-duration:.5s;transition-timing-function:cubic-bezier(.5,0,.75,0)}
+@media (prefers-reduced-motion:reduce){.rot-i:not(.on){visibility:hidden!important}.hero h1 .rot .wd > span{transform:none!important;transition:none}}

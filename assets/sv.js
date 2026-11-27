@@ -148,7 +148,7 @@
             var i = document.createElement('span'); i.textContent = part; w.appendChild(i); frag.appendChild(w);
           });
           n.parentNode.replaceChild(frag, n);
-        } else if (n.nodeType === 1 && !n.classList.contains('wd')) walk(n);
+        } else if (n.nodeType === 1 && !n.classList.contains('wd') && !n.classList.contains('rot') && !n.classList.contains('sr')) walk(n);
       });
     };
     walk(h);
@@ -306,4 +306,39 @@
     if (live && !running) cycle();
     if (!live){ timers.forEach(clearTimeout); timers = []; running = false; toast.className = 'd-toast'; s = start(); paint(false); dash.style.opacity = 1; }
   }, { threshold: .35 }).observe(dash);
+})();
+
+
+/* ---------------------------------------------------------------- hero: the green sentence changes every 6 s */
+(function(){
+  var rot = document.querySelector('.rot'); if (!rot) return;
+  var items = Array.prototype.slice.call(rot.querySelectorAll('.rot-i'));
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce || items.length < 2) return;
+  items.forEach(function(it){
+    var words = it.textContent.split(/\s+/).filter(Boolean); it.textContent = '';
+    words.forEach(function(w, k){
+      if (k) it.appendChild(document.createTextNode(' '));
+      var o = document.createElement('span'); o.className = 'wd';
+      var i = document.createElement('span'); i.textContent = w; i.style.transitionDelay = (k * 0.06) + 's';
+      o.appendChild(i); it.appendChild(o);
+    });
+  });
+  rot.classList.add('ready');
+  // the first sentence rises with the rest of the headline
+  items[0].classList.remove('on');
+  setTimeout(function(){ items[0].classList.add('on'); }, 380);
+  var cur = 0, timer = null;
+  function next(){
+    var a = items[cur], b = items[(cur + 1) % items.length];
+    a.classList.remove('on'); a.classList.add('out');
+    setTimeout(function(){ b.classList.remove('out'); b.classList.add('on'); }, 380);
+    setTimeout(function(){ a.classList.remove('out'); }, 1300);
+    cur = (cur + 1) % items.length;
+  }
+  function play(){ if (!timer) timer = setInterval(next, 6000); }
+  function stop(){ clearInterval(timer); timer = null; }
+  play();
+  document.addEventListener('visibilitychange', function(){ document.hidden ? stop() : play(); });
+  if ('IntersectionObserver' in window) new IntersectionObserver(function(es){ es[0].isIntersecting ? play() : stop(); }).observe(rot);
 })();
