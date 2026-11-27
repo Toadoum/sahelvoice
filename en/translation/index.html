@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>French → Ngambay translator | SahelVoice</title>
+<meta name="description" content="Try the French → Ngambay translation model from SahelVoice research.">
+<meta property="og:title" content="French → Ngambay translator | SahelVoice">
+<meta property="og:description" content="Try the French → Ngambay translation model from SahelVoice research.">
+<meta property="og:image" content="https://sahelvoice.app/og.png">
+<meta property="og:url" content="https://sahelvoice.app/en/translation/">
+<meta property="og:type" content="website">
+<link rel="canonical" href="https://sahelvoice.app/en/translation/">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" href="/assets/icon.svg" type="image/svg+xml"><link rel="icon" href="/favicon.ico" sizes="any"><link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="alternate" hreflang="fr" href="https://sahelvoice.app/traduction/">
+<link rel="alternate" hreflang="en" href="https://sahelvoice.app/en/translation/">
+<link rel="alternate" hreflang="x-default" href="https://sahelvoice.app/traduction/">
+<link rel="stylesheet" href="/assets/fonts.css?v=202611161200">
+<link rel="stylesheet" href="/assets/sv.css?v=202611271000">
+</head>
+<body>
+<div class="note-bar"><div class="wrap">
+  <span><span class="dot" aria-hidden="true"></span>WhatsApp verification by Meta in progress, then the first pilots with a few NGOs.</span>
+  <span>SahelVoice is part of the <b>AWS Activate</b> programme.</span>
+</div></div>
+<header class="top">
+  <div class="wrap">
+    <nav aria-label="Main navigation">
+      <a class="brand" href="/en/"><svg width="30" height="30" viewBox="0 0 42 42" aria-hidden="true"><rect width="42" height="42" rx="11" fill="#2e3c8c"/><g stroke="#fff" stroke-width="3" stroke-linecap="round"><path d="M11 25v-8"/><path d="M16 29V13"/><path d="M21 26V16"/><path d="M26 22v-4"/><path d="M31 24v-6"/></g></svg>SahelVoice</a>
+      <div class="links">
+        <a href="/en/#how">How it works</a>
+        <a href="/en/#templates">Templates</a>
+        <a href="/en/#plans">Plans</a>
+        <a href="/en/#about">About</a>
+        <a href="/en/#faq">FAQ</a>
+        <span class="lsw" role="group" aria-label="Language"><a href="/traduction/" hreflang="fr" lang="fr">FR</a><span aria-current="true">EN</span></span>
+        <a href="https://app.sahelvoice.app/login">Log in</a>
+        <a class="btn" href="/en/pilot/">Request a pilot</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main>
+<section class="page-head">
+  <div class="wrap">
+    <h1>French → Ngambay translator</h1>
+    <p>The model from our research that translates SahelVoice questionnaires. It is in testing: have every translation reviewed by a speaker.</p>
+  </div>
+</section>
+<section class="doc">
+  <div class="wrap">
+    <div class="trx" id="trx" data-l="{&quot;working&quot;: &quot;Translating…&quot;, &quot;waking&quot;: &quot;A few more seconds, the model compares several translations…&quot;, &quot;done&quot;: &quot;Machine translation. Have it checked.&quot;, &quot;error&quot;: &quot;The model is not responding right now. Try again in a few minutes.&quot;, &quot;placeholder&quot;: &quot;The translation will appear here.&quot;, &quot;copy&quot;: &quot;Copy&quot;, &quot;copied&quot;: &quot;Copied&quot;, &quot;pick&quot;: &quot;Choose a .docx, .pdf or .txt file.&quot;, &quot;toobig&quot;: &quot;This file is over 3 MB.&quot;, &quot;sending&quot;: &quot;Sending the file…&quot;, &quot;queued&quot;: &quot;Waiting in line, position {n}.&quot;, &quot;progress&quot;: &quot;Translating: {d} of {t} sentences.&quot;, &quot;ready&quot;: &quot;Ready. You can download the file once, then it is deleted from our servers.&quot;, &quot;taken&quot;: &quot;File downloaded and deleted from our servers.&quot;, &quot;lost&quot;: &quot;This translation has expired. Send the file again.&quot;, &quot;docerror&quot;: &quot;&quot;}">
+        <div class="trx-top">
+          <div class="trx-dir"><span>French</span><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span>Ngambay</span></div>
+          <div class="trx-badges"><span class="beta">Beta</span><span>Model Toadoum/ngambay-fr-v1</span></div>
+          <div class="trx-tabs" role="tablist" aria-label="What do you want to translate?">
+            <button type="button" role="tab" id="tab-text" aria-controls="pane-text" aria-selected="true">A text</button>
+            <button type="button" role="tab" id="tab-doc" aria-controls="pane-doc" aria-selected="false" tabindex="-1">A document</button>
+          </div>
+        </div>
+        <div id="pane-text" role="tabpanel" aria-labelledby="tab-text">
+          <div class="trx-panes">
+            <div class="trx-pane">
+              <label class="trx-lbl" for="trx-in"><span>Your text in French</span><span class="trx-count"></span></label>
+              <textarea id="trx-in" maxlength="1000" lang="fr" placeholder="Type or paste a text in French…"></textarea>
+            </div>
+            <div class="trx-pane">
+              <div class="trx-lbl"><span>Ngambay translation</span><button type="button" class="trx-copy" hidden>Copy</button></div>
+              <div class="trx-out empty" lang="sba" aria-live="polite">The translation will appear here.</div>
+            </div>
+          </div>
+          <div class="trx-bar">
+            <div class="trx-ex"><span>Examples:</span><button type="button" lang="fr">Bonjour, comment allez-vous aujourd'hui ?</button><button type="button" lang="fr">Avez-vous reçu le kit complet ?</button><button type="button" lang="fr">Merci pour votre participation et votre soutien.</button></div>
+            <div class="trx-go"><span class="trx-status" role="status"></span><button type="button" class="btn dark trx-run">Translate</button></div>
+          </div>
+        </div>
+        <div id="pane-doc" role="tabpanel" aria-labelledby="tab-doc" hidden>
+          <div class="doc">
+            <label class="drop" for="doc-file">
+              <input type="file" id="doc-file" accept=".docx,.pdf,.txt,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/pdf,text/plain">
+              <b class="drop-t">Choose a file</b>
+              <span class="drop-n">Word (.docx), PDF or text (.txt), up to 3 MB and about 3 pages.</span>
+            </label>
+            <div class="doc-side">
+              <label class="opt"><input type="checkbox" id="doc-bi"> <span>Bilingual version: each French paragraph followed by its translation</span></label>
+              <p class="doc-how">A Word file comes back as Word, with its headings, tables and formatting. A PDF or text file comes back as a Word document. The note at the top of the file is in French.</p>
+              <div class="doc-go"><button type="button" class="btn dark doc-run">Translate the document</button><a class="btn doc-dl" hidden download>Download the translation</a></div>
+              <p class="doc-status" role="status" aria-live="polite"></p>
+              <div class="doc-bar" hidden><i></i></div>
+            </div>
+          </div>
+        </div>
+        <p class="trx-foot">Our model runs on our own servers. We keep neither texts nor documents: a translated document is deleted as soon as you download it, or after one hour. Do not put personal data in it.</p>
+      </div>
+  </div>
+</section>
+</main>
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a class="brand" href="/en/"><svg width="30" height="30" viewBox="0 0 42 42" aria-hidden="true"><rect width="42" height="42" rx="11" fill="#2e3c8c"/><g stroke="#fff" stroke-width="3" stroke-linecap="round"><path d="M11 25v-8"/><path d="M16 29V13"/><path d="M21 26V16"/><path d="M26 22v-4"/><path d="M31 24v-6"/></g></svg>SahelVoice</a>
+        <p>WhatsApp surveys, in audio or in text, for organisations in Chad.</p>
+      </div>
+      <div><h3>Product</h3><ul>
+        <li><a href="/en/#how">How it works</a></li>
+        <li><a href="/demo/">Demo</a></li>
+        <li><a href="/en/#templates">Templates</a></li>
+        <li><a href="/en/#plans">Plans</a></li>
+        <li><a href="/en/translation/">Ngambay translator</a></li>
+        <li><a href="https://app.sahelvoice.app/login">Log in</a></li>
+      </ul></div>
+      <div><h3>Company</h3><ul>
+        <li><a href="/en/#about">About</a></li>
+        <li><a href="/en/#updates">Updates</a></li>
+        <li><a href="/en/#support">Support us</a></li>
+        <li><a href="/en/#faq">FAQ</a></li>
+      </ul></div>
+      <div><h3>Contact</h3><ul>
+        <li><a href="mailto:contact@sahelvoice.app">contact@sahelvoice.app</a></li>
+        <li><a href="https://wa.me/23566049094">+235 66 04 90 94</a></li>
+        <li>N'Djamena, Chad</li>
+      </ul></div>
+    </div>
+    <div class="legal">
+      <span>© 2026 SahelVoice, a service of Quantum Qube Technologies, N'Djamena, Chad. RCCM TD-NDJ-01-2024-A10-01446.</span>
+      <span><a href="/en/privacy/">Privacy</a> &nbsp; <a href="/en/terms/">Partner terms</a></span>
+    </div>
+  </div>
+</footer>
+<script src="/assets/translate.js?v=202611131330"></script>
+<script src="/assets/menu.js?v=202611271000"></script>
+</body>
+</html>
