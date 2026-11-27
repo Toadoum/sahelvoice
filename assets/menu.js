@@ -18,7 +18,7 @@
   b.addEventListener('click', function(){ set(!nav.classList.contains('open')); });
   document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && nav.classList.contains('open')) { set(false); b.focus(); } });
   document.addEventListener('click', function(e){ if (nav.classList.contains('open') && !nav.contains(e.target)) set(false); });
-  window.addEventListener('resize', function(){ if (window.innerWidth > 860) set(false); });
+  window.addEventListener('resize', function(){ if (window.innerWidth > 1100) set(false); });
 
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   var go = function(el){ el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }); };
