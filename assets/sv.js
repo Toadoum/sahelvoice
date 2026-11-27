@@ -238,3 +238,72 @@
     }
   }
 })();
+
+/* ---------------------------------------------------------------- animated dashboard copy */
+(function(){
+  var dash = document.querySelector('.dash'); if (!dash) return;
+  var inner = dash.querySelector('.d-in');
+  function fit(){ inner.style.setProperty('--k', dash.clientWidth / 1020); }
+  fit(); window.addEventListener('resize', fit);
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var start = function(){ return { done: 5, verify: 7, voice: 34, q1: { oui: 3, non: 2 }, q2: { Riz: 0, Huile: 1, Sorgho: 0, Sel: 0, Savon: 1 } }; };
+  var s = start();
+  var toast = dash.querySelector('.d-toast'), t1 = toast.querySelector('.d-t1'), t2 = toast.querySelector('.d-t2');
+  function set(k, v, flash){
+    dash.querySelectorAll('[data-k="' + k + '"]').forEach(function(el){
+      if (el.textContent === String(v)) return;
+      el.textContent = v;
+      if (flash){ el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash'); }
+    });
+  }
+  function bars(flash){
+    ['q1', 'q2'].forEach(function(q){
+      var tot = 0, o; for (o in s[q]) tot += s[q][o];
+      dash.querySelectorAll('.d-bar[data-q="' + q + '"]').forEach(function(b){
+        var n = s[q][b.dataset.o], p = tot ? Math.round(100 * n / tot) : 0;
+        var label = n + ' · ' + p + ' %', was = b.querySelector('b').textContent;
+        b.querySelector('em').style.setProperty('--w', p + '%'); b.querySelector('b').textContent = label;
+        b.classList.toggle('grew', flash && was && was !== label);
+      });
+    });
+  }
+  function paint(flash){
+    set('done', s.done, flash); set('verify', s.verify, flash); set('voice', s.voice, flash);
+    set('q1n', s.q1.oui + s.q1.non, flash); set('open', 0);
+    bars(flash);
+  }
+  paint(false);
+  if (reduce || !('IntersectionObserver' in window)) return;
+  var steps = [
+    { who: '7c1e', how: 'par la voix', voice: true, go: function(){ s.done++; s.q1.oui++; s.verify++; s.voice = 38; } },
+    { who: 'b09a', how: 'par bouton', voice: false, go: function(){ s.done++; s.q1.non++; s.q2.Sel++; } },
+    { who: '52d3', how: 'par la voix', voice: true, go: function(){ s.done++; s.q1.oui++; s.verify++; s.voice = 41; } }
+  ];
+  var timers = [], live = false, running = false;
+  function later(fn, ms){ timers.push(setTimeout(fn, ms)); }
+  function cycle(){
+    if (!live){ running = false; return; }
+    running = true;
+    var t = 600;
+    steps.forEach(function(st){
+      later(function(){ toast.className = 'd-toast show' + (st.voice ? '' : ' btn'); t1.textContent = 'Nouvelle réponse'; t2.textContent = 'Participant ' + st.who + ' · ' + st.how; }, t);
+      later(function(){ st.go(); paint(true); }, t + 900);
+      if (st.voice){
+        later(function(){ toast.className = 'd-toast show ok'; t1.textContent = '✓ Vérifiée par Achta'; t2.textContent = 'Le vocal a été réécouté'; s.verify--; paint(true); }, t + 2900);
+        later(function(){ toast.className = 'd-toast'; }, t + 4300);
+        t += 5000;
+      } else {
+        later(function(){ toast.className = 'd-toast'; }, t + 2600);
+        t += 3300;
+      }
+    });
+    later(function(){ dash.style.transition = 'opacity .5s'; dash.style.opacity = .35; }, t + 2500);
+    later(function(){ s = start(); paint(false); dash.style.opacity = 1; }, t + 3100);
+    later(cycle, t + 4200);
+  }
+  new IntersectionObserver(function(es){
+    live = es[0].isIntersecting;
+    if (live && !running) cycle();
+    if (!live){ timers.forEach(clearTimeout); timers = []; running = false; toast.className = 'd-toast'; s = start(); paint(false); dash.style.opacity = 1; }
+  }, { threshold: .35 }).observe(dash);
+})();

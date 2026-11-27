@@ -17,7 +17,7 @@
 <link rel="alternate" hreflang="en" href="https://sahelvoice.app/en/">
 <link rel="alternate" hreflang="x-default" href="https://sahelvoice.app/">
 <link rel="stylesheet" href="/assets/fonts.css?v=202611161200">
-<link rel="stylesheet" href="/assets/sv.css?v=202611271145">
+<link rel="stylesheet" href="/assets/sv.css?v=202611271225">
 <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
@@ -129,8 +129,42 @@
         </div>
       </div>
       <div>
-        <div class="shot"><img src="/assets/tableau-de-bord-1020.jpg" srcset="/assets/tableau-de-bord-1020.jpg 1020w, /assets/tableau-de-bord.jpg 2040w" sizes="(max-width: 980px) 100vw, 600px" width="1020" height="645" alt="The SahelVoice dashboard: results of a post-distribution survey" loading="lazy"></div>
-        <p class="shot-cap">The real dashboard, with demo data. The interface is in French today.</p>
+        <div class="shot dash-shot"><div class="dash" role="img" aria-label="Tableau de bord SahelVoice : les réponses arrivent et sont vérifiées">
+<div class="d-in">
+  <aside class="d-side">
+    <div class="d-logo"><svg width="22" height="22" viewBox="0 0 42 42" aria-hidden="true"><rect width="42" height="42" rx="11" fill="#2e3c8c"/><g stroke="#fff" stroke-width="3.4" stroke-linecap="round"><path d="M11 25v-8"/><path d="M16 29V13"/><path d="M21 26V16" stroke="#3ddc97"/><path d="M26 22v-4"/><path d="M31 24v-6"/></g></svg><b>SahelVoice</b></div>
+    <small>ONG de démonstration</small>
+    <nav><span class="on">Enquêtes</span><span>À vérifier <i class="d-badge" data-k="verify">7</i></span><span>Traduction</span><hr><span>Organisation</span><span>Guide</span></nav>
+    <div class="d-user"><b>Achta (admin)</b><small>Administrateur</small></div>
+  </aside>
+  <div class="d-main">
+    <div class="d-crumb">Enquêtes /</div>
+    <div class="d-title"><h4>Suivi post-distribution de vivres</h4><div class="d-acts"><span>Exporter CSV</span><span>CSV + audios</span><span class="warn">Mettre en pause</span></div></div>
+    <div class="d-meta">7 questions · mot-clé <code>vivres</code> · <em>Ouverte</em></div>
+    <div class="d-kpis">
+      <div><span>Terminées</span><b data-k="done">5</b><small>100 % de celles qui ont accepté</small></div>
+      <div><span>En cours</span><b data-k="open">0</b><small>conversations ouvertes</small></div>
+      <div><span>À vérifier</span><b class="amber" data-k="verify">7</b><small><u>ouvrir la file</u></small></div>
+      <div><span>Réponses vocales</span><b><i data-k="voice">34</i> %</b><small>des réponses données par la voix</small></div>
+      <div><span>Durée médiane</span><b>&lt; 1 min</b><small>0 refus · 0 STOP</small></div>
+    </div>
+    <div class="d-tabs"><span class="on">Résultats</span><span>Réponses <i data-k="done">5</i></span><span>Diffusion</span><span>Questionnaire</span></div>
+    <div class="d-cards">
+      <div class="d-card"><small>QUESTION 1</small><h5>Avez-vous reçu le kit alimentaire complet ?</h5><p class="d-n"><i data-k="q1n">5</i> réponses</p>
+        <div class="d-bar" data-q="q1" data-o="oui"><span>Oui</span><em></em><b></b></div>
+        <div class="d-bar" data-q="q1" data-o="non"><span>Non</span><em></em><b></b></div></div>
+      <div class="d-card"><small>QUESTION 2</small><h5>Quel article manquait ?</h5><p class="d-n">posée si la réponse est « Non »</p>
+        <div class="d-bar" data-q="q2" data-o="Riz"><span>Riz</span><em></em><b></b></div>
+        <div class="d-bar" data-q="q2" data-o="Huile"><span>Huile</span><em></em><b></b></div>
+        <div class="d-bar" data-q="q2" data-o="Sorgho"><span>Sorgho</span><em></em><b></b></div>
+        <div class="d-bar" data-q="q2" data-o="Sel"><span>Sel</span><em></em><b></b></div>
+        <div class="d-bar" data-q="q2" data-o="Savon"><span>Savon</span><em></em><b></b></div></div>
+    </div>
+    <div class="d-toast" aria-hidden="true"><span class="d-wave"><i></i><i></i><i></i><i></i><i></i></span><div><b class="d-t1">Nouvelle réponse</b><small class="d-t2">Participant 7c1e · par la voix</small></div></div>
+  </div>
+</div>
+</div></div>
+        <p class="shot-cap">An animated copy of the dashboard, with demo data: answers arrive, your team checks them. The interface is in French today.</p>
       </div>
     </div>
     <div class="feats">
@@ -458,7 +492,7 @@ for resp in r.json()["responses"]:
     </svg>
   </div>
 </footer>
-<script src="/assets/sv.js?v=202611271145"></script>
-<script src="/assets/menu.js?v=202611271145"></script>
+<script src="/assets/sv.js?v=202611271225"></script>
+<script src="/assets/menu.js?v=202611271225"></script>
 </body>
 </html>
