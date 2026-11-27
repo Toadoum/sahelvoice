@@ -474,3 +474,49 @@ fieldset{border:0;margin:0;padding:0}
 .legal-doc th,.legal-doc td{text-align:left;padding:10px 12px 10px 0;border-bottom:1px solid var(--line);vertical-align:top}
 section.doc{border-top:0!important}
 .trx-lbl{font:600 14px var(--body)!important;letter-spacing:0!important;text-transform:none!important;color:var(--ink-2)!important}
+
+/* ---------- motion (2026-11-27) ---------- */
+/* footer: the giant word, filled with an equalizer */
+footer{padding-bottom:0;overflow:hidden}
+.giant{margin-top:56px;width:100%;height:clamp(64px,17vw,250px);overflow:hidden;pointer-events:auto}
+.giant svg{width:100%;height:auto;display:block}
+.giant text{font-family:var(--display);font-weight:800;font-stretch:105%;font-size:266px;letter-spacing:-.02em}
+.giant-bg{fill:#eceef7}
+.giant-bars rect{fill:var(--indigo)}
+.giant-bars rect.hot{fill:#3d4cb0}
+
+/* titles rise out of a hidden line, word by word */
+.rise .wd{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.08em;margin-bottom:-.08em}
+.rise .wd > span{display:inline-block;transform:translateY(105%);transition:transform .8s cubic-bezier(.2,.75,.15,1)}
+.rise.in .wd > span{transform:none}
+
+/* the three steps: the rule above each one draws itself */
+.js .step{border-top-color:transparent;position:relative}
+.js .step::before{content:"";position:absolute;left:0;right:0;top:-2px;height:2px;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .9s cubic-bezier(.3,.7,.2,1)}
+.js .steps.in .step::before{transform:scaleX(1)}
+.js .steps.in .step:nth-child(2)::before{transition-delay:.35s}
+.js .steps.in .step:nth-child(3)::before{transition-delay:.7s}
+.js .step .n{opacity:0;transition:opacity .4s}
+.js .steps.in .step .n{opacity:1}
+.js .steps.in .step:nth-child(2) .n{transition-delay:.35s}
+.js .steps.in .step:nth-child(3) .n{transition-delay:.7s}
+
+/* AI examples type themselves */
+.rows .ex .caret{display:inline-block;width:2px;height:1.05em;background:var(--leaf);vertical-align:-2px;margin-left:2px;animation:blink .9s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+
+/* note bar: the "in progress" dot breathes */
+.note-bar .dot{animation:breathe 2.4s ease-in-out infinite}
+@keyframes breathe{0%,100%{box-shadow:0 0 0 0 rgba(216,162,27,.45)}50%{box-shadow:0 0 0 5px rgba(216,162,27,0)}}
+
+/* closing band: a slow sound wave */
+.cta-band{position:relative;overflow:hidden;isolation:isolate}
+.cta-wave{position:absolute;left:0;right:0;bottom:0;width:100%;height:160px;z-index:-1}
+.cta-wave path{fill:none;stroke:#fff;stroke-width:1.5}
+.cta-wave path:nth-child(1){opacity:.22}.cta-wave path:nth-child(2){opacity:.12}.cta-wave path:nth-child(3){opacity:.07}
+
+@media (prefers-reduced-motion:reduce){
+  .rise .wd > span{transform:none!important;transition:none}
+  .js .step::before{transform:scaleX(1);transition:none}.js .step .n{opacity:1}
+  .note-bar .dot{animation:none}.rows .ex .caret{display:none}
+}

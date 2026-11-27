@@ -123,3 +123,118 @@
     navigator.clipboard.writeText(pre.textContent).then(function(){ copy.textContent = copy.dataset.lDone; setTimeout(function(){ copy.textContent = copy.dataset.lCopy; }, 1600); });
   });
 })();
+
+/* ---------------------------------------------------------------- motion (2026-11-27) */
+(function(){
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var IO = 'IntersectionObserver' in window;
+  function once(el, cb, threshold){
+    if (!el) return;
+    if (!IO || reduce){ cb(el); return; }
+    var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting){ io.unobserve(e.target); cb(e.target); } }); }, { threshold: threshold || .3 });
+    io.observe(el);
+  }
+
+  /* titles rise word by word: the hero on load, the others when they come into view */
+  function split(h){
+    var walk = function(node){
+      Array.prototype.slice.call(node.childNodes).forEach(function(n){
+        if (n.nodeType === 3){
+          var frag = document.createDocumentFragment();
+          n.textContent.split(/(\s+)/).forEach(function(part){
+            if (!part) return;
+            if (/^\s+$/.test(part)){ frag.appendChild(document.createTextNode(part)); return; }
+            var w = document.createElement('span'); w.className = 'wd';
+            var i = document.createElement('span'); i.textContent = part; w.appendChild(i); frag.appendChild(w);
+          });
+          n.parentNode.replaceChild(frag, n);
+        } else if (n.nodeType === 1 && !n.classList.contains('wd')) walk(n);
+      });
+    };
+    walk(h);
+    h.classList.add('rise');
+    h.querySelectorAll('.wd > span').forEach(function(s, k){ s.style.transitionDelay = (k * 0.055) + 's'; });
+  }
+  if (!reduce){
+    var hero = document.querySelector('.hero h1, .page-head h1');
+    if (hero){ split(hero); requestAnimationFrame(function(){ setTimeout(function(){ hero.classList.add('in'); }, 60); }); }
+    document.querySelectorAll('.head h2, .cta-band h2, .needs h3.sub').forEach(function(h){ split(h); once(h, function(x){ x.classList.add('in'); }, .6); });
+  }
+
+  /* the three steps draw their rules in order */
+  once(document.querySelector('.steps'), function(x){ x.classList.add('in'); }, .35);
+
+  /* numbers count up */
+  document.querySelectorAll('.facts b').forEach(function(b){
+    var m = b.textContent.match(/^(\d+)(.*)$/); if (!m || +m[1] === 0 || reduce) return;
+    var n = +m[1], rest = m[2]; b.textContent = '0' + rest;
+    once(b, function(){
+      var t0 = null;
+      function step(ts){ if (t0 === null) t0 = ts; var k = Math.min(1, (ts - t0) / 900); b.textContent = Math.round(n * (1 - Math.pow(1 - k, 3))) + rest; if (k < 1) requestAnimationFrame(step); }
+      requestAnimationFrame(step);
+    }, .8);
+  });
+
+  /* AI examples type themselves */
+  document.querySelectorAll('.rows .ex').forEach(function(ex, k){
+    if (reduce) return;
+    var html = ex.innerHTML, text = ex.textContent;
+    ex.style.minHeight = ex.offsetHeight + 'px'; ex.textContent = '';
+    once(ex, function(){
+      var i = 0;
+      setTimeout(function tick(){
+        i++; ex.innerHTML = text.slice(0, i).replace(/&/g, '&amp;').replace(/</g, '&lt;') + '<span class="caret"></span>';
+        if (i < text.length) setTimeout(tick, 22 + Math.random() * 30);
+        else setTimeout(function(){ ex.innerHTML = html; }, 700);
+      }, 150 + k * 120);
+    }, .9);
+  });
+
+  /* closing band: a slow sound wave (only while visible) */
+  var wave = document.querySelector('.cta-wave');
+  if (wave){
+    var paths = wave.querySelectorAll('path'), on = false, t = 0;
+    function draw(){
+      paths.forEach(function(p, j){
+        var d = 'M0 ' + 100, amp = 26 - j * 6, f = .0055 + j * .0012, ph = t * (0.9 + j * .35) + j * 1.7;
+        for (var x = 0; x <= 1440; x += 16){
+          var env = Math.sin(Math.PI * x / 1440);
+          var y = 100 + env * amp * (Math.sin(x * f + ph) * .7 + Math.sin(x * f * 2.3 - ph * 1.3) * .3);
+          d += ' L' + x + ' ' + y.toFixed(1);
+        }
+        p.setAttribute('d', d);
+      });
+    }
+    function loop(){ if (!on) return; t += 0.018; draw(); requestAnimationFrame(loop); }
+    draw();
+    if (IO && !reduce){ new IntersectionObserver(function(es){ on = es[0].isIntersecting; if (on) requestAnimationFrame(loop); }).observe(wave); }
+  }
+
+  /* footer: the giant word, filled with an equalizer that answers the pointer */
+  var giant = document.querySelector('.giant');
+  if (giant){
+    var g = giant.querySelector('.giant-bars'), N = 96, W = 1200, H = 236, bw = W / N, bars = [], ns = 'http://www.w3.org/2000/svg';
+    for (var i = 0; i < N; i++){
+      var r = document.createElementNS(ns, 'rect'); r.setAttribute('x', (i * bw + bw * .18).toFixed(1)); r.setAttribute('width', (bw * .64).toFixed(1)); r.setAttribute('rx', 2);
+      g.appendChild(r); bars.push({ el: r, h: 0, seed: Math.random() * 6.28, speed: .6 + Math.random() * .9 });
+    }
+    var px = -1, live = false, T = 0, svg = giant.querySelector('svg');
+    function place(level){
+      bars.forEach(function(b, i){
+        var base = .32 + .26 * Math.sin(T * b.speed + b.seed) + .14 * Math.sin(T * .7 + i * .31);
+        var near = px < 0 ? 0 : Math.max(0, 1 - Math.abs(i - px) / 9);
+        var target = Math.min(1, Math.max(.06, base + near * .65)) * level;
+        b.h += (target - b.h) * .12;
+        var hh = b.h * H; b.el.setAttribute('y', (H - hh).toFixed(1)); b.el.setAttribute('height', hh.toFixed(1));
+        b.el.classList.toggle('hot', near > .35);
+      });
+    }
+    function frame(){ if (!live) return; T += .03; place(1); requestAnimationFrame(frame); }
+    if (reduce || !IO){ T = 1; bars.forEach(function(b){ b.h = .4; }); place(1); bars.forEach(function(b){ b.h = .45; }); place(1); }
+    else {
+      new IntersectionObserver(function(es){ live = es[0].isIntersecting; if (live) requestAnimationFrame(frame); }).observe(giant);
+      giant.addEventListener('pointermove', function(e){ var r = svg.getBoundingClientRect(); px = (e.clientX - r.left) / r.width * N; });
+      giant.addEventListener('pointerleave', function(){ px = -1; });
+    }
+  }
+})();
